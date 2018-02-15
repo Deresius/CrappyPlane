@@ -80,6 +80,12 @@ public class Sprite {
         return new Rectangle(x, y, width, height);
     }
 
-
+    public int getWidth() {
+    	return this.width;
+    }
+    
+    public int getHeight() {
+    	return this.height;
+    }
     
 }

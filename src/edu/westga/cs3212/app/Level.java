@@ -23,14 +23,18 @@ public class Level extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 4780054145331265009L;
 	private Timer timer;
     private Plane plane;
+    private Ground ground;
     private boolean ingame;
     private final int PLANE_START_LOCATION_X = 40;
     private final int PLANE_START_LOCATION_Y = 60;
-    private final int LEVEL_WIDTH = 400;
-    private final int LEVEL_HEIGHT = 300;
+    private int LEVEL_WIDTH = 400;
+    private int LEVEL_HEIGHT = 300;
     private final int DELAY = 15;
 	
 	public Level() {
+		this.LEVEL_HEIGHT = CrappyPlane.verticalPixelCount;
+		this.LEVEL_WIDTH = CrappyPlane.horizontalPixelCount;
+		
 		initLevel();
 
 	}
@@ -45,7 +49,8 @@ public class Level extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(LEVEL_WIDTH, LEVEL_HEIGHT));
 
         plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-
+        
+        this.ground = new Ground(0,600);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -73,6 +78,8 @@ public class Level extends JPanel implements ActionListener {
             g.drawImage(plane.getImage(), plane.getX(), plane.getY(),
                     this);
         }
+        
+        g.drawImage(ground.getImage(), ground.getX(), ground.getY(), 1200, 161, this);
 
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
@@ -122,15 +129,16 @@ public class Level extends JPanel implements ActionListener {
 	 
 	 public void checkCollisions() {
 
-	        /*Rectangle player = plane.getBoundaries();
+	        Rectangle player = plane.getBoundaries();
+	        Rectangle groundBounds = this.ground.getBoundaries();
 
-	        if(player.intersects("the ground")) {
+	        if(player.intersects(groundBounds)) {
 	        	plane.setVisible(false);
 	        	ingame = false;
 	        }
 	        
-	        if(player.intersects("obstacle")) {
-	        	//take damage
+	       /* if(player.intersects("obstacle")) {
+	        	take damage
 	        	
 	        }*/
 	        
