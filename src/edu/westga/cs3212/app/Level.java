@@ -14,153 +14,143 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 public class Level extends JPanel implements ActionListener {
-	
+
 	/**
 	 * Generated serial for warning suppression.
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
 	private Timer timer;
-    private Plane plane;
-    private Ground ground;
-    private boolean ingame;
-    private final int PLANE_START_LOCATION_X = 40;
-    private final int PLANE_START_LOCATION_Y = 60;
-    private int LEVEL_WIDTH = 400;
-    private int LEVEL_HEIGHT = 300;
-    private final int DELAY = 15;
-	
+	private Plane plane;
+	private Ground ground;
+	private boolean ingame;
+	private final int PLANE_START_LOCATION_X = 40;
+	private final int PLANE_START_LOCATION_Y = 60;
+	private int LEVEL_WIDTH = 400;
+	private int LEVEL_HEIGHT = 300;
+	private final int DELAY = 15;
+
 	public Level() {
 		this.LEVEL_HEIGHT = CrappyPlane.verticalPixelCount;
 		this.LEVEL_WIDTH = CrappyPlane.horizontalPixelCount;
-		
+
 		initLevel();
 
 	}
-	
+
 	private void initLevel() {
 
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        setBackground(Color.BLACK);
-        ingame = true;
+		addKeyListener(new TAdapter());
+		setFocusable(true);
+		setBackground(Color.BLACK);
+		this.ingame = true;
 
-        setPreferredSize(new Dimension(LEVEL_WIDTH, LEVEL_HEIGHT));
+		setPreferredSize(new Dimension(this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
-        plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-        
-        this.ground = new Ground(0,600);
+		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
 
-        timer = new Timer(DELAY, this);
-        timer.start();
-    }
-	
+		this.ground = new Ground(0, 600);
+
+		this.timer = new Timer(this.DELAY, this);
+		this.timer.start();
+	}
+
 	@Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 
-        if (ingame) {
+		if (this.ingame) {
 
-            drawObjects(g);
+			drawObjects(g);
 
-        } else {
+		} else {
 
-            drawGameOver(g);
-        }
+			drawGameOver(g);
+		}
 
-        Toolkit.getDefaultToolkit().sync();
-    }
+		Toolkit.getDefaultToolkit().sync();
+	}
 
 	private void drawObjects(Graphics g) {
 
-        if (plane.isVisible()) {
-            g.drawImage(plane.getImage(), plane.getX(), plane.getY(),
-                    this);
-        }
-        
-        g.drawImage(ground.getImage(), ground.getX(), ground.getY(), 1200, 161, this);
+		if (this.plane.isVisible()) {
+			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
+		}
 
-        g.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		g.drawImage(this.ground.getImage(), this.ground.getX(), this.ground.getY(), 1200, 161, this);
 
-        g.setColor(Color.WHITE);
-        g.drawString("Don't Panic: Press Spacebar", 500, 200);
-    }
+		g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
-    private void drawGameOver(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.drawString("Don't Panic: Press Spacebar", 500, 200);
+	}
 
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics fm = getFontMetrics(small);
+	private void drawGameOver(Graphics g) {
 
-        g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(msg, (LEVEL_WIDTH - fm.stringWidth(msg)) / 2,
-                LEVEL_HEIGHT / 2);
-    }
+		String msg = "Game Over";
+		Font small = new Font("Helvetica", Font.BOLD, 14);
+		FontMetrics fm = getFontMetrics(small);
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+		g.setColor(Color.white);
+		g.setFont(small);
+		g.drawString(msg, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, this.LEVEL_HEIGHT / 2);
+	}
 
-        inGame();
+	@Override
+	public void actionPerformed(ActionEvent e) {
 
-        updatePlane();
+		inGame();
 
-        checkCollisions();
+		updatePlane();
 
-        repaint();
-    }
+		checkCollisions();
 
-    
-	 private void inGame() {
-	        
-	        if (!ingame) {
-	            timer.stop();
-	        }
-	    }
+		repaint();
+	}
 
-	 private void updatePlane() {
+	private void inGame() {
 
-	        if (plane.isVisible()) {
-	            plane.move();
-	        }
-	    }
+		if (!this.ingame) {
+			this.timer.stop();
+		}
+	}
 
-	 
-	 public void checkCollisions() {
+	private void updatePlane() {
 
-	        Rectangle player = plane.getBoundaries();
-	        Rectangle groundBounds = this.ground.getBoundaries();
+		if (this.plane.isVisible()) {
+			this.plane.move();
+		}
+	}
 
-	        if(player.intersects(groundBounds)) {
-	        	plane.setVisible(false);
-	        	ingame = false;
-	        }
-	        
-	       /* if(player.intersects("obstacle")) {
-	        	take damage
-	        	
-	        }*/
-	        
-	    }
+	public void checkCollisions() {
 
-	
+		Rectangle player = this.plane.getBoundaries();
+		Rectangle groundBounds = this.ground.getBoundaries();
+
+		if (player.intersects(groundBounds)) {
+			this.plane.setVisible(false);
+			this.ingame = false;
+		}
+
+		/*
+		 * if(player.intersects("obstacle")) { take damage
+		 * 
+		 * }
+		 */
+
+	}
 
 	private class TAdapter extends KeyAdapter {
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-            plane.keyReleased(e);
-        }
+		@Override
+		public void keyReleased(KeyEvent e) {
+			plane.keyReleased(e);
+		}
 
-        @Override
-        public void keyPressed(KeyEvent e) {
-            plane.keyPressed(e);
-        }
-    }
-
-
-
-	
+		@Override
+		public void keyPressed(KeyEvent e) {
+			plane.keyPressed(e);
+		}
+	}
 
 }

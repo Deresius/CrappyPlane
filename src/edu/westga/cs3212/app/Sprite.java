@@ -4,88 +4,108 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-
-
 /**
- * Defines the sprite class, to be used for all moving objects on the screen.
+ * Defines the Sprite class, to be used for all moving objects on the screen.
  *
  */
 public class Sprite {
 
-	/*locations*/
-    protected int x; 
-    protected int y;
-    
-    /*boundaries*/
-    protected int width;
-    protected int height;
-        
-    protected Image image;
+	/* locations */
+	protected int x;
+	protected int y;
 
-    protected boolean visibility;
-    
-    
-    /**
-     * Creates a new sprite, at location x, y, and sets visibility to true.
-     * @param x the horizontal location of the sprite
-     * @param y the vertical location of the sprite
-     */
-    public Sprite(int x, int y) {
+	/* boundaries */
+	protected int width;
+	protected int height;
 
-        this.x = x;
-        this.y = y;
-        visibility = true;
-    }
-    
-    public int getX() {
-        return x;
-    }
+	protected Image image;
 
-    public int getY() {
-        return y;
-    }
+	protected boolean visibility;
 
-    public boolean isVisible() {
-        return visibility;
-    }
+	/**
+	 * Creates a new Sprite, at location x, y, and sets visibility to true.
+	 * 
+	 * @param x
+	 *            The horizontal location of the Sprite
+	 * @param y
+	 *            The vertical location of the Sprite
+	 */
+	public Sprite(int x, int y) {
 
-    public void setVisible(Boolean visible) {
-        visibility = visible;
-    }
-    
-    protected void getImageDimensions() {
+		this.x = x;
+		this.y = y;
+		visibility = true;
+	}
 
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-    }
+	/**
+	 * @return The horizontal location of the Sprite
+	 */
+	public int getX() {
+		return this.x;
+	}
 
-    protected void loadImage(String imageName) {
+	/**
+	 * @return The vertical location of the Sprite
+	 */
+	public int getY() {
+		return this.y;
+	}
+	
+	/**
+	 * @return The width of the Sprite
+	 */
+	public int getWidth() {
+		return this.width;
+	}
 
-        ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
-    }
+	/**
+	 * @return The height of the Sprite
+	 */
+	public int getHeight() {
+		return this.height;
+	}
+	
+	/**
+	 * @return The image of the Sprite
+	 */
+	public Image getImage() {
+		return this.image;
+	}
+	
+	/**
+	 * @return The boundaries of the sprite (by location and size/dimensions)
+	 */
+	public Rectangle getBoundaries() {
+		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
 
-    /** Gets the image of the sprite.
-     * @return the image of the sprite
-     */
-    public Image getImage() {
-        return image;
-    }
-    
-    
-    /** Gets the boundaries of the sprite (by location and size/dimensions)
-     * @return
-     */
-    public Rectangle getBoundaries() {
-        return new Rectangle(x, y, width, height);
-    }
+	/**
+	 * @return true if the Sprite is visible
+	 */
+	public boolean isVisible() {
+		return this.visibility;
+	}
 
-    public int getWidth() {
-    	return this.width;
-    }
-    
-    public int getHeight() {
-    	return this.height;
-    }
-    
+	/**
+	 * Sets the visibility of the Sprite
+	 * 
+	 * @param visible
+	 *            true if the Sprite is to be set visible
+	 */
+	public void setVisible(Boolean visible) {
+		this.visibility = visible;
+	}
+	
+	protected void getImageDimensions() {
+
+		this.width = this.image.getWidth(null);
+		this.height = this.image.getHeight(null);
+	}
+
+	protected void loadImage(String imageName) {
+
+		ImageIcon ii = new ImageIcon(imageName);
+		this.image = ii.getImage();
+	}
+
 }

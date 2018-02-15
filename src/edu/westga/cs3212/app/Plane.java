@@ -2,54 +2,78 @@ package edu.westga.cs3212.app;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * Defines the Plane class which is operated by the user
+ *
+ */
 public class Plane extends Sprite {
 
-    private int directionY;
-    
-    public Plane(int x, int y) {
-        super(x, y);
+	private int directionY;
 
-        initializePlane();
-    }
+	/**
+	 * Create a Plane at a given x,y location
+	 * 
+	 * @param x
+	 *            The horizontal location of the Plane
+	 * @param y
+	 *            The vertical location of the Plane
+	 */
+	public Plane(int x, int y) {
+		super(x, y);
 
-    private void initializePlane() {
-        
-        loadImage("src/images/plane.png");
-        getImageDimensions();
-    }
+		initializePlane();
+	}
 
-    public void move() {
+	private void initializePlane() {
 
-       y += directionY;
+		loadImage("src/images/plane.png");
+		getImageDimensions();
+	}
 
-        if (x < 1) {
-            x = 1;
-        }
+	/**
+	 * Moves the Plane up
+	 */
+	public void move() {
 
-        if (y < 1) {
-            y = 1;
-        }
-    }
+		this.y += this.directionY;
 
+		if (this.x < 1) {
+			this.x = 1;
+		}
 
-    public void keyPressed(KeyEvent e) {
+		if (this.y < 1) {
+			this.y = 1;
+		}
+	}
 
-        int key = e.getKeyCode();
+	/**
+	 * Registers when a key is pressed and responds
+	 * 
+	 * @param e
+	 *            The event
+	 */
+	public void keyPressed(KeyEvent e) {
 
-        if (key == KeyEvent.VK_SPACE) {
-            directionY = - 1;
-        }
+		int key = e.getKeyCode();
 
-    }
+		if (key == KeyEvent.VK_SPACE) {
+			this.directionY = -1;
+		}
 
-    public void keyReleased(KeyEvent e) {
+	}
 
-        int key = e.getKeyCode();
+	/**
+	 * Registers when a key is released and responds
+	 * 
+	 * @param e
+	 *            The event
+	 */
+	public void keyReleased(KeyEvent e) {
 
-        if (key == KeyEvent.VK_SPACE) {
-            directionY = + 3;
-        }        
-    }
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_SPACE) {
+			this.directionY = +3;
+		}
+	}
 }
-	
-
