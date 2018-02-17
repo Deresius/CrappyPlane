@@ -24,9 +24,10 @@ public class Level extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
 	private Timer timer;
-<<<<<<< HEAD
+
 	private Plane plane;
 	private Ground ground;
+	private Clouds clouds;
 	private boolean ingame;
 	private final int PLANE_START_LOCATION_X = 40;
 	private final int PLANE_START_LOCATION_Y = 60;
@@ -34,18 +35,7 @@ public class Level extends JPanel implements ActionListener {
 	private int LEVEL_HEIGHT = 300;
 	private final int DELAY = 15;
 
-=======
-    private Plane plane;
-    private Ground ground;
-    private Clouds clouds;
-    private boolean ingame;
-    private final int PLANE_START_LOCATION_X = 40;
-    private final int PLANE_START_LOCATION_Y = 60;
-    private int LEVEL_WIDTH = 400;
-    private int LEVEL_HEIGHT = 300;
-    private final int DELAY = 15;
-	
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
+
 	public Level() {
 		this.LEVEL_HEIGHT = CrappyPlane.verticalPixelCount;
 		this.LEVEL_WIDTH = CrappyPlane.horizontalPixelCount;
@@ -63,20 +53,17 @@ public class Level extends JPanel implements ActionListener {
 
 		setPreferredSize(new Dimension(this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
-<<<<<<< HEAD
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
 
 		this.ground = new Ground(0, 600);
 
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
-	}
-=======
+	
         this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
         this.ground = new Ground(0,600);
         this.clouds = new Clouds(LEVEL_WIDTH/2, LEVEL_HEIGHT-(LEVEL_HEIGHT- (-50)));
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
-
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -95,11 +82,9 @@ public class Level extends JPanel implements ActionListener {
 
 	private void drawObjects(Graphics g) {
 
-<<<<<<< HEAD
 		if (this.plane.isVisible()) {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
-=======
         if (plane.isVisible()) {
             g.drawImage(plane.getImage(), plane.getX(), plane.getY(),
                     this);
@@ -109,7 +94,6 @@ public class Level extends JPanel implements ActionListener {
         
        
         g.drawImage(clouds.getImage(),clouds.getX(), clouds.getY(),200,200,this);
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
 
 		g.drawImage(this.ground.getImage(), this.ground.getX(), this.ground.getY(), 1200, 161, this);
 
@@ -133,17 +117,13 @@ public class Level extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
 		inGame();
 
 		updatePlane();
-=======
-        updatePlane();
         
         this.clouds.move(); //TODO
         
         checkCollisions();
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
 
 		checkCollisions();
 
@@ -152,18 +132,10 @@ public class Level extends JPanel implements ActionListener {
 
 	private void inGame() {
 
-<<<<<<< HEAD
 		if (!this.ingame) {
 			this.timer.stop();
 		}
 	}
-=======
-	        if (plane.isVisible()) {
-	            this.plane.move();
-	            
-	        }
-	    }
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
 
 	private void updatePlane() {
 
@@ -192,7 +164,6 @@ public class Level extends JPanel implements ActionListener {
 
 	private class TAdapter extends KeyAdapter {
 
-<<<<<<< HEAD
 		@Override
 		public void keyReleased(KeyEvent e) {
 			plane.keyReleased(e);
@@ -203,10 +174,6 @@ public class Level extends JPanel implements ActionListener {
 			plane.keyPressed(e);
 		}
 	}
-=======
 	
-	
-	
->>>>>>> 04ae569740c7d3443fc4cd7c9226de7131fc2615
 
 }
