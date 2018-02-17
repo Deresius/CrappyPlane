@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  * Defines the sprite class, to be used for all moving objects on the screen.
  *
  */
-public class Sprite {
+public abstract class Sprite {
 
 	/*locations*/
     protected int x; 
@@ -88,4 +88,5 @@ public class Sprite {
     	return this.height;
     }
     
+    public abstract void move();
 }

@@ -1,8 +1,7 @@
 package edu.westga.cs3212.app;
 
-public class Ground extends Sprite {
-	
-	public Ground(int x, int y) {
+public class Clouds extends Sprite {
+	public Clouds(int x, int y) {
         super(x, y);
 
         initializeGround();
@@ -10,14 +9,15 @@ public class Ground extends Sprite {
 
     private void initializeGround() {
         
-        loadImage("src/images/grass.png");
+        loadImage("src/images/cloud.png");
         getImageDimensions();
     }
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
+		if(x != -200) {
+			x-=1;
+		}
 		
 	}
-
 }

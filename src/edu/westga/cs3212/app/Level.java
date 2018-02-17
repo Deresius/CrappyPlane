@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -24,6 +27,7 @@ public class Level extends JPanel implements ActionListener {
 	private Timer timer;
     private Plane plane;
     private Ground ground;
+    private Clouds clouds;
     private boolean ingame;
     private final int PLANE_START_LOCATION_X = 40;
     private final int PLANE_START_LOCATION_Y = 60;
@@ -48,9 +52,9 @@ public class Level extends JPanel implements ActionListener {
 
         setPreferredSize(new Dimension(LEVEL_WIDTH, LEVEL_HEIGHT));
 
-        plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-        
+        this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
         this.ground = new Ground(0,600);
+        this.clouds = new Clouds(LEVEL_WIDTH/2, LEVEL_HEIGHT-(LEVEL_HEIGHT- (-50)));
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -80,6 +84,9 @@ public class Level extends JPanel implements ActionListener {
         }
         
         g.drawImage(ground.getImage(), ground.getX(), ground.getY(), 1200, 161, this);
+        
+       
+        g.drawImage(clouds.getImage(),clouds.getX(), clouds.getY(),200,200,this);
 
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
@@ -105,7 +112,9 @@ public class Level extends JPanel implements ActionListener {
         inGame();
 
         updatePlane();
-
+        
+        this.clouds.move(); //TODO
+        
         checkCollisions();
 
         repaint();
@@ -122,7 +131,8 @@ public class Level extends JPanel implements ActionListener {
 	 private void updatePlane() {
 
 	        if (plane.isVisible()) {
-	            plane.move();
+	            this.plane.move();
+	            
 	        }
 	    }
 
@@ -160,7 +170,8 @@ public class Level extends JPanel implements ActionListener {
     }
 
 
-
+	
+	
 	
 
 }
