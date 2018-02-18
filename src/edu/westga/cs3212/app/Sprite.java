@@ -108,5 +108,8 @@ public abstract class Sprite {
 		this.image = ii.getImage();
 	}
 
+	/**
+	 * Abstract method to move the object on the screen.
+	 */
     public abstract void move();
 }
