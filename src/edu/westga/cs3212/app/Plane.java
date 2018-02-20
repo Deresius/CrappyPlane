@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
  */
 public class Plane extends Sprite {
 
+	private static final int RISE_SLOW = 1;
+	private static final int FALL_NORMAL = -3;
+
 	private int directionY;
 
 	/**
@@ -57,7 +60,7 @@ public class Plane extends Sprite {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_SPACE) {
-			this.directionY = -1;
+			this.move(this.RISE_SLOW);
 		}
 
 	}
@@ -73,7 +76,19 @@ public class Plane extends Sprite {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_SPACE) {
-			this.directionY = +3;
+			this.move(this.FALL_NORMAL);
 		}
+	}
+
+	/**
+	 * Moves the plane in the given direction
+	 * 
+	 * @param speed
+	 *            Controls both speed and direction. Up if positive and down if
+	 *            negative. Larger the number the faster it goes
+	 * 
+	 */
+	public void move(int speed) {
+		this.directionY = speed;
 	}
 }
