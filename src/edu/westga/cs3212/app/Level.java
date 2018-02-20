@@ -33,7 +33,6 @@ public class Level extends JPanel implements ActionListener {
 	private int LEVEL_HEIGHT = 300;
 	private final int DELAY = 15;
 
-
 	public Level() {
 		this.LEVEL_HEIGHT = CrappyPlane.verticalPixelCount;
 		this.LEVEL_WIDTH = CrappyPlane.horizontalPixelCount;
@@ -57,11 +56,12 @@ public class Level extends JPanel implements ActionListener {
 
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
-	
-        this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-        this.ground = new Ground(0,600);
-        this.clouds = new Clouds(LEVEL_WIDTH/2, LEVEL_HEIGHT-(LEVEL_HEIGHT- (-50)));
+
+		this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
+		this.ground = new Ground(0, 600);
+		this.clouds = new Clouds(LEVEL_WIDTH / 2, LEVEL_HEIGHT - (LEVEL_HEIGHT - (-50)));
 	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -83,15 +83,13 @@ public class Level extends JPanel implements ActionListener {
 		if (this.plane.isVisible()) {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
-        if (plane.isVisible()) {
-            g.drawImage(plane.getImage(), plane.getX(), plane.getY(),
-                    this);
-        }
-        
-        g.drawImage(ground.getImage(), ground.getX(), ground.getY(), 1200, 161, this);
-        
-       
-        g.drawImage(clouds.getImage(),clouds.getX(), clouds.getY(),200,200,this);
+		if (plane.isVisible()) {
+			g.drawImage(plane.getImage(), plane.getX(), plane.getY(), this);
+		}
+
+		g.drawImage(ground.getImage(), ground.getX(), ground.getY(), 1200, 161, this);
+
+		g.drawImage(clouds.getImage(), clouds.getX(), clouds.getY(), 200, 200, this);
 
 		g.drawImage(this.ground.getImage(), this.ground.getX(), this.ground.getY(), 1200, 161, this);
 
@@ -118,10 +116,10 @@ public class Level extends JPanel implements ActionListener {
 		inGame();
 
 		updatePlane();
-        
-        this.clouds.move(); //TODO
-        
-        checkCollisions();
+
+		this.clouds.move(); // TODO
+
+		checkCollisions();
 
 		checkCollisions();
 
@@ -172,6 +170,5 @@ public class Level extends JPanel implements ActionListener {
 			plane.keyPressed(e);
 		}
 	}
-	
 
 }

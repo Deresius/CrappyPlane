@@ -8,16 +8,15 @@ public class Ground extends Sprite {
 		initializeGround();
 	}
 
-    private void initializeGround() {
-        loadImage("src/images/grass.png");
-        getImageDimensions();
-    }
-
+	private void initializeGround() {
+		loadImage("src/images/grass.png");
+		getImageDimensions();
+	}
 
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

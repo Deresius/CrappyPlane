@@ -4,7 +4,9 @@
 package edu.westgs.cs3212.app.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import edu.westga.cs3212.app.Clouds;
 
 /**
@@ -47,10 +49,9 @@ class CloudsTests {
 
 		assertEquals(false, testCloud.isVisible());
 	}
-	
+
 	/**
-	 * Tests getting the width of a cloud.
-	 * Default of 1988.
+	 * Tests getting the width of a cloud. Default of 1988.
 	 */
 	@Test
 	void testGetWidth() {
@@ -58,10 +59,9 @@ class CloudsTests {
 
 		assertEquals(1988, testCloud.getWidth());
 	}
-	
+
 	/**
-	 * Tests getting the height of a cloud.
-	 * Default of 1290.
+	 * Tests getting the height of a cloud. Default of 1290.
 	 */
 	@Test
 	void testGetHeight() {

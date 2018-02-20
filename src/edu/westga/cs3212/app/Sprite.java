@@ -50,7 +50,7 @@ public abstract class Sprite {
 	public int getY() {
 		return this.y;
 	}
-	
+
 	/**
 	 * @return The width of the Sprite
 	 */
@@ -64,14 +64,14 @@ public abstract class Sprite {
 	public int getHeight() {
 		return this.height;
 	}
-	
+
 	/**
 	 * @return The image of the Sprite
 	 */
 	public Image getImage() {
 		return this.image;
 	}
-	
+
 	/**
 	 * @return The boundaries of the sprite (by location and size/dimensions)
 	 */
@@ -95,7 +95,7 @@ public abstract class Sprite {
 	public void setVisible(Boolean visible) {
 		this.visibility = visible;
 	}
-	
+
 	protected void getImageDimensions() {
 
 		this.width = this.image.getWidth(null);
@@ -111,5 +111,5 @@ public abstract class Sprite {
 	/**
 	 * Abstract method to move the object on the screen.
 	 */
-    public abstract void move();
+	public abstract void move();
 }
