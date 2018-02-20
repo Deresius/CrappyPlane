@@ -8,8 +8,13 @@ import java.awt.event.KeyEvent;
  */
 public class Plane extends Sprite {
 
-	private static final int RISE_SLOW = 1;
-	private static final int FALL_NORMAL = -3;
+	private static final int RISE_SLOW = -3;
+	private static final int RISE_NORMAL = -5;
+	private static final int RISE_FAST = -8;
+
+	private static final int FALL_SLOW = 3;
+	private static final int FALL_NORMAL = 5;
+	private static final int FALL_FAST = 8;
 
 	private int directionY;
 
@@ -24,13 +29,13 @@ public class Plane extends Sprite {
 	public Plane(int x, int y) {
 		super(x, y);
 
-		initializePlane();
+		this.initializePlane();
 	}
 
 	private void initializePlane() {
 
-		loadImage("src/images/plane.png");
-		getImageDimensions();
+		this.loadImage("src/images/plane.png");
+		this.getImageDimensions();
 	}
 
 	/**
@@ -39,10 +44,6 @@ public class Plane extends Sprite {
 	public void move() {
 
 		this.y += this.directionY;
-
-		if (this.x < 1) {
-			this.x = 1;
-		}
 
 		if (this.y < 1) {
 			this.y = 1;
@@ -60,7 +61,7 @@ public class Plane extends Sprite {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_SPACE) {
-			this.move(this.RISE_SLOW);
+			this.move(Plane.RISE_NORMAL);
 		}
 
 	}
@@ -76,7 +77,7 @@ public class Plane extends Sprite {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_SPACE) {
-			this.move(this.FALL_NORMAL);
+			this.move(Plane.FALL_NORMAL);
 		}
 	}
 

@@ -34,7 +34,7 @@ public abstract class Sprite {
 
 		this.x = x;
 		this.y = y;
-		visibility = true;
+		this.visibility = true;
 	}
 
 	/**
