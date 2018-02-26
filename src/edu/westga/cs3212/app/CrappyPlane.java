@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+/**
+ * Driver for the Crappy Plane
+ * 
+ * @author Team 4
+ */
 public class CrappyPlane extends JFrame {
 
 	/**
