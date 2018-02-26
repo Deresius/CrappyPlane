@@ -2,13 +2,13 @@ package edu.westga.cs3212.app;
 
 import java.util.Random;
 
-public class Clouds extends Sprite {
+public class Cloud extends Sprite {
 	
 	private int lowestAltitudeToDraw;
 	private int rightSideOfScreen;
 	private int speed = 6;
 		
-	public Clouds(int x, int y, int maxX , int maxY) {
+	public Cloud(int x, int y, int maxX , int maxY) {
 		super(x, y);
 		
 		this.lowestAltitudeToDraw = maxY;

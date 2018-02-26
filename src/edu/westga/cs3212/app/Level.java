@@ -32,7 +32,7 @@ public class Level extends JPanel implements ActionListener {
 
 	private Plane plane;
 	private ArrayList<Ground> ground;
-	private ArrayList<Clouds> clouds;
+	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
 	private Sky sky;
 	private boolean ingame;
@@ -57,7 +57,7 @@ public class Level extends JPanel implements ActionListener {
 		this.setFocusable(true);
 		this.setBackground(Color.BLACK);
 		this.ingame = true;
-		this.clouds = new ArrayList<Clouds>();
+		this.clouds = new ArrayList<Cloud>();
 		this.ground = new ArrayList<Ground>();
 		this.obstacles = new ArrayList<Obstacle>();
 
@@ -74,9 +74,9 @@ public class Level extends JPanel implements ActionListener {
 		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
-		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 	}
 	
 	@Override
@@ -100,7 +100,7 @@ public class Level extends JPanel implements ActionListener {
 		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 
 		for (int i = 1; i < 4; i++) {
-			for (Clouds cloud : this.clouds) {
+			for (Cloud cloud : this.clouds) {
 				if (cloud.getSpeed() == i) {
 					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 2,
 							(110 * cloud.getSpeed()) / 2, this);
@@ -117,7 +117,7 @@ public class Level extends JPanel implements ActionListener {
 		}
 
 		for (int i = 4; i < 7; i++) {
-			for (Clouds cloud : this.clouds) {
+			for (Cloud cloud : this.clouds) {
 				if (cloud.getSpeed() == i) {
 					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
 							(110 * cloud.getSpeed()) / 4, this);
@@ -165,7 +165,7 @@ public class Level extends JPanel implements ActionListener {
 	private void updateLevel() {
 		this.distance++;
 
-		for (Clouds cloud : this.clouds) {
+		for (Cloud cloud : this.clouds) {
 			cloud.move();
 		}
 
@@ -187,17 +187,17 @@ public class Level extends JPanel implements ActionListener {
 		}
 
 		if (this.distance % 200 == 0) {
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Clouds(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 		}
 	}
