@@ -123,9 +123,7 @@ public class Level extends JPanel implements ActionListener {
 					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4, (110 * cloud.getSpeed()) / 4, this);
 				}				
 			}
-		}
-		
-		
+		}		
 		for(Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int)(LEVEL_WIDTH * 1.1), 150, this);
 		}
@@ -152,45 +150,30 @@ public class Level extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		inGame();
-
-		
-		
+		inGame();		
 		updatePlane();
-
-		updateLevel();
-		
-		
-		
+		updateLevel();		
 		checkCollisions();
-
 		repaint();
 	}
 
 	private void updateLevel()
 	{
-		distance++;
-		
+		distance++;		
 		for(Clouds cloud : this.clouds) {
 			cloud.move();
-		}
-		
+		}		
 		for(Ground individualGround : this.ground) {
 			individualGround.move();
-		}
-		
+		}		
 		for(Obstacle individualObstacle : this.obstacles) {
 			individualObstacle.move();
-		}
-		
+		}		
 		Random rand = new Random();
-		
-		if (distance % 600 == 0) {
+		if (distance % 1000 == 0) {
 			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
-		}
-		
-		
+		}		
 		if(distance % 200 == 0)
 		{
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
@@ -218,14 +201,12 @@ public class Level extends JPanel implements ActionListener {
 
 	public void checkCollisions() {
 
-		Rectangle player = this.plane.getBoundaries();
-		
-		
+		Rectangle player = this.plane.getBoundaries();		
 		
 		if(plane.getY() + plane.getHeight() > LEVEL_HEIGHT) {
 			this.plane.setVisible(false);
 			this.ingame = false;
-		}
+		}		
 		
 		for(Obstacle individualObstacle : this.obstacles) {
 			
