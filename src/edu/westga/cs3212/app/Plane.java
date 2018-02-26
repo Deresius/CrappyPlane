@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 /**
  * Defines the Plane class which is operated by the user
  *
+ * @author Team 4
  */
 public class Plane extends Sprite {
 

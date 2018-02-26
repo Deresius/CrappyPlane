@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 
 /**
  * Defines the Sprite class, to be used for all moving objects on the screen.
+ * 
+ * @author Team 4
  *
  */
 public abstract class Sprite {
@@ -31,6 +33,13 @@ public abstract class Sprite {
 	 *            The vertical location of the Sprite
 	 */
 	public Sprite(int x, int y) {
+
+		if (x < 0) {
+			throw new IllegalArgumentException("Sprite x cannot be negative");
+		}
+		if (y < 0) {
+			throw new IllegalArgumentException("Sprite y cannot be negative");
+		}
 
 		this.x = x;
 		this.y = y;
@@ -76,7 +85,8 @@ public abstract class Sprite {
 	 * @return The boundaries of the sprite (by location and size/dimensions)
 	 */
 	public Rectangle getBoundaries() {
-		return new Rectangle(this.x + (int) (.1 * this.width), this.y + (int) (.1 * this.height), (int) (.8 * this.width), (int) (.8 * this.height));
+		return new Rectangle(this.x + (int) (.1 * this.width), this.y + (int) (.1 * this.height),
+				(int) (.8 * this.width), (int) (.8 * this.height));
 	}
 
 	/**
