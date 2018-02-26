@@ -1,19 +1,23 @@
 package edu.westga.cs3212.app;
 
 /**
- * The Class Sky.
+ * The Sky for the background of the running application
+ * 
+ * @author Team 4
  */
-public class Sky extends Sprite{
+public class Sky extends Sprite {
 
 	/**
-	 * Instantiates a new sky.
+	 * Instantiates a new sky that will be used as the background
 	 *
-	 * @param x the x
-	 * @param y the y
+	 * @param x
+	 *            The horizontal location of the Sky
+	 * @param y
+	 *            The vertical location of the Sky
 	 */
 	public Sky(int x, int y) {
 		super(x, y);
-		
+
 		this.initializeSky();
 	}
 
@@ -25,8 +29,8 @@ public class Sky extends Sprite{
 		this.getImageDimensions();
 	}
 
-	
 	@Override
-	public void move() {}
+	public void move() {
+	}
 
 }
