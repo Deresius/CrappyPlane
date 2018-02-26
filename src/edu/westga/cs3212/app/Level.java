@@ -29,13 +29,13 @@ public class Level extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
 	private Timer timer;
-
 	private Plane plane;
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
 	private Sky sky;
 	private boolean ingame;
+	private boolean started = false; 
 	private final int PLANE_START_LOCATION_X = 40;
 	private final int PLANE_START_LOCATION_Y = 60;
 	private int LEVEL_WIDTH;
@@ -43,6 +43,9 @@ public class Level extends JPanel implements ActionListener {
 	private final int DELAY = 15;
 	private int distance = 0;
 
+	/**
+	 * Instantiates a new level, based on the given viewport.
+	 */
 	public Level() {
 		this.LEVEL_HEIGHT = CrappyPlane.verticalPixelCount;
 		this.LEVEL_WIDTH = CrappyPlane.horizontalPixelCount;
@@ -51,6 +54,9 @@ public class Level extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Initializes the level.
+	 */
 	private void initLevel() {
 
 		this.addKeyListener(new TAdapter());
@@ -71,12 +77,15 @@ public class Level extends JPanel implements ActionListener {
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
 
-		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		Random rand = new Random(); 
+		
+		this.obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT)); 
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		
+		this.clouds.add(new Cloud(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT)); 		 
+		this.clouds.add(new Cloud(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT)); 
+		this.clouds.add(new Cloud(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT));		 
 	}
 	
 	@Override
@@ -95,6 +104,11 @@ public class Level extends JPanel implements ActionListener {
 		Toolkit.getDefaultToolkit().sync();
 	}
 
+	/**
+	 * Called to Draw the objects on the screen
+	 *
+	 * @param g the graphics
+	 */
 	private void drawObjects(Graphics g) {
 
 		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
@@ -128,14 +142,23 @@ public class Level extends JPanel implements ActionListener {
 		for (Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), 150, this);
 		}
-		g.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		g.setFont(new Font("Helvetica", Font.PLAIN, 25));
 
 		g.setColor(Color.WHITE);
-		g.drawString("Don't Panic: Press Spacebar", 500, 200);
-		g.drawString("Distance: " + this.distance, this.LEVEL_WIDTH - 200, 20);
+		
+		g.drawString("Distance: " + distance, LEVEL_WIDTH - 250, 20); 
+		if(!started) { 
+		g.drawString("Don't Panic: Press Spacebar", 500, 200);  
+		}
+		
 
 	}
 
+	/**
+	 * Called to draw game over.
+	 *
+	 * @param g the graphics
+	 */
 	private void drawGameOver(Graphics g) {
 
 		String msg = "Game Over";
@@ -148,6 +171,11 @@ public class Level extends JPanel implements ActionListener {
 		g.drawString("Score: " + distance, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 60);
 	}
 
+	/* 
+	 * The trigger to call the updates in the game.
+	 * 
+	 * @param e the ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -162,8 +190,13 @@ public class Level extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
+	/**
+	 * Called to update the level for moving objects, and spawning clouds and .
+	 */
 	private void updateLevel() {
-		this.distance++;
+		if(started) {
+			this.distance++;
+		}
 
 		for (Cloud cloud : this.clouds) {
 			cloud.move();
@@ -179,14 +212,14 @@ public class Level extends JPanel implements ActionListener {
 
 		Random rand = new Random();
 
-		if (this.distance % 600 == 0) {
+		if (this.distance % 600 == 0 && started) {
 			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 		}
 
-		if (this.distance % 200 == 0) {
+		if (this.distance % 200 == 0 && started) {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
@@ -216,6 +249,9 @@ public class Level extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Check collisions for collisions between the plane, the ground, and objects, to end the game.
+	 */
 	public void checkCollisions() {
 
 		Rectangle player = this.plane.getBoundaries();
@@ -233,15 +269,7 @@ public class Level extends JPanel implements ActionListener {
 				this.plane.setVisible(false);
 				this.ingame = false;
 			}
-
 		}
-
-		/*
-		 * if(player.intersects("obstacle")) { take damage
-		 * 
-		 * }
-		 */
-
 	}
 
 	private class TAdapter extends KeyAdapter {
@@ -254,6 +282,7 @@ public class Level extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			plane.keyPressed(e);
+			started = true;
 		}
 	}
 
