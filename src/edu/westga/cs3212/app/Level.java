@@ -178,7 +178,7 @@ public class Level extends JPanel implements ActionListener {
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}
 		
-		//checkCollisions();
+		checkCollisions();
 
 		repaint();
 	}

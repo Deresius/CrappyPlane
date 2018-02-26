@@ -76,7 +76,7 @@ public abstract class Sprite {
 	 * @return The boundaries of the sprite (by location and size/dimensions)
 	 */
 	public Rectangle getBoundaries() {
-		return new Rectangle(this.x, this.y, this.width, this.height);
+		return new Rectangle(this.x + (int) (.1 * this.width), this.y + (int) (.1 * this.height), (int) (.8 * this.width), (int) (.8 * this.height));
 	}
 
 	/**
