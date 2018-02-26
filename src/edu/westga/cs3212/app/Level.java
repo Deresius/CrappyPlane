@@ -168,7 +168,7 @@ public class Level extends JPanel implements ActionListener {
 		}
 		
 		
-		if(distance % 300 == 0)
+		if(distance % 200 == 0)
 		{
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
@@ -178,7 +178,7 @@ public class Level extends JPanel implements ActionListener {
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}
 		
-		checkCollisions();
+		//checkCollisions();
 
 		repaint();
 	}
@@ -219,15 +219,10 @@ public class Level extends JPanel implements ActionListener {
 		Rectangle player = this.plane.getBoundaries();
 		
 		
-		for(Ground individualGround : this.ground) {
-			
-			Rectangle groundBounds = individualGround.getBoundaries();
-			
-			if (player.intersects(groundBounds)) {
-				this.plane.setVisible(false);
-				this.ingame = false;
-			}
-			
+		
+		if(plane.getY() + plane.getHeight() > LEVEL_HEIGHT) {
+			this.plane.setVisible(false);
+			this.ingame = false;
 		}
 		
 		for(Obstacle individualObstacle : this.obstacles) {
