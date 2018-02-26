@@ -36,9 +36,20 @@ public class Obstacle extends Sprite{
 			
 			     y = (int)(rand.nextInt(lowestAltitudeToDraw) * .7);
 			     //speed = rand.nextInt(4) + 1;
+			     
+			     Random rando = new Random();
+					int theRandom = rando.nextInt(3) + 1;
+					if(theRandom == 1) {
+						loadImage("src/images/balloon2.png");
+					}else if(theRandom == 2) {
+						loadImage("src/images/balloon3.png");
+					}else {
+						loadImage("src/images/balloon.png");
+					}
 			
 			
 		}
+		
 	
 
 	}

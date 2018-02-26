@@ -159,10 +159,6 @@ public class Level extends JPanel implements ActionListener {
 
 		updateLevel();
 		
-		for(Clouds cloud : this.clouds) {
-			cloud.move();
-		}
-		
 		Random rand = new Random();
 		
 		if (distance % 800 == 0) {
@@ -172,9 +168,9 @@ public class Level extends JPanel implements ActionListener {
 		
 		if(distance % 500 == 0)
 		{
-			clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-			clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-			clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}
 		
 		checkCollisions();

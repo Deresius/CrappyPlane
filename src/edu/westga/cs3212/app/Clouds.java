@@ -40,6 +40,9 @@ public class Clouds extends Sprite {
 			
 			
 		}
+		
+		
+		
 	
 
 	}
