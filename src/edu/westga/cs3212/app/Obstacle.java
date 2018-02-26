@@ -6,7 +6,7 @@ public class Obstacle extends Sprite{
 	
 	private int lowestAltitudeToDraw;
 	private int rightSideOfScreen;
-	private int speed = 3;
+	private int speed = 5;
 	
 	public Obstacle(int x, int y, int maxX , int maxY) {
 		super(x, y);			

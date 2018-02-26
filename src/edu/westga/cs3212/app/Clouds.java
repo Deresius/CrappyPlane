@@ -6,7 +6,7 @@ public class Clouds extends Sprite {
 	
 	private int lowestAltitudeToDraw;
 	private int rightSideOfScreen;
-	private int speed = 2;
+	private int speed = 6;
 		
 	public Clouds(int x, int y, int maxX , int maxY) {
 		super(x, y);
@@ -36,7 +36,7 @@ public class Clouds extends Sprite {
 			x = rightSideOfScreen + rand.nextInt(rightSideOfScreen);
 			
 			     y = (int)(rand.nextInt(lowestAltitudeToDraw) * .6);
-			     speed = rand.nextInt(4) + 1;
+			     speed = rand.nextInt(7) + 1;
 			
 			
 		}

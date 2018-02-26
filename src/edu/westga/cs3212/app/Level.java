@@ -116,11 +116,11 @@ public class Level extends JPanel implements ActionListener {
 		}	
 		
 		
-		for(int i = 4; i < 5; i++)
+		for(int i = 4; i < 7; i++)
 		{
 			for(Clouds cloud : this.clouds) {
 				if(cloud.getSpeed() == i) {
-					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 2, (110 * cloud.getSpeed()) / 2, this);
+					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4, (110 * cloud.getSpeed()) / 4, this);
 				}				
 			}
 		}
@@ -154,11 +154,34 @@ public class Level extends JPanel implements ActionListener {
 
 		inGame();
 
-		distance++;
+		
 		
 		updatePlane();
 
 		updateLevel();
+		
+		
+		
+		checkCollisions();
+
+		repaint();
+	}
+
+	private void updateLevel()
+	{
+		distance++;
+		
+		for(Clouds cloud : this.clouds) {
+			cloud.move();
+		}
+		
+		for(Ground individualGround : this.ground) {
+			individualGround.move();
+		}
+		
+		for(Obstacle individualObstacle : this.obstacles) {
+			individualObstacle.move();
+		}
 		
 		Random rand = new Random();
 		
@@ -177,27 +200,6 @@ public class Level extends JPanel implements ActionListener {
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}
-		
-		checkCollisions();
-
-		repaint();
-	}
-
-	private void updateLevel()
-	{
-		for(Clouds cloud : this.clouds) {
-			cloud.move();
-		}
-		
-		for(Ground individualGround : this.ground) {
-			individualGround.move();
-		}
-		
-		for(Obstacle individualObstacle : this.obstacles) {
-			individualObstacle.move();
-		}
-		
-		
 	}
 	
 	private void inGame() {
