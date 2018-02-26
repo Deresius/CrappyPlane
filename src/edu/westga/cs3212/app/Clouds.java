@@ -13,6 +13,7 @@ public class Clouds extends Sprite {
 		lowestAltitudeToDraw = maxY;
 		rightSideOfScreen = maxX;
 		initializeGround();
+		
 	}
 
 	public int getSpeed() {
