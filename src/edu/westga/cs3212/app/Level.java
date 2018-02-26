@@ -204,13 +204,13 @@ public class Level extends JPanel implements ActionListener {
 			this.distance++;
 		}
 
-		for (Cloud cloud : this.clouds) {
-			cloud.move();
-		}
-
-		for (Ground individualGround : this.ground) {
-			individualGround.move();
-		}
+		updateClouds();
+		updateGround();
+		
+		
+		
+		
+		
 
 		for (Obstacle individualObstacle : this.obstacles) {
 			individualObstacle.move();
@@ -218,15 +218,21 @@ public class Level extends JPanel implements ActionListener {
 
 		Random rand = new Random();
 
-		if (this.distance % 600 == 0 && started) {
+		if (this.distance % 1000 == 0 && started) {
 			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+			
+			// Commented out for speed.
+			/*this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));*/
 		}
 
-		if (this.distance % 200 == 0 && started) {
+		if (this.distance % 1000 == 0 && started) {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+			
+			// Commented out for speed.
+			/*this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
@@ -235,12 +241,24 @@ public class Level extends JPanel implements ActionListener {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));*/
 		}
 	}
 
+	
+	private void updateClouds() {
+
+		for (Cloud cloud : this.clouds) {
+			cloud.move();
+		}
+	}
+	
+	private void updateGround() {
+		for (Ground individualGround : this.ground) {
+			individualGround.move();
+		}
+	}
+	
 	private void inGame() {
 
 		if (!this.ingame) {

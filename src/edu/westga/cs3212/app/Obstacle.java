@@ -68,13 +68,16 @@ public class Obstacle extends Sprite {
 
 			Random rando = new Random();
 			int theRandom = rando.nextInt(3) + 1;
-			if (theRandom == 1) {
+			
+			//Needs optimization. Commented out randomization of image in this manner. finding a new method of randomization(pointing) 
+			//will drastically increase speed at draw time.
+			/*if (theRandom == 1) {
 				this.loadImage("src/images/balloon2.png");
 			} else if (theRandom == 2) {
 				this.loadImage("src/images/balloon3.png");
 			} else {
 				this.loadImage("src/images/balloon.png");
-			}
+			}*/
 
 		}
 
