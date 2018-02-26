@@ -1,9 +1,22 @@
 package edu.westga.cs3212.app;
 
+/**
+ * The Class Ground.
+ */
 public class Ground extends Sprite {
 
 	private int maxDrawToLeft;
 
+	/**
+	 * Instantiates a new ground.
+	 *
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param maxX
+	 *            the max X
+	 */
 	public Ground(int x, int y, int maxX) {
 		super(x, y);
 
@@ -12,6 +25,9 @@ public class Ground extends Sprite {
 		this.initializeGround();
 	}
 
+	/**
+	 * Initialize ground.
+	 */
 	private void initializeGround() {
 		this.loadImage("src/images/grass.png");
 		this.getImageDimensions();
