@@ -65,20 +65,20 @@ public class Level extends JPanel implements ActionListener {
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
 
-		ground.add(new Ground(0, LEVEL_HEIGHT - 150, LEVEL_WIDTH));
-		ground.add(new Ground(LEVEL_WIDTH, LEVEL_HEIGHT - 150, LEVEL_WIDTH));
+		ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
+		ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.sky = new Sky(0, 0);
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
 
-		this.obstacles.add(new Obstacle(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
+		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
-		this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-		this.clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-		this.clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-		this.clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
+		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
+		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		this.clouds.add(new Clouds(this.LEVEL_WIDTH, 0, this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 	}
-
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -97,7 +97,7 @@ public class Level extends JPanel implements ActionListener {
 
 	private void drawObjects(Graphics g) {
 
-		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), LEVEL_WIDTH, LEVEL_HEIGHT, this);
+		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 
 		for (int i = 1; i < 4; i++) {
 			for (Clouds cloud : this.clouds) {
@@ -126,13 +126,13 @@ public class Level extends JPanel implements ActionListener {
 		}
 
 		for (Ground ground : this.ground) {
-			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (LEVEL_WIDTH * 1.1), 150, this);
+			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), 150, this);
 		}
 		g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
 		g.setColor(Color.WHITE);
 		g.drawString("Don't Panic: Press Spacebar", 500, 200);
-		g.drawString("Distance: " + distance, LEVEL_WIDTH - 200, 20);
+		g.drawString("Distance: " + this.distance, this.LEVEL_WIDTH - 200, 20);
 
 	}
 

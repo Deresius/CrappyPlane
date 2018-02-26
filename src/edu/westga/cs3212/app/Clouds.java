@@ -10,9 +10,11 @@ public class Clouds extends Sprite {
 		
 	public Clouds(int x, int y, int maxX , int maxY) {
 		super(x, y);
-		lowestAltitudeToDraw = maxY;
-		rightSideOfScreen = maxX;
-		initializeGround();
+		
+		this.lowestAltitudeToDraw = maxY;
+		this.rightSideOfScreen = maxX;
+		
+		this.initializeGround();
 		
 	}
 
@@ -22,28 +24,23 @@ public class Clouds extends Sprite {
 	
 	private void initializeGround() {
 
-		loadImage("src/images/cloud.png");
-		getImageDimensions();
+		this.loadImage("src/images/cloud.png");
+		this.getImageDimensions();
 	}
 
 	@Override
 	public void move() {
-		x -= speed;
+		this.x -= this.speed;
 		
-		if( x < -rightSideOfScreen / 2 ) {
+		if( this.x < -this.rightSideOfScreen / 2 ) {
 			Random rand = new Random();
 			
-			x = rightSideOfScreen + rand.nextInt(rightSideOfScreen);
+			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen);
 			
-			     y = (int)(rand.nextInt(lowestAltitudeToDraw) * .6);
-			     speed = rand.nextInt(7) + 1;
-			
+			this.y = (int)(rand.nextInt(this.lowestAltitudeToDraw) * .6);
+			this.speed = rand.nextInt(7) + 1;
 			
 		}
-		
-		
-		
-	
 
 	}
 }

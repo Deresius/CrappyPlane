@@ -7,29 +7,25 @@ public class Ground extends Sprite {
 	public Ground(int x, int y, int maxX) {
 		super(x, y);
 
-		maxDrawToLeft = maxX;
+		this.maxDrawToLeft = maxX;
 		
-		initializeGround();
+		this.initializeGround();
 	}
 
 	private void initializeGround() {
-		loadImage("src/images/grass.png");
-		getImageDimensions();
+		this.loadImage("src/images/grass.png");
+		this.getImageDimensions();
 	}
 
 	@Override
 	public void move() {
 		
-		if(x > (-maxDrawToLeft))
+		if(this.x > (-this.maxDrawToLeft))
 		{
-			x = x - 17;
+			this.x = this.x - 17;
 		}else {
-			x = maxDrawToLeft;
+			this.x = this.maxDrawToLeft;
 		}
-		
-		
-		
-		// TODO Auto-generated method stub
 
 	}
 

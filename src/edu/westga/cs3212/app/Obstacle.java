@@ -9,10 +9,12 @@ public class Obstacle extends Sprite{
 	private int speed = 5;
 	
 	public Obstacle(int x, int y, int maxX , int maxY) {
-		super(x, y);			
-		lowestAltitudeToDraw = maxY;
-		rightSideOfScreen = maxX;
-		initializeObstacle();
+		super(x, y);
+		
+		this.lowestAltitudeToDraw = maxY;
+		this.rightSideOfScreen = maxX;
+		
+		this.initializeObstacle();
 	}
 	
 	public int getSpeed() {
@@ -21,30 +23,30 @@ public class Obstacle extends Sprite{
 	
 	private void initializeObstacle() {
 
-		loadImage("src/images/balloon.png");
-		getImageDimensions();
+		this.loadImage("src/images/balloon.png");
+		this.getImageDimensions();
 	}
 
 	@Override
 	public void move() {
-		x -= speed;
+		this.x -= this.speed;
 		
-		if( x < -rightSideOfScreen / 2 ) {
+		if( this.x < -this.rightSideOfScreen / 2 ) {
 			Random rand = new Random();
 			
-			x = rightSideOfScreen + rand.nextInt(rightSideOfScreen);
+			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen);
 			
-			     y = (int)(rand.nextInt(lowestAltitudeToDraw) * .7);
+			this.y = (int)(rand.nextInt(this.lowestAltitudeToDraw) * .7);
 			     //speed = rand.nextInt(4) + 1;
 			     
 			     Random rando = new Random();
 					int theRandom = rando.nextInt(3) + 1;
 					if(theRandom == 1) {
-						loadImage("src/images/balloon2.png");
+						this.loadImage("src/images/balloon2.png");
 					}else if(theRandom == 2) {
-						loadImage("src/images/balloon3.png");
+						this.loadImage("src/images/balloon3.png");
 					}else {
-						loadImage("src/images/balloon.png");
+						this.loadImage("src/images/balloon.png");
 					}
 			
 			

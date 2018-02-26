@@ -5,16 +5,15 @@ public class Sky extends Sprite{
 	public Sky(int x, int y) {
 		super(x, y);
 		
-		initializeSky();
+		this.initializeSky();
 	}
 
 	private void initializeSky() {
-		loadImage("src/images/sky.png");
-		getImageDimensions();
+		this.loadImage("src/images/sky.png");
+		this.getImageDimensions();
 	}
 
 	@Override
-	public void move() {		
-	}
+	public void move() {}
 
 }
