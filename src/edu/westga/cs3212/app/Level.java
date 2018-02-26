@@ -31,6 +31,7 @@ public class Level extends JPanel implements ActionListener {
 	private ArrayList<Obstacle> obstacles;
 	private Sky sky;
 	private boolean ingame;
+	private boolean started = false;
 	private final int PLANE_START_LOCATION_X = 40;
 	private final int PLANE_START_LOCATION_Y = 60;
 	private int LEVEL_WIDTH = 1280;
@@ -66,12 +67,15 @@ public class Level extends JPanel implements ActionListener {
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
 		
-		obstacles.add(new Obstacle(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
+		
+		Random rand = new Random();
+		
+		obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT));
 
 		this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
-		clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-		clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
-		clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));		
+		clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT));
+		clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT));
+		clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), rand.nextInt((int)(.8 * LEVEL_HEIGHT)), LEVEL_WIDTH, LEVEL_HEIGHT));		
 	}
 	
 	
@@ -127,11 +131,16 @@ public class Level extends JPanel implements ActionListener {
 		for(Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int)(LEVEL_WIDTH * 1.1), 150, this);
 		}
-		g.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		g.setFont(new Font("Helvetica", Font.PLAIN, 25));
 
 		g.setColor(Color.WHITE);
-		g.drawString("Don't Panic: Press Spacebar", 500, 200);
-		g.drawString("Distance: " + distance, LEVEL_WIDTH - 200, 20);
+		
+		g.drawString("Distance: " + distance, LEVEL_WIDTH - 250, 20);
+		
+		if(!started) {
+			g.drawString("Don't Panic: Press Spacebar", 500, 200);
+		}
+		
 	
 	}	
 
@@ -159,7 +168,10 @@ public class Level extends JPanel implements ActionListener {
 
 	private void updateLevel()
 	{
-		distance++;		
+		if(started) {
+			distance++;	
+		}
+			
 		for(Clouds cloud : this.clouds) {
 			cloud.move();
 		}		
@@ -170,11 +182,11 @@ public class Level extends JPanel implements ActionListener {
 			individualObstacle.move();
 		}		
 		Random rand = new Random();
-		if (distance % 1000 == 0) {
+		if (distance % 1000 == 0 && started) {
 			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}		
-		if(distance % 200 == 0)
+		if(distance % 200 == 0 && started)
 		{
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
@@ -215,19 +227,8 @@ public class Level extends JPanel implements ActionListener {
 			if (player.intersects(obstacleBounds)) {
 				this.plane.setVisible(false);
 				this.ingame = false;
-			}
-			
-		}
-		
-
-		
-
-		/*
-		 * if(player.intersects("obstacle")) { take damage
-		 * 
-		 * }
-		 */
-
+			}			
+		}		
 	}
 
 	private class TAdapter extends KeyAdapter {
@@ -240,6 +241,7 @@ public class Level extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			plane.keyPressed(e);
+			started = true;
 		}
 	}
 
