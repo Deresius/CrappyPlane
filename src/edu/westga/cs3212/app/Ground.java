@@ -3,12 +3,12 @@ package edu.westga.cs3212.app;
 public class Ground extends Sprite {
 
 	private int maxDrawToLeft;
-	
+
 	public Ground(int x, int y, int maxX) {
 		super(x, y);
 
 		this.maxDrawToLeft = maxX;
-		
+
 		this.initializeGround();
 	}
 
@@ -19,11 +19,10 @@ public class Ground extends Sprite {
 
 	@Override
 	public void move() {
-		
-		if(this.x > (-this.maxDrawToLeft))
-		{
+
+		if (this.x > (-this.maxDrawToLeft)) {
 			this.x = this.x - 17;
-		}else {
+		} else {
 			this.x = this.maxDrawToLeft;
 		}
 

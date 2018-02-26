@@ -2,6 +2,12 @@ package edu.westga.cs3212.app;
 
 import java.util.Random;
 
+/**
+ * Cloud object that moves and obscures vision
+ * 
+ * @author Team 4
+ *
+ */
 public class Cloud extends Sprite {
 
 	private int lowestAltitudeToDraw;
@@ -23,7 +29,7 @@ public class Cloud extends Sprite {
 	public Cloud(int x, int y, int maxX, int maxY) {
 		super(x, y);
 
-		if (maxX < x) {
+		if (maxX > x) {
 			throw new IllegalArgumentException("Max X is lower than starting position");
 		}
 		if (maxY < y) {
