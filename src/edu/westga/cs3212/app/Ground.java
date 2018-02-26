@@ -2,9 +2,13 @@ package edu.westga.cs3212.app;
 
 public class Ground extends Sprite {
 
-	public Ground(int x, int y) {
+	private int maxDrawToLeft;
+	
+	public Ground(int x, int y, int maxX) {
 		super(x, y);
 
+		maxDrawToLeft = maxX;
+		
 		initializeGround();
 	}
 
@@ -15,6 +19,16 @@ public class Ground extends Sprite {
 
 	@Override
 	public void move() {
+		
+		if(x > (-maxDrawToLeft))
+		{
+			x = x - 17;
+		}else {
+			x = maxDrawToLeft;
+		}
+		
+		
+		
 		// TODO Auto-generated method stub
 
 	}

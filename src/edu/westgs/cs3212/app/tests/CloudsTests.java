@@ -23,7 +23,7 @@ class CloudsTests {
 	 */
 	@Test
 	void testFindHorizontalLocation() {
-		Clouds testCloud = new Clouds(40, 80);
+		Clouds testCloud = new Clouds(40, 80, 100, 100);
 
 		assertEquals(40, testCloud.getX());
 	}
@@ -33,7 +33,7 @@ class CloudsTests {
 	 */
 	@Test
 	void testFindVerticalLocation() {
-		Clouds testCloud = new Clouds(40, 80);
+		Clouds testCloud = new Clouds(40, 80, 100, 100);
 
 		assertEquals(80, testCloud.getY());
 	}
@@ -43,7 +43,7 @@ class CloudsTests {
 	 */
 	@Test
 	void testSetVisibility() {
-		Clouds testCloud = new Clouds(40, 80);
+		Clouds testCloud = new Clouds(40, 80, 100, 100);
 
 		testCloud.setVisible(false);
 
@@ -55,7 +55,7 @@ class CloudsTests {
 	 */
 	@Test
 	void testGetWidth() {
-		Clouds testCloud = new Clouds(40, 80);
+		Clouds testCloud = new Clouds(40, 80, 100, 100);
 
 		assertEquals(1988, testCloud.getWidth());
 	}
@@ -65,7 +65,7 @@ class CloudsTests {
 	 */
 	@Test
 	void testGetHeight() {
-		Clouds testCloud = new Clouds(40, 80);
+		Clouds testCloud = new Clouds(40, 80, 100, 100);
 
 		assertEquals(1290, testCloud.getHeight());
 	}

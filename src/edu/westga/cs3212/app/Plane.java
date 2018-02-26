@@ -8,9 +8,9 @@ import java.awt.event.KeyEvent;
  */
 public class Plane extends Sprite {
 
-	private static final int RISE_SLOW = -3;
-	private static final int RISE_NORMAL = -5;
-	private static final int RISE_FAST = -8;
+	private static final int RISE_SLOW = -1;
+	private static final int RISE_NORMAL = -2;
+	private static final int RISE_FAST = -3;
 
 	private static final int FALL_SLOW = 3;
 	private static final int FALL_NORMAL = 5;
