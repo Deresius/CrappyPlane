@@ -168,8 +168,10 @@ public class Level extends JPanel implements ActionListener {
 		}
 		
 		
-		if(distance % 500 == 0)
+		if(distance % 300 == 0)
 		{
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
