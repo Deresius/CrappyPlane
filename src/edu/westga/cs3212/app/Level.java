@@ -34,8 +34,8 @@ public class Level extends JPanel implements ActionListener {
 	private boolean started = false;
 	private final int PLANE_START_LOCATION_X = 40;
 	private final int PLANE_START_LOCATION_Y = 60;
-	private int LEVEL_WIDTH = 1280;
-	private int LEVEL_HEIGHT = 720;
+	private int LEVEL_WIDTH;
+	private int LEVEL_HEIGHT;
 	private final int DELAY = 15;
 	private int distance = 0;
 
@@ -61,8 +61,8 @@ public class Level extends JPanel implements ActionListener {
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
 
-		ground.add(new Ground(0, 570, LEVEL_WIDTH));
-		ground.add(new Ground(LEVEL_WIDTH, 570, LEVEL_WIDTH));
+		ground.add(new Ground(0, LEVEL_HEIGHT - 150, LEVEL_WIDTH));
+		ground.add(new Ground(LEVEL_WIDTH, LEVEL_HEIGHT - 150, LEVEL_WIDTH));
 		this.sky = new Sky(0, 0);
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
