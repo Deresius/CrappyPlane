@@ -111,6 +111,10 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
 		
+		for(Obstacle obstacle : this.obstacles) {
+			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
+		}	
+		
 		
 		for(int i = 4; i < 5; i++)
 		{
@@ -121,9 +125,6 @@ public class Level extends JPanel implements ActionListener {
 			}
 		}
 		
-		for(Obstacle obstacle : this.obstacles) {
-			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
-		}	
 		
 		for(Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int)(LEVEL_WIDTH * 1.1), 150, this);
@@ -139,13 +140,13 @@ public class Level extends JPanel implements ActionListener {
 	private void drawGameOver(Graphics g) {
 
 		String msg = "Game Over";
-		Font small = new Font("Helvetica", Font.BOLD, 14);
+		Font small = new Font("Helvetica", Font.BOLD, 50);
 		FontMetrics fm = getFontMetrics(small);
 
 		g.setColor(Color.white);
 		g.setFont(small);
 		g.drawString(msg, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, this.LEVEL_HEIGHT / 2);
-		g.drawString("Score: " + distance, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 20);
+		g.drawString("Score: " + distance, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 60);
 	}
 
 	@Override
@@ -161,13 +162,15 @@ public class Level extends JPanel implements ActionListener {
 		
 		Random rand = new Random();
 		
-		if (distance % 800 == 0) {
-			obstacles.add(new Obstacle(LEVEL_WIDTH, (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+		if (distance % 600 == 0) {
+			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+			obstacles.add(new Obstacle(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 		}
 		
 		
 		if(distance % 500 == 0)
 		{
+			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
 			clouds.add(new Clouds(LEVEL_WIDTH + rand.nextInt(LEVEL_WIDTH), (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
