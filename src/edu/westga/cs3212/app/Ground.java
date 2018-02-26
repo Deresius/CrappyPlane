@@ -1,24 +1,30 @@
 package edu.westga.cs3212.app;
 
 /**
- * The Class Ground.
+ * The ground that gives the user a sense of speed
+ * 
+ * @author Team 4
  */
 public class Ground extends Sprite {
 
 	private int maxDrawToLeft;
 
 	/**
-	 * Instantiates a new ground.
+	 * Instantiates a new ground object at the given location with a max width
 	 *
 	 * @param x
-	 *            the x
+	 *            the x-axis location
 	 * @param y
-	 *            the y
+	 *            the y-axis location
 	 * @param maxX
-	 *            the max X
+	 *            the max distance the ground can be drawn
 	 */
 	public Ground(int x, int y, int maxX) {
 		super(x, y);
+
+		if (maxX < x) {
+			throw new IllegalArgumentException("Ground Max X location is lower than starting position");
+		}
 
 		this.maxDrawToLeft = maxX;
 
