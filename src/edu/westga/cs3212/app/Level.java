@@ -113,7 +113,7 @@ public class Level extends JPanel implements ActionListener {
 
 		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 
-		for (int i = 1; i < 4; i++) {
+		for (int i = 1; i < 5; i++) {
 			for (Cloud cloud : this.clouds) {
 				if (cloud.getSpeed() == i) {
 					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 2,
@@ -130,7 +130,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
 		}
 
-		for (int i = 4; i < 7; i++) {
+		for (int i = 5; i < 8; i++) {
 			for (Cloud cloud : this.clouds) {
 				if (cloud.getSpeed() == i) {
 					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
