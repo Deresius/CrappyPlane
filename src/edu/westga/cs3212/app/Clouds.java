@@ -7,10 +7,7 @@ public class Clouds extends Sprite {
 	private int lowestAltitudeToDraw;
 	private int rightSideOfScreen;
 	private int speed = 2;
-	
-	public int getSpeed() {
-		return speed;
-	}
+		
 	public Clouds(int x, int y, int maxX , int maxY) {
 		super(x, y);
 		lowestAltitudeToDraw = maxY;
@@ -18,6 +15,10 @@ public class Clouds extends Sprite {
 		initializeGround();
 	}
 
+	public int getSpeed() {
+		return speed;
+	}
+	
 	private void initializeGround() {
 
 		loadImage("src/images/cloud.png");

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,6 +28,7 @@ public class Level extends JPanel implements ActionListener {
 	private Plane plane;
 	private ArrayList<Ground> ground;
 	private ArrayList<Clouds> clouds;
+	private ArrayList<Obstacle> obstacles;
 	private Sky sky;
 	private boolean ingame;
 	private final int PLANE_START_LOCATION_X = 40;
@@ -52,6 +54,7 @@ public class Level extends JPanel implements ActionListener {
 		this.ingame = true;
 		this.clouds = new ArrayList<Clouds>();
 		this.ground = new ArrayList<Ground>();
+		this.obstacles = new ArrayList<Obstacle>();
 
 		setPreferredSize(new Dimension(this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
@@ -62,6 +65,8 @@ public class Level extends JPanel implements ActionListener {
 		this.sky = new Sky(0, 0);
 		this.timer = new Timer(this.DELAY, this);
 		this.timer.start();
+		
+		obstacles.add(new Obstacle(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
 
 		this.plane = new Plane(PLANE_START_LOCATION_X, PLANE_START_LOCATION_Y);
 		clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
@@ -106,6 +111,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
 		
+		
 		for(int i = 4; i < 5; i++)
 		{
 			for(Clouds cloud : this.clouds) {
@@ -115,13 +121,13 @@ public class Level extends JPanel implements ActionListener {
 			}
 		}
 		
-		
+		for(Obstacle obstacle : this.obstacles) {
+			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
+		}	
 		
 		for(Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int)(LEVEL_WIDTH * 1.1), 150, this);
 		}
-		//g.drawImage(this.ground.getImage(), this.ground.getX(), this.ground.getY(), LEVEL_WIDTH, 161, this);
-
 		g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
 		g.setColor(Color.WHITE);
@@ -157,6 +163,13 @@ public class Level extends JPanel implements ActionListener {
 			cloud.move();
 		}
 		
+		Random rand = new Random();
+		
+		if (distance % 800 == 0) {
+			obstacles.add(new Obstacle(LEVEL_WIDTH, (int)(rand.nextInt(LEVEL_HEIGHT) * .8), LEVEL_WIDTH, LEVEL_HEIGHT));
+		}
+		
+		
 		if(distance % 500 == 0)
 		{
 			clouds.add(new Clouds(LEVEL_WIDTH, 0, LEVEL_WIDTH, LEVEL_HEIGHT));
@@ -177,6 +190,10 @@ public class Level extends JPanel implements ActionListener {
 		
 		for(Ground individualGround : this.ground) {
 			individualGround.move();
+		}
+		
+		for(Obstacle individualObstacle : this.obstacles) {
+			individualObstacle.move();
 		}
 		
 		
@@ -206,6 +223,17 @@ public class Level extends JPanel implements ActionListener {
 			Rectangle groundBounds = individualGround.getBoundaries();
 			
 			if (player.intersects(groundBounds)) {
+				this.plane.setVisible(false);
+				this.ingame = false;
+			}
+			
+		}
+		
+		for(Obstacle individualObstacle : this.obstacles) {
+			
+			Rectangle obstacleBounds = individualObstacle.getBoundaries();
+			
+			if (player.intersects(obstacleBounds)) {
 				this.plane.setVisible(false);
 				this.ingame = false;
 			}
