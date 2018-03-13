@@ -39,7 +39,7 @@ public class Cloud extends Sprite {
 		this.lowestAltitudeToDraw = maxY;
 		this.rightSideOfScreen = maxX;
 
-		this.initializeGround();
+		this.initializeCloud();
 
 	}
 
@@ -50,7 +50,7 @@ public class Cloud extends Sprite {
 		return this.speed;
 	}
 
-	private void initializeGround() {
+	private void initializeCloud() {
 
 		this.loadImage("src/images/cloud.png");
 		this.getImageDimensions();
