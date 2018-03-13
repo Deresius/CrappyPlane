@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import edu.westga.cs3212.app.Cloud;
+import edu.westga.cs3212.app.model.Cloud;
 
 /**
  * @author William Leatherman

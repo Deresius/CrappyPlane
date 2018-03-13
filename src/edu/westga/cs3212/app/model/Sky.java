@@ -1,4 +1,4 @@
-package edu.westga.cs3212.app;
+package edu.westga.cs3212.app.model;
 
 /**
  * The Sky for the background of the running application

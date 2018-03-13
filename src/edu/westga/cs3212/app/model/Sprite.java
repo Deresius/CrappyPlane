@@ -1,4 +1,4 @@
-package edu.westga.cs3212.app;
+package edu.westga.cs3212.app.model;
 
 import java.awt.Image;
 import java.awt.Rectangle;

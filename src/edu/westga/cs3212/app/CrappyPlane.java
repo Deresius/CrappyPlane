@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import edu.westga.cs3212.app.model.Level;
+
 /**
  * Driver for the Crappy Plane
  * 
