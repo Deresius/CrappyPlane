@@ -30,10 +30,10 @@ public class Cloud extends Sprite {
 		super(x, y);
 
 		if (maxX > x) {
-			throw new IllegalArgumentException("Max X is lower than starting position");
+			throw new IllegalArgumentException("Max X is larger than to starting position");
 		}
 		if (maxY < y) {
-			throw new IllegalArgumentException("Max Y is lower than starting position");
+			throw new IllegalArgumentException("Max Y is smaller than to starting position");
 		}
 
 		this.lowestAltitudeToDraw = maxY;

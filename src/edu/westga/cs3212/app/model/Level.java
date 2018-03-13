@@ -50,7 +50,6 @@ public class Level extends JPanel implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.LEVEL_HEIGHT = (int) screenSize.getHeight();
 		this.LEVEL_WIDTH = (int) screenSize.getWidth();
-		System.out.println("Height: " + this.LEVEL_HEIGHT + "\nWidth: " + this.LEVEL_WIDTH);
 
 		this.initLevel();
 

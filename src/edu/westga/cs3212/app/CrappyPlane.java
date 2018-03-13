@@ -1,6 +1,5 @@
 package edu.westga.cs3212.app;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
