@@ -47,11 +47,27 @@ public class Level extends JPanel implements ActionListener {
 	 * Instantiates a new level, based on the given viewport.
 	 */
 	public Level() {
-		this.LEVEL_HEIGHT = 720;
-		this.LEVEL_WIDTH = 1280;
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		this.LEVEL_HEIGHT = (int) screenSize.getHeight();
+		this.LEVEL_WIDTH = (int) screenSize.getWidth();
+		System.out.println("Height: " + this.LEVEL_HEIGHT + "\nWidth: " + this.LEVEL_WIDTH);
 
 		this.initLevel();
 
+	}
+
+	/**
+	 * Gets the height of the level
+	 */
+	public int getHeight() {
+		return this.LEVEL_HEIGHT;
+	}
+
+	/**
+	 * Gets the width of the level
+	 */
+	public int getWidth() {
+		return this.LEVEL_WIDTH;
 	}
 
 	/**

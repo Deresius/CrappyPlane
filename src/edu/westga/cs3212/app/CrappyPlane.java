@@ -1,5 +1,6 @@
 package edu.westga.cs3212.app;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,17 +21,15 @@ public class CrappyPlane extends JFrame {
 
 	public static final String MAIN_WINDOW = "view/MainMenuView.fxml";
 
-	public static int horizontalPixelCount = 1280;
-	public static int verticalPixelCount = 720;
-
 	public CrappyPlane() {
 		initUI();
 	}
 
 	private void initUI() {
-		add(new Level());
+		Level level = new Level();
+		add(level);
 
-		setSize(horizontalPixelCount, verticalPixelCount);
+		setSize(level.getWidth(), level.getHeight());
 
 		setResizable(false);
 		// pack(); not quite sure what this does yet, seems to ignore size settings
