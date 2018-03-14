@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,7 +24,7 @@ import javax.swing.Timer;
  *
  * @author Team 4
  */
-public class Level extends JPanel implements ActionListener {
+public class Level extends JPanel implements Runnable {
 
 	/**
 	 * Generated serial for warning suppression.
@@ -40,8 +42,11 @@ public class Level extends JPanel implements ActionListener {
 	private final int PLANE_START_LOCATION_Y = 60;
 	private int LEVEL_WIDTH;
 	private int LEVEL_HEIGHT;
-	private final int DELAY = 15;
+	private final int DELAY = 10;
 	private int distance = 0;
+	private Image image;
+	private Image imageGrass;
+	private Thread animator;
 
 	/**
 	 * Instantiates a new level, based on the given viewport.
@@ -52,6 +57,12 @@ public class Level extends JPanel implements ActionListener {
 		this.LEVEL_WIDTH = (int) screenSize.getWidth();
 
 		this.initLevel();
+		
+		ImageIcon ii = new ImageIcon("src/images/cloud.png");
+		this.image = ii.getImage();
+		
+		ImageIcon iii = new ImageIcon("src/images/grass.png");
+		this.imageGrass = iii.getImage();
 
 	}
 
@@ -89,8 +100,8 @@ public class Level extends JPanel implements ActionListener {
 		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.sky = new Sky(0, 0);
-		this.timer = new Timer(this.DELAY, this);
-		this.timer.start();
+		//this.timer = new Timer(this.DELAY, this);
+		//this.timer.start();
 
 		Random rand = new Random();
 
@@ -197,6 +208,7 @@ public class Level extends JPanel implements ActionListener {
 	 * @param e
 	 *            the ActionEvent
 	 */
+	/*
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -209,7 +221,7 @@ public class Level extends JPanel implements ActionListener {
 		this.checkCollisions();
 
 		this.repaint();
-	}
+	}*/
 
 	/**
 	 * Called to update the level for moving objects, and spawning clouds and .
@@ -234,7 +246,9 @@ public class Level extends JPanel implements ActionListener {
 
 		}
 
-		if (this.distance % 1000 == 0 && started) {
+		if (this.distance % 100 == 0 && started) {
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
@@ -292,6 +306,14 @@ public class Level extends JPanel implements ActionListener {
 		}
 	}
 
+	@Override
+	public void addNotify() {
+	    super.addNotify();
+
+	    animator = new Thread(this);
+	    animator.start();
+	}
+	
 	private class TAdapter extends KeyAdapter {
 
 		@Override
@@ -304,6 +326,54 @@ public class Level extends JPanel implements ActionListener {
 			plane.keyPressed(e);
 			started = true;
 		}
+	}
+
+	private void cycle() {
+		if (started) {
+			this.distance++;
+		}
+		
+		this.inGame();
+		
+			this.updateLevel();
+		
+		
+
+		this.updatePlane();
+
+		this.checkCollisions();
+		
+		this.repaint();
+
+	}
+	
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, sleep;
+
+        beforeTime = System.currentTimeMillis();
+
+        while (true) {
+
+            cycle();
+            repaint();
+
+            timeDiff = System.currentTimeMillis() - beforeTime;
+            sleep = DELAY - timeDiff;
+
+            if (sleep < 0) {
+                sleep = 2;
+            }
+
+            try {
+                Thread.sleep(sleep);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted: " + e.getMessage());
+            }
+
+            beforeTime = System.currentTimeMillis();
+        }
+		
 	}
 
 }
