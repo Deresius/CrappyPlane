@@ -57,5 +57,23 @@ class TestCloudConstructor {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	final void testPassValidCloudLargeNumbers() {
+		try {
+			new Cloud(300, 200, 200, 300);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	final void testPassValidCloudNegativeMaxX() {
+		try {
+			new Cloud(3, 2, -200, 3);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
 }
