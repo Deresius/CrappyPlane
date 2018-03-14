@@ -76,4 +76,22 @@ class TestCloudConstructor {
 		}
 	}
 
+	@Test
+	final void testPassValidCloudAllZero() {
+		try {
+			new Cloud(0, 0, 0, 0);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	final void testPassValidCloudAllSameNumber() {
+		try {
+			new Cloud(200, 200, 200, 200);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+
 }
