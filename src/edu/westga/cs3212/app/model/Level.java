@@ -100,8 +100,6 @@ public class Level extends JPanel implements Runnable {
 		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.sky = new Sky(0, 0);
-		//this.timer = new Timer(this.DELAY, this);
-		//this.timer.start();
 
 		Random rand = new Random();
 
