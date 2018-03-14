@@ -244,7 +244,7 @@ public class Level extends JPanel implements Runnable {
 
 		}
 
-		if (this.distance % 100 == 0 && started) {
+		if (this.distance % 1000 == 0 && started) {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
