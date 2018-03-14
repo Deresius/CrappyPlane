@@ -1,4 +1,4 @@
-package edu.westgs.cs3212.app.cloudtests;
+package edu.westgs.cs3212.app.model.cloudtests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
