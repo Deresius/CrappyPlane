@@ -66,7 +66,6 @@ public class Cloud extends Sprite {
 			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen / 4);
 
 			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .6);
-			this.speed = rand.nextInt(7) + 1;
 
 		}
 

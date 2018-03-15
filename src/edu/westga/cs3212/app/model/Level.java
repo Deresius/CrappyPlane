@@ -142,15 +142,6 @@ public class Level extends JPanel implements Runnable {
 
 		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 
-		for (int i = 1; i < 5; i++) {
-			for (Cloud cloud : this.clouds) {
-				if (cloud.getSpeed() == i) {
-					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 2,
-							(110 * cloud.getSpeed()) / 2, this);
-				}
-			}
-		}
-
 		if (this.plane.isVisible()) {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
@@ -159,14 +150,13 @@ public class Level extends JPanel implements Runnable {
 			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
 		}
 
-		for (int i = 5; i < 8; i++) {
-			for (Cloud cloud : this.clouds) {
-				if (cloud.getSpeed() == i) {
-					g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
-							(110 * cloud.getSpeed()) / 4, this);
-				}
-			}
+		
+		for (Cloud cloud : this.clouds) {
+			
+			g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
+					(110 * cloud.getSpeed()) / 4, this);			
 		}
+		
 
 		for (Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), 150, this);
