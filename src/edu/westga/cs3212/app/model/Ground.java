@@ -8,6 +8,7 @@ package edu.westga.cs3212.app.model;
 public class Ground extends Sprite {
 
 	private int maxDrawToLeft;
+	private int speed = 17;
 
 	/**
 	 * Instantiates a new ground object at the given location with a max width
@@ -31,6 +32,10 @@ public class Ground extends Sprite {
 		this.initializeGround();
 	}
 
+	public int getSpeed() {
+		return this.speed;
+	}
+
 	/**
 	 * Initialize ground.
 	 */
@@ -43,7 +48,7 @@ public class Ground extends Sprite {
 	public void move() {
 
 		if (this.x > (-this.maxDrawToLeft)) {
-			this.x = this.x - 17;
+			this.x -= this.speed;
 		} else {
 			this.x = this.maxDrawToLeft;
 		}
