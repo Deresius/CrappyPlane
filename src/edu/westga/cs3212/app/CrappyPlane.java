@@ -29,9 +29,8 @@ public class CrappyPlane extends JFrame {
 		add(level);
 
 		setSize(level.getWidth(), level.getHeight());
-		System.out.println(this.getSize());
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//setUndecorated(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		// setUndecorated(true);
 
 		setResizable(false);
 		// pack(); not quite sure what this does yet, seems to ignore size settings
