@@ -1,5 +1,6 @@
 package edu.westga.cs3212.app;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +31,7 @@ public class CrappyPlane extends JFrame {
 
 		setSize(level.getWidth(), level.getHeight());
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setBackground(Color.WHITE);
 		// setUndecorated(true);
 
 		setResizable(false);

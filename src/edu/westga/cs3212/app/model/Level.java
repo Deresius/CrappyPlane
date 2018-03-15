@@ -35,7 +35,6 @@ public class Level extends JPanel implements Runnable {
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
-	private Sky sky;
 	private boolean ingame;
 	private boolean started = false;
 	private final int PLANE_START_LOCATION_X = 40;
@@ -99,7 +98,6 @@ public class Level extends JPanel implements Runnable {
 
 		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
-		this.sky = new Sky(0, 0);
 
 		Random rand = new Random();
 
@@ -140,8 +138,10 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private void drawObjects(Graphics g) {
 
-		g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
-
+		//g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
+		Color lgtBlue = new Color(41, 151, 255);
+		g.setColor(lgtBlue);
+		g.fillRect(0, 0, LEVEL_WIDTH, LEVEL_HEIGHT);
 		if (this.plane.isVisible()) {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
 		}
@@ -149,7 +149,6 @@ public class Level extends JPanel implements Runnable {
 		for (Obstacle obstacle : this.obstacles) {
 			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
 		}
-
 		
 		for (Cloud cloud : this.clouds) {
 			
