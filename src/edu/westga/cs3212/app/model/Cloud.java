@@ -60,10 +60,10 @@ public class Cloud extends Sprite {
 	public void move() {
 		this.x -= this.speed;
 
-		if (this.x < -this.rightSideOfScreen / 3) {
+		if (this.x < -this.rightSideOfScreen / 4) {
 			Random rand = new Random();
 
-			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen);
+			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen / 4);
 
 			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .6);
 			this.speed = rand.nextInt(7) + 1;

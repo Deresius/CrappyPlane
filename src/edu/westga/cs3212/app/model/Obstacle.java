@@ -59,10 +59,10 @@ public class Obstacle extends Sprite {
 	public void move() {
 		this.x -= this.speed;
 
-		if (this.x < -this.rightSideOfScreen / 2) {
+		if (this.x < -this.rightSideOfScreen / 10) {
 			Random rand = new Random();
 
-			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen);
+			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen / 3);
 
 			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .7);
 

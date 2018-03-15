@@ -201,27 +201,6 @@ public class Level extends JPanel implements Runnable {
 	}
 
 	/**
-	 * The trigger to call the updates in the game.
-	 * 
-	 * @param e
-	 *            the ActionEvent
-	 */
-	/*
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		this.inGame();
-
-		this.updatePlane();
-
-		this.updateLevel();
-
-		this.checkCollisions();
-
-		this.repaint();
-	}*/
-
-	/**
 	 * Called to update the level for moving objects, and spawning clouds and .
 	 */
 	private void updateLevel() {
@@ -244,9 +223,7 @@ public class Level extends JPanel implements Runnable {
 
 		}
 
-		if (this.distance % 1000 == 0 && started) {
-			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		if (this.distance % 500 == 0 && started) {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
@@ -254,7 +231,6 @@ public class Level extends JPanel implements Runnable {
 	}
 
 	private void updateClouds() {
-
 		for (Cloud cloud : this.clouds) {
 			cloud.move();
 		}
@@ -329,20 +305,13 @@ public class Level extends JPanel implements Runnable {
 	private void cycle() {
 		if (started) {
 			this.distance++;
-		}
-		
+		}		
 		this.inGame();
+		this.updateLevel();
 		
-			this.updateLevel();
-		
-		
-
 		this.updatePlane();
-
 		this.checkCollisions();
-		
 		this.repaint();
-
 	}
 	
 	@Override
@@ -354,7 +323,7 @@ public class Level extends JPanel implements Runnable {
         while (true) {
 
             cycle();
-            repaint();
+            //repaint();
 
             timeDiff = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDiff;
