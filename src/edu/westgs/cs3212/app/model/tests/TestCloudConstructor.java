@@ -17,7 +17,7 @@ class TestCloudConstructor {
 	final void testFailNegativeX() {
 		try {
 			new Cloud(-3, 2, 2, 3);
-			fail("Cloud was created with a negative X");
+			fail("Cloud was created with a negative X.");
 		} catch (IllegalArgumentException iae) {
 		}
 	}
@@ -35,7 +35,7 @@ class TestCloudConstructor {
 	final void testFailInvalidMaxX() {
 		try {
 			new Cloud(3, 2, 4, 3);
-			fail("Cloud was created with a MaxX greater than X");
+			fail("Cloud was created with a MaxX greater than X.");
 		} catch (IllegalArgumentException iae) {
 		}
 	}
@@ -84,7 +84,7 @@ class TestCloudConstructor {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	final void testPassValidCloudAllSameNumber() {
 		try {

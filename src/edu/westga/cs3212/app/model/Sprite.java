@@ -35,10 +35,10 @@ public abstract class Sprite {
 	public Sprite(int x, int y) {
 
 		if (x < 0) {
-			throw new IllegalArgumentException("Sprite x cannot be negative");
+			throw new IllegalArgumentException("Sprite X cannot be negative.");
 		}
 		if (y < 0) {
-			throw new IllegalArgumentException("Sprite y cannot be negative");
+			throw new IllegalArgumentException("Sprite Y cannot be negative.");
 		}
 
 		this.x = x;
@@ -106,12 +106,21 @@ public abstract class Sprite {
 		this.visibility = visible;
 	}
 
+	/**
+	 * Sets the image width and height.
+	 */
 	protected void getImageDimensions() {
 
 		this.width = this.image.getWidth(null);
 		this.height = this.image.getHeight(null);
 	}
 
+	/**
+	 * Loads the selected image.
+	 * 
+	 * @param imageName
+	 *            The image to load.
+	 */
 	protected void loadImage(String imageName) {
 
 		ImageIcon ii = new ImageIcon(imageName);

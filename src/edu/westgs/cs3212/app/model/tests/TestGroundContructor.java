@@ -16,56 +16,44 @@ class TestGroundContructor {
 
 	@Test
 	final void testFailNegativeX() {
-		try {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Ground(-3, 2, 300);
-			fail("Ground was created with a negative X");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Ground was created with a negative X.");
 	}
 
 	@Test
 	final void testFailNegativeY() {
-		try {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Ground(3, -2, 300);
-			fail("Ground was created with a negative Y");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Ground was created with a negative Y.");
 	}
 
 	@Test
 	final void testFailMaxXLessThanX() {
-		try {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Ground(3, 2, 2);
-			fail("Ground was created with a negative Y");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Ground was created with a negative Y.");
 	}
 
 	@Test
-	final void testPassAllSameNumber() {
-		try {
-			new Ground(3, 3, 3);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+	final void testPassAllSameNumber() {		
+		Ground testGround = new Ground(3, 3, 3);
+		
+		assertEquals(17, testGround.getSpeed());
 	}
-	
+
 	@Test
 	final void testPassAllLargerNumbers() {
-		try {
-			new Ground(300, 400, 350);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Ground testGround = new Ground(300, 400, 350);
+		
+		assertEquals(17, testGround.getSpeed());
 	}
 
 	@Test
 	final void testPassAllZero() {
-		try {
-			new Ground(0, 0, 0);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Ground testGround = new Ground(0, 0, 0);
+		
+		assertEquals(17, testGround.getSpeed());
 	}
 
 }

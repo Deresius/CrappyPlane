@@ -24,7 +24,7 @@ public class Ground extends Sprite {
 		super(x, y);
 
 		if (maxX < x) {
-			throw new IllegalArgumentException("Ground Max X location is lower than starting position");
+			throw new IllegalArgumentException("Ground Max X location is lower than starting position.");
 		}
 
 		this.maxDrawToLeft = maxX;
