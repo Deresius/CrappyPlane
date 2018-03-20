@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -56,10 +54,10 @@ public class Level extends JPanel implements Runnable {
 		this.LEVEL_WIDTH = (int) screenSize.getWidth();
 
 		this.initLevel();
-		
+
 		ImageIcon ii = new ImageIcon("src/images/cloud.png");
 		this.image = ii.getImage();
-		
+
 		ImageIcon iii = new ImageIcon("src/images/grass.png");
 		this.imageGrass = iii.getImage();
 
@@ -138,7 +136,8 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private void drawObjects(Graphics g) {
 
-		//g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(), this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
+		// g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(),
+		// this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 		Color lgtBlue = new Color(41, 151, 255);
 		g.setColor(lgtBlue);
 		g.fillRect(0, 0, LEVEL_WIDTH, LEVEL_HEIGHT);
@@ -149,13 +148,12 @@ public class Level extends JPanel implements Runnable {
 		for (Obstacle obstacle : this.obstacles) {
 			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
 		}
-		
+
 		for (Cloud cloud : this.clouds) {
-			
+
 			g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
-					(110 * cloud.getSpeed()) / 4, this);			
+					(110 * cloud.getSpeed()) / 4, this);
 		}
-		
 
 		for (Ground ground : this.ground) {
 			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), 150, this);
@@ -271,12 +269,12 @@ public class Level extends JPanel implements Runnable {
 
 	@Override
 	public void addNotify() {
-	    super.addNotify();
+		super.addNotify();
 
-	    animator = new Thread(this);
-	    animator.start();
+		animator = new Thread(this);
+		animator.start();
 	}
-	
+
 	private class TAdapter extends KeyAdapter {
 
 		@Override
@@ -294,42 +292,42 @@ public class Level extends JPanel implements Runnable {
 	private void cycle() {
 		if (started) {
 			this.distance++;
-		}		
+		}
 		this.inGame();
 		this.updateLevel();
-		
+
 		this.updatePlane();
 		this.checkCollisions();
 		this.repaint();
 	}
-	
+
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, sleep;
 
-        beforeTime = System.currentTimeMillis();
+		beforeTime = System.currentTimeMillis();
 
-        while (true) {
+		while (true) {
 
-            cycle();
-            //repaint();
+			cycle();
+			// repaint();
 
-            timeDiff = System.currentTimeMillis() - beforeTime;
-            sleep = DELAY - timeDiff;
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			sleep = DELAY - timeDiff;
 
-            if (sleep < 0) {
-                sleep = 2;
-            }
+			if (sleep < 0) {
+				sleep = 2;
+			}
 
-            try {
-                Thread.sleep(sleep);
-            } catch (InterruptedException e) {
-                System.out.println("Interrupted: " + e.getMessage());
-            }
+			try {
+				Thread.sleep(sleep);
+			} catch (InterruptedException e) {
+				System.out.println("Interrupted: " + e.getMessage());
+			}
 
-            beforeTime = System.currentTimeMillis();
-        }
-		
+			beforeTime = System.currentTimeMillis();
+		}
+
 	}
 
 }
