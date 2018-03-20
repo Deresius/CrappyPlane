@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.app.model.Ground;
 
+/**
+ * Tests the methods of the Ground object.
+ * 
+ * @author Team 4
+ *
+ */
 class TestGroundContructor {
 
 	@Test
