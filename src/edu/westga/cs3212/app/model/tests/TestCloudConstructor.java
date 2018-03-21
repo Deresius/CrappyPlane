@@ -117,7 +117,7 @@ class TestCloudConstructor {
 
 		assertEquals(new Cloud(12, 12, 12, 12).getImage(), testCloud.getImage());
 	}
-	
+
 	@Test
 	final void testValidCloudBoundaries() {
 		Cloud testCloud = new Cloud(2, 2, 2, 2);
