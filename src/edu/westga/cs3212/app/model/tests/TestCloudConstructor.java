@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.app.model.Cloud;
+import edu.westga.cs3212.app.model.Ground;
 
 /**
  * Tests the constructor for the Cloud class
@@ -14,84 +15,66 @@ import edu.westga.cs3212.app.model.Cloud;
 class TestCloudConstructor {
 
 	@Test
-	final void testFailNegativeX() {
-		try {
+	final void testFailNegativeX() {	
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Cloud(-3, 2, 2, 3);
-			fail("Cloud was created with a negative X.");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Cloud was created with a negative X.");
 	}
 
 	@Test
 	final void testFailNegativeY() {
-		try {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Cloud(3, -2, 2, 3);
-			fail("Cloud was created with a negative Y");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Cloud was created with a negative Y.");
 	}
 
 	@Test
 	final void testFailInvalidMaxX() {
-		try {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Cloud(3, 2, 4, 3);
-			fail("Cloud was created with a MaxX greater than X.");
-		} catch (IllegalArgumentException iae) {
-		}
+		}, "Cloud was created with a MaxX greater than X.");
 	}
 
 	@Test
 	final void testFailInvalidMaxY() {
-		try {
-			new Cloud(3, 2, 2, 1);
-			fail("Cloud was created with a MaxY less than Y");
-		} catch (IllegalArgumentException iae) {
-		}
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Cloud(3, 2, 4, 3);
+		}, "Cloud was created with a MaxY less than Y.");
 	}
 
 	@Test
 	final void testPassValidCloud() {
-		try {
-			new Cloud(3, 2, 2, 3);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Cloud testCloud = new Cloud(3, 2, 2, 3);
+		
+		assertEquals(6, testCloud.getSpeed());
 	}
 
 	@Test
 	final void testPassValidCloudLargeNumbers() {
-		try {
-			new Cloud(300, 200, 200, 300);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Cloud testCloud = new Cloud(300, 200, 200, 300);
+		
+		assertEquals(6, testCloud.getSpeed());
 	}
 
 	@Test
 	final void testPassValidCloudNegativeMaxX() {
-		try {
-			new Cloud(3, 2, -200, 3);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Cloud testCloud = new Cloud(3, 2, -200, 3);
+		
+		assertEquals(6, testCloud.getSpeed());
 	}
 
 	@Test
 	final void testPassValidCloudAllZero() {
-		try {
-			new Cloud(0, 0, 0, 0);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+		Cloud testCloud = new Cloud(0, 0, 0, 0);
+		
+		assertEquals(6, testCloud.getSpeed());
 	}
 
 	@Test
-	final void testPassValidCloudAllSameNumber() {
-		try {
-			new Cloud(200, 200, 200, 200);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
+	final void testPassValidCloudAllSameNumber() {		
+		Cloud testCloud = new Cloud(200, 200, 200, 200);
+		
+		assertEquals(6, testCloud.getSpeed());
 	}
 
 }
