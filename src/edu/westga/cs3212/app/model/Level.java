@@ -30,7 +30,7 @@ public class Level extends JPanel implements Runnable {
 	 * Generated serial for warning suppression.
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
-	private Timer timer;
+	//private Timer timer;
 	private Plane plane;
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
@@ -42,10 +42,12 @@ public class Level extends JPanel implements Runnable {
 	private int LEVEL_WIDTH;
 	private int LEVEL_HEIGHT;
 	private final int DELAY = 10;
-	private int distance = 0;
+	private int distance;
 	private Image image;
 	private Image imageGrass;
 	private Thread animator;
+	private int finalScore;
+	private boolean scored;
 
 	/**
 	 * Instantiates a new level, based on the given viewport.
@@ -84,10 +86,12 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private void initLevel() {
 
+		this.scored = false;
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
 		this.setBackground(Color.BLACK);
 		this.ingame = true;
+		this.distance = 0;
 		this.clouds = new ArrayList<Cloud>();
 		this.ground = new ArrayList<Ground>();
 		this.obstacles = new ArrayList<Obstacle>();
@@ -138,8 +142,6 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private void drawObjects(Graphics g) {
 
-		// g.drawImage(this.sky.getImage(), this.sky.getX(), this.sky.getY(),
-		// this.LEVEL_WIDTH, this.LEVEL_HEIGHT, this);
 		Color lgtBlue = new Color(41, 151, 255);
 		g.setColor(lgtBlue);
 		g.fillRect(0, 0, LEVEL_WIDTH, LEVEL_HEIGHT);
@@ -186,7 +188,7 @@ public class Level extends JPanel implements Runnable {
 		g.setColor(Color.white);
 		g.setFont(small);
 		g.drawString(msg, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, this.LEVEL_HEIGHT / 2);
-		g.drawString("Score: " + distance, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 60);
+		g.drawString("Score: " + finalScore, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 60);
 	}
 
 	/**
@@ -234,8 +236,12 @@ public class Level extends JPanel implements Runnable {
 	private void inGame() {
 
 		if (!this.ingame) {
-			this.timer.stop();
+			//this.timer.stop();
 		}
+	}
+	
+	private void scoreGame() {
+		this.finalScore = distance;
 	}
 
 	private void updatePlane() {
@@ -256,6 +262,10 @@ public class Level extends JPanel implements Runnable {
 		if (this.plane.getY() + this.plane.getHeight() > this.LEVEL_HEIGHT) {
 			this.plane.setVisible(false);
 			this.ingame = false;
+			if(!scored) {
+				scoreGame();
+				scored = true;
+			}
 		}
 
 		for (Obstacle individualObstacle : this.obstacles) {
@@ -265,6 +275,10 @@ public class Level extends JPanel implements Runnable {
 			if (player.intersects(obstacleBounds)) {
 				this.plane.setVisible(false);
 				this.ingame = false;
+				if(!scored) {
+					scoreGame();
+					scored = true;
+				}
 			}
 		}
 	}
@@ -284,10 +298,20 @@ public class Level extends JPanel implements Runnable {
 			plane.keyReleased(e);
 		}
 
+		
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			plane.keyPressed(e);
 			started = true;
+			int key = e.getKeyCode();
+
+			if (key == KeyEvent.VK_R) {
+				started = false;
+				ingame = true;
+				initLevel();
+				
+			}
 		}
 	}
 
@@ -312,7 +336,7 @@ public class Level extends JPanel implements Runnable {
 		while (true) {
 
 			cycle();
-			// repaint();
+		    repaint();
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = DELAY - timeDiff;
