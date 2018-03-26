@@ -51,7 +51,7 @@ public class Level extends JPanel implements Runnable {
 	
 	
 	private Image image;
-	private Image imageGrass;
+	
 	private Thread animator;
 	
 	
@@ -67,25 +67,15 @@ public class Level extends JPanel implements Runnable {
 		this.initLevel();
 
 		ImageIcon ii = new ImageIcon("src/images/cloud.png");
-		ImageIcon iii = new ImageIcon("src/images/grass.png");
-
 		this.image = ii.getImage();
-		this.imageGrass = iii.getImage();
 
 	}
 
 	/**
-	 * Gets the image of the level
+	 * Gets the image of the cloud
 	 */
 	public Image getImage() {
 		return this.image;
-	}
-
-	/**
-	 * Gets the image of the grass in the level
-	 */
-	public Image getGrassImage() {
-		return this.imageGrass;
 	}
 
 	/**
