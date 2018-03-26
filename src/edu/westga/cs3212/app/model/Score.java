@@ -3,7 +3,7 @@ package edu.westga.cs3212.app.model;
 /**
  * The Class HighScore.
  */
-public class HighScore {
+public class Score {
 
 /** The players name. */
 private String playersName;
@@ -17,7 +17,7 @@ private int score;
  * @param playersName the players name
  * @param score the score
  */
-public HighScore(String playersName, int score) {
+public Score(String playersName, int score) {
 	if(playersName == null || playersName == "") {
 		throw new IllegalArgumentException("Must enter a name.");
 	}

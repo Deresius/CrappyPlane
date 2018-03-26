@@ -6,16 +6,16 @@ import java.util.ArrayList;
 /**
  * The Class HighScoreList.
  */
-public class HighScores {
+public class Scoreboard {
 
 /** The high score collection. */
-private ArrayList<HighScore> highScoreCollection;
+private ArrayList<Score> highScoreCollection;
 
 /**
  * Instantiates a new high score list.
  */
-public HighScores() {
-	this.highScoreCollection = new ArrayList<HighScore>();
+public Scoreboard() {
+	this.highScoreCollection = new ArrayList<Score>();
 }
 
 /**
@@ -23,7 +23,7 @@ public HighScores() {
  *
  * @return the high scores
  */
-public ArrayList<HighScore> getHighScores() {
+public ArrayList<Score> getHighScores() {
 	return this.highScoreCollection;
 }
 
@@ -33,7 +33,7 @@ public ArrayList<HighScore> getHighScores() {
  * @param highScore the high score
  * @return true, if successful
  */
-public boolean add(HighScore highScore) {
+public boolean add(Score highScore) {
 	return this.highScoreCollection.add(highScore);
 }
 
@@ -43,7 +43,7 @@ public boolean add(HighScore highScore) {
  * @param highscore the highscore
  * @return true, if successful
  */
-public boolean remove(HighScore highscore) {
+public boolean remove(Score highscore) {
 	return this.highScoreCollection.remove(highscore);
 }
 }
