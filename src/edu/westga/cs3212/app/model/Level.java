@@ -8,16 +8,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  * Sets up the level to be played
@@ -30,7 +26,7 @@ public class Level extends JPanel implements Runnable {
 	 * Generated serial for warning suppression.
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
-	//private Timer timer;
+	// private Timer timer;
 	private Plane plane;
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
@@ -60,11 +56,25 @@ public class Level extends JPanel implements Runnable {
 		this.initLevel();
 
 		ImageIcon ii = new ImageIcon("src/images/cloud.png");
-		this.image = ii.getImage();
-
 		ImageIcon iii = new ImageIcon("src/images/grass.png");
+
+		this.image = ii.getImage();
 		this.imageGrass = iii.getImage();
 
+	}
+
+	/**
+	 * Gets the image of the level
+	 */
+	public Image getImage() {
+		return this.image;
+	}
+
+	/**
+	 * Gets the image of the grass in the level
+	 */
+	public Image getGrassImage() {
+		return this.imageGrass;
 	}
 
 	/**
@@ -188,7 +198,8 @@ public class Level extends JPanel implements Runnable {
 		g.setColor(Color.white);
 		g.setFont(small);
 		g.drawString(msg, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, this.LEVEL_HEIGHT / 2);
-		g.drawString("Score: " + finalScore, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, (this.LEVEL_HEIGHT / 2) + 60);
+		g.drawString("Score: " + finalScore, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2,
+				(this.LEVEL_HEIGHT / 2) + 60);
 	}
 
 	/**
@@ -236,10 +247,10 @@ public class Level extends JPanel implements Runnable {
 	private void inGame() {
 
 		if (!this.ingame) {
-			//this.timer.stop();
+			// this.timer.stop();
 		}
 	}
-	
+
 	private void scoreGame() {
 		this.finalScore = distance;
 	}
@@ -262,7 +273,7 @@ public class Level extends JPanel implements Runnable {
 		if (this.plane.getY() + this.plane.getHeight() > this.LEVEL_HEIGHT) {
 			this.plane.setVisible(false);
 			this.ingame = false;
-			if(!scored) {
+			if (!scored) {
 				scoreGame();
 				scored = true;
 			}
@@ -275,7 +286,7 @@ public class Level extends JPanel implements Runnable {
 			if (player.intersects(obstacleBounds)) {
 				this.plane.setVisible(false);
 				this.ingame = false;
-				if(!scored) {
+				if (!scored) {
 					scoreGame();
 					scored = true;
 				}
@@ -298,8 +309,6 @@ public class Level extends JPanel implements Runnable {
 			plane.keyReleased(e);
 		}
 
-		
-		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			plane.keyPressed(e);
@@ -310,7 +319,7 @@ public class Level extends JPanel implements Runnable {
 				started = false;
 				ingame = true;
 				initLevel();
-				
+
 			}
 		}
 	}
@@ -336,7 +345,7 @@ public class Level extends JPanel implements Runnable {
 		while (true) {
 
 			cycle();
-		    repaint();
+			repaint();
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = DELAY - timeDiff;
