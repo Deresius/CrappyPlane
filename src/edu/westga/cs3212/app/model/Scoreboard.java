@@ -7,14 +7,17 @@ import java.util.ArrayList;
  */
 public class Scoreboard {
 
-	/** The high score collection. */
-	private ArrayList<Score> highScoreCollection;
+	private static final int MAX_SIZE = 10;
+	private ArrayList<Score> highScores;
 
 	/**
 	 * Instantiates a new high score list.
 	 */
 	public Scoreboard() {
-		this.highScoreCollection = new ArrayList<Score>();
+		this.highScores = new ArrayList<Score>();
+		while (this.highScores.size() < MAX_SIZE) {
+			this.highScores.add(new Score("", 0));
+		}
 	}
 
 	/**
@@ -23,18 +26,32 @@ public class Scoreboard {
 	 * @return the high scores
 	 */
 	public ArrayList<Score> getHighScores() {
-		return this.highScoreCollection;
+		return this.highScores;
 	}
 
 	/**
-	 * Adds the new highscore.
+	 * Adds the new highscore if it is worthy
 	 *
 	 * @param highScore
 	 *            the high score
+	 * 
 	 * @return true, if successful
 	 */
-	public boolean add(Score highScore) {
-		return this.highScoreCollection.add(highScore);
+	public boolean add(Score newScore) {
+		int index = this.highScores.size() - 1;
+		Score current = this.highScores.get(index);
+		if (current.getScore() > newScore.getScore()) {
+			while (current.getScore() < newScore.getScore()) {
+				current = this.highScores.get(index);
+			}
+			this.highScores.add(index, newScore);
+			if (this.highScores.size() > MAX_SIZE) {
+				this.highScores.remove(this.highScores.size() - 1);
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -45,6 +62,6 @@ public class Scoreboard {
 	 * @return true, if successful
 	 */
 	public boolean remove(Score highscore) {
-		return this.highScoreCollection.remove(highscore);
+		return this.highScores.remove(highscore);
 	}
 }

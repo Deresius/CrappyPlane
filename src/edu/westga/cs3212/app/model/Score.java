@@ -20,10 +20,10 @@ public class Score {
 	 *            the score
 	 */
 	public Score(String playersName, int score) {
-		if (playersName == null || playersName == "") {
+		if (playersName == null) {
 			throw new IllegalArgumentException("Must enter a name.");
 		}
-		if (score <= 0) {
+		if (score < 0) {
 			throw new IllegalArgumentException("Must have a positive score.");
 		}
 
