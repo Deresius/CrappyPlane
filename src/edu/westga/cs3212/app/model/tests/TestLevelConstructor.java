@@ -37,11 +37,4 @@ class TestLevelConstructor {
 		assertEquals(expect.getImage(), myLevel.getImage());
 	}
 
-	@Test
-	final void testPassNewLevelHasCorrectGrassImage() {
-		Level myLevel = new Level();
-		ImageIcon expect = new ImageIcon("src/images/grass.png");
-		assertEquals(expect.getImage(), myLevel.getGrassImage());
-	}
-
 }
