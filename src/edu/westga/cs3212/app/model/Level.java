@@ -27,23 +27,34 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
 	// private Timer timer;
+	
+	private Random rand = new Random();
+	
 	private Plane plane;
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
+	
 	private boolean ingame;
 	private boolean started = false;
+	private int distance;
+	private boolean scored;
+	private int finalScore;	
+	
 	private final int PLANE_START_LOCATION_X = 40;
 	private final int PLANE_START_LOCATION_Y = 60;
+	
 	private int LEVEL_WIDTH;
 	private int LEVEL_HEIGHT;
+	
 	private final int DELAY = 10;
-	private int distance;
+	
+	
 	private Image image;
 	private Image imageGrass;
 	private Thread animator;
-	private int finalScore;
-	private boolean scored;
+	
+	
 
 	/**
 	 * Instantiates a new level, based on the given viewport.
@@ -102,30 +113,35 @@ public class Level extends JPanel implements Runnable {
 		this.setBackground(Color.BLACK);
 		this.ingame = true;
 		this.distance = 0;
-		this.clouds = new ArrayList<Cloud>();
-		this.ground = new ArrayList<Ground>();
-		this.obstacles = new ArrayList<Obstacle>();
-
-		this.setPreferredSize(new Dimension(this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
+		
+		this.setupGround();
+		this.setupSky();
+		this.setupObstacles();		
 
-		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
-		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
+		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);		
+	}
 
-		Random rand = new Random();
-
+	private void setupObstacles() {
+		this.obstacles = new ArrayList<Obstacle>();
 		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 				rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+	}
 
-		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
+	private void setupSky() {
+		this.clouds = new ArrayList<Cloud>();
+		for(int i = 0; i < 3; i++) {
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+					rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+		}
+	}
 
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-				rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-				rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
-		this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
-				rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
+	private void setupGround() {
+		this.ground = new ArrayList<Ground>();
+		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
+		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 	}
 
 	@Override
@@ -200,7 +216,7 @@ public class Level extends JPanel implements Runnable {
 		g.drawString(msg, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2, this.LEVEL_HEIGHT / 2);
 		g.drawString("Score: " + finalScore, (this.LEVEL_WIDTH - fm.stringWidth(msg)) / 2,
 				(this.LEVEL_HEIGHT / 2) + 60);
-	}
+	}   
 
 	/**
 	 * Called to update the level for moving objects, and spawning clouds and .
@@ -212,12 +228,8 @@ public class Level extends JPanel implements Runnable {
 
 		updateClouds();
 		updateGround();
-
-		for (Obstacle individualObstacle : this.obstacles) {
-			individualObstacle.move();
-		}
-
-		Random rand = new Random();
+		updateObstacles();
+		updatePlane();
 
 		if (this.distance % 1000 == 0 && started) {
 			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
@@ -232,6 +244,12 @@ public class Level extends JPanel implements Runnable {
 		}
 	}
 
+	private void updateObstacles() {
+		for (Obstacle individualObstacle : this.obstacles) {
+			individualObstacle.move();
+		}
+	}
+
 	private void updateClouds() {
 		for (Cloud cloud : this.clouds) {
 			cloud.move();
@@ -241,13 +259,6 @@ public class Level extends JPanel implements Runnable {
 	private void updateGround() {
 		for (Ground individualGround : this.ground) {
 			individualGround.move();
-		}
-	}
-
-	private void inGame() {
-
-		if (!this.ingame) {
-			// this.timer.stop();
 		}
 	}
 
@@ -328,10 +339,7 @@ public class Level extends JPanel implements Runnable {
 		if (started) {
 			this.distance++;
 		}
-		this.inGame();
 		this.updateLevel();
-
-		this.updatePlane();
 		this.checkCollisions();
 		this.repaint();
 	}
