@@ -53,6 +53,8 @@ public class Level extends JPanel implements Runnable {
 	private Image cloudImage;
 
 	private boolean easyDraw;
+	private boolean showConsole;
+	
 
 	private Thread animator;
 
@@ -270,6 +272,18 @@ public class Level extends JPanel implements Runnable {
 		this.updateLevel();
 		this.checkCollisions();
 		this.repaint();
+	}
+	
+	public void showConsole() {
+		this.showConsole = true;
+	}
+	
+	public void hideConsole() {
+		this.showConsole = false;
+	}
+	
+	public boolean consoleVisible() {
+		return this.showConsole;
 	}
 
 	public void setEasyDraw(boolean val) {

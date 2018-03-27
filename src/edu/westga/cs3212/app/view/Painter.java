@@ -82,6 +82,17 @@ public class Painter extends JPanel {
 			g.drawString(msg, (this.theLevel.getWidth() - (fm.stringWidth(msg) / 2)) / 2,
 					this.theLevel.getHeight() / 2);
 		}
+		
+		if(this.theLevel.consoleVisible()) {
+			Font small = new Font("Helvetica", Font.BOLD, 50);
+			FontMetrics fm = getFontMetrics(small);
+			String console = "Console Activated - Press 'H' to hide this menu";
+			String controls = "Press 'E' to activate simple graphics mode.";
+			g.drawString(console, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
+					(int) (this.theLevel.getHeight() * .55));
+			g.drawString(controls, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
+					(int) (this.theLevel.getHeight() * .6));
+		}
 	}
 
 	/**
