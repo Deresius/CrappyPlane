@@ -2,8 +2,8 @@
 Running example for SE2 Spring 2018
 
 ## Controls
-Use the space bar to make the CrappyPlane ascend. Release the space bar to decend.
-Press 'R' at the Game Over screen to restart the game.
+* Use the space bar to make the CrappyPlane ascend. Release the space bar to decend.
+* Press 'R' at the Game Over screen to restart the game.
 
 ## Installation Instructions
 ### CrappyPlane Game App
