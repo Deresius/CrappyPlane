@@ -41,21 +41,12 @@ public class Scoreboard {
 	 * 
 	 * @return true, if successful
 	 */
-	public boolean add(Score newScore) {
-		int index = this.highScores.size() - 1;
-		Score current = this.highScores.get(index);
-		if (current.getScore() < newScore.getScore()) {
-			while (current.getScore() < newScore.getScore() && index > 0) {
-				index--;
-				current = this.highScores.get(index);
-			}
-			this.highScores.add(index, newScore);
+	public void add(Score newScore) {
+		
+			this.highScores.add(newScore);
+			this.highScores.sort(null);
 			this.highScores.remove(this.highScores.size() - 1);
 
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
