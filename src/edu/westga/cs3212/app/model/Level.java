@@ -358,32 +358,6 @@ public class Level extends JPanel implements Runnable {
 		animator = new Thread(this);
 		animator.start();
 	}
-
-	private class TAdapter extends KeyAdapter {
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			plane.keyReleased(e);
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			plane.keyPressed(e);
-			started = true;
-			int key = e.getKeyCode();
-
-			if (key == KeyEvent.VK_R) {
-				started = false;
-				ingame = true;
-				initLevel();
-
-			}
-			if (key == KeyEvent.VK_E) {
-				easyDraw = true;
-
-			}
-		}
-	}
 	
 	public void setEasyDraw(boolean val) {
 		this.easyDraw = val;

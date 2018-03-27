@@ -30,12 +30,10 @@ public class ControlListener extends KeyAdapter {
 			this.theLevel.setStarted(false);
 			this.theLevel.setInGame(true);
 			this.theLevel.initLevel();
-			System.out.println("Pressed R");
 		}
 		
 		if (key == KeyEvent.VK_E) {
 			this.theLevel.setEasyDraw(true);
-			System.out.println("Pressed E");
 		}
 
 	}
