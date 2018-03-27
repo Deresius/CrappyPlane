@@ -36,7 +36,7 @@ class TestLevelGetters {
 	final void testGetImage() {
 		Level level = new Level();
 		Image expect = new ImageIcon("src/images/cloud.png").getImage();
-		assertEquals(expect, level.getImage());
+		assertEquals(expect, level.getCloudImage());
 	}
 
 	@Test
@@ -45,46 +45,78 @@ class TestLevelGetters {
 		level.setStarted(true);
 		assertEquals(true, level.isStarted());
 	}
-	
+
 	@Test
 	final void testSetStartedFalse() {
 		Level level = new Level();
 		level.setStarted(false);
 		assertEquals(false, level.isStarted());
 	}
-	
+
 	@Test
 	final void testSetInGameTrue() {
 		Level level = new Level();
 		level.setInGame(true);
 		assertEquals(true, level.isIngame());
 	}
-	
+
 	@Test
 	final void testSetInGameFalse() {
 		Level level = new Level();
 		level.setInGame(false);
 		assertEquals(false, level.isIngame());
 	}
-	
+
 	@Test
 	final void testGetPlane() {
 		Level level = new Level();
 		level.initLevel();
 		assertEquals(true, level.getPlane() != null);
 	}
-	
+
 	@Test
 	final void testSetEasyDrawTrue() {
 		Level level = new Level();
 		level.setEasyDraw(true);
 		assertEquals(true, level.getEasyDraw());
 	}
-	
+
 	@Test
 	final void testSetEasyDrawFalse() {
 		Level level = new Level();
 		level.setEasyDraw(false);
 		assertEquals(false, level.getEasyDraw());
+	}
+
+	@Test
+	final void testGetDistance() {
+		Level level = new Level();
+
+		assertEquals(true, level.getDistance() == 0);
+	}
+
+	@Test
+	final void testGetFinalScore() {
+		Level level = new Level();
+
+		assertEquals(true, level.getFinalScore() == 0);
+	}
+
+	@Test
+	final void testGetObstacles() {
+		Level level = new Level();
+		assertEquals(true, level.getObstacles() != null);
+	}
+
+	@Test
+	final void testGetGround() {
+		Level level = new Level();
+		assertEquals(true, level.getGround() != null);
+	}
+
+	@Test
+	final void testGetClouds() {
+		Level level = new Level();
+		assertEquals(true, level.getClouds() != null);
 	}
 }
