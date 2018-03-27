@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.app.model.Level;
 
 /**
- * Tests the Level constructor
+ * Tests the Level constructor.
+ * 
+ * @author Team 4
  * 
  */
 class TestLevelConstructor {
@@ -28,6 +30,7 @@ class TestLevelConstructor {
 	final void testPassMakeNewLevelHasCorrectWidthAndHeight() {
 		Level myLevel = new Level();
 		int expect = (int) this.screenSize.getWidth() + (int) this.screenSize.getHeight();
+
 		assertEquals(expect, myLevel.getWidth() + myLevel.getHeight());
 	}
 
@@ -35,6 +38,7 @@ class TestLevelConstructor {
 	final void testPassNewLevelHasCorrectImage() {
 		Level myLevel = new Level();
 		ImageIcon expect = new ImageIcon("src/images/cloud.png");
+
 		assertEquals(expect.getImage(), myLevel.getImage());
 	}
 

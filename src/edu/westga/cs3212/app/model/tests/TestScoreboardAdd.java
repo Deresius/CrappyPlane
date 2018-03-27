@@ -44,7 +44,7 @@ class TestScoreboardAdd {
 		}
 
 		int expect = 10;
-		
+
 		assertEquals(expect, board.getHighScores().get(0).getScore());
 	}
 
@@ -56,7 +56,7 @@ class TestScoreboardAdd {
 		}
 
 		int expect = 10;
-		
+
 		assertEquals(expect, board.getHighScores().size());
 	}
 }

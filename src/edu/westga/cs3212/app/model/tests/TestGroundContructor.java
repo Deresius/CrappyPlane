@@ -36,23 +36,23 @@ class TestGroundContructor {
 	}
 
 	@Test
-	final void testPassAllSameNumber() {		
+	final void testPassAllSameNumber() {
 		Ground testGround = new Ground(3, 3, 3);
-		
+
 		assertEquals(17, testGround.getSpeed());
 	}
 
 	@Test
 	final void testPassAllLargerNumbers() {
 		Ground testGround = new Ground(300, 400, 350);
-		
+
 		assertEquals(17, testGround.getSpeed());
 	}
 
 	@Test
 	final void testPassAllZero() {
 		Ground testGround = new Ground(0, 0, 0);
-		
+
 		assertEquals(17, testGround.getSpeed());
 	}
 

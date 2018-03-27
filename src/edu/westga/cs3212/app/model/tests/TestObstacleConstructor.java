@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.app.model.Obstacle;
 
+/**
+ * Tests the construction a an Obstacle object.
+ * 
+ * @author Team 4
+ *
+ */
 class TestObstacleConstructor {
 
 	@Test

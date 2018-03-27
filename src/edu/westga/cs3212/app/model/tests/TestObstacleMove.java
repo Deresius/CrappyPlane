@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.app.model.Obstacle;
 
+/**
+ * Tests Obstacle's move method.
+ * 
+ * @author Team 4
+ *
+ */
 class TestObstacleMove {
 
 	@Test
@@ -38,6 +44,7 @@ class TestObstacleMove {
 		myObstacle.move();
 		myObstacle.move();
 		boolean expect = true;
+		
 		assertEquals(expect, (myObstacle.getX() > 6));
 	}
 
