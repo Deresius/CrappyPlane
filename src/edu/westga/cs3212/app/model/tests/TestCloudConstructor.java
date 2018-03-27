@@ -92,14 +92,14 @@ class TestCloudConstructor {
 	final void testValidCloudWidth() {
 		Cloud testCloud = new Cloud(0, 0, 0, 0);
 
-		assertEquals(86, testCloud.getWidth());
+		assertEquals(0, testCloud.getWidth());
 	}
 
 	@Test
 	final void testValidCloudHeight() {
 		Cloud testCloud = new Cloud(0, 0, 0, 0);
 
-		assertEquals(42, testCloud.getHeight());
+		assertEquals(0, testCloud.getHeight());
 	}
 
 	@Test
@@ -122,7 +122,7 @@ class TestCloudConstructor {
 	final void testValidCloudBoundaries() {
 		Cloud testCloud = new Cloud(2, 2, 2, 2);
 
-		assertEquals(new Rectangle(10, 6, 68, 33), testCloud.getBoundaries());
+		assertEquals(new Rectangle(2, 2, 0, 0), testCloud.getBoundaries());
 	}
 
 }
