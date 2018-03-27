@@ -110,8 +110,10 @@ public class Painter extends JPanel {
 		g.setColor(Color.white);
 		g.setFont(small);
 		g.drawString(msg, (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2, this.theLevel.getHeight() / 2);
-		g.drawString("Score: " + this.theLevel.getFinalScore(), (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2,
+		g.drawString("Score: " + this.theLevel.getFinalScore(), (this.theLevel.getWidth() - fm.stringWidth("Score:" + this.theLevel.getFinalScore())) / 2,
 				(this.theLevel.getHeight() / 2) + 60);
+		g.drawString("Press 'R' to Restart", (this.theLevel.getWidth() - fm.stringWidth("Press 'R' to Restart")) / 2,
+				(this.theLevel.getHeight() / 2) + 150);
 	}
 
 }
