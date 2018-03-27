@@ -39,7 +39,7 @@ class TestCloudConstructor {
 	@Test
 	final void testFailInvalidMaxY() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Cloud(3, 4, 4, 0);
+			new Cloud(3, 4, 2, 0);
 		}, "Cloud was created with a MaxY less than Y.");
 	}
 

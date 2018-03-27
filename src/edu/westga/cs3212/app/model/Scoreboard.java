@@ -19,7 +19,7 @@ public class Scoreboard {
 			this.highScores.add(new Score("", 0));
 		}
 	}
-	
+
 	public int getMaxSize() {
 		return MAX_SIZE;
 	}
@@ -42,20 +42,9 @@ public class Scoreboard {
 	 * @return true, if successful
 	 */
 	public void add(Score newScore) {
-			this.highScores.add(newScore);
-			this.highScores.sort(null);
-			this.highScores.remove(this.highScores.size() - 1);
+		this.highScores.add(newScore);
+		this.highScores.sort(null);
+		this.highScores.remove(this.highScores.size() - 1);
 
-	}
-
-	/**
-	 * Removes a highscore.
-	 *
-	 * @param highscore
-	 *            the highscore
-	 * @return true, if successful
-	 */
-	public boolean remove(Score highscore) {
-		return this.highScores.remove(highscore);
 	}
 }

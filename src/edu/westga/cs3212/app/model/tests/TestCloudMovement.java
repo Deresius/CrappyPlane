@@ -34,4 +34,15 @@ class TestCloudMovement {
 		assertEquals(expect, myCloud.getX());
 	}
 
+	@Test
+	final void testCloudResets() {
+		Cloud myCloud = new Cloud(20, 200, 10, 300);
+
+		myCloud.move();
+		myCloud.move();
+		myCloud.move();
+		myCloud.move();
+		boolean expect = true;
+		assertEquals(expect, (myCloud.getX() > 6));
+	}
 }
