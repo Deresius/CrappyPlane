@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
  */
 public class Plane extends Sprite {
 
-	private static final int RISE_NORMAL = -2;
-	private static final int FALL_NORMAL = 6;
+	public static final int RISE_NORMAL = -2;
+	public static final int FALL_NORMAL = 6;
 
 	private int directionY;
 
@@ -56,36 +56,5 @@ public class Plane extends Sprite {
 	 */
 	public void move(int speed) {
 		this.directionY = speed;
-	}
-
-	/**
-	 * Registers when a key is pressed and responds
-	 * 
-	 * @param e
-	 *            The event
-	 */
-	public void keyPressed(KeyEvent e) {
-
-		int key = e.getKeyCode();
-
-		if (key == KeyEvent.VK_SPACE) {
-			this.move(Plane.RISE_NORMAL);
-		}
-
-	}
-
-	/**
-	 * Registers when a key is released and responds
-	 * 
-	 * @param e
-	 *            The event
-	 */
-	public void keyReleased(KeyEvent e) {
-
-		int key = e.getKeyCode();
-
-		if (key == KeyEvent.VK_SPACE) {
-			this.move(Plane.FALL_NORMAL);
-		}
 	}
 }

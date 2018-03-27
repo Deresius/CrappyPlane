@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import edu.westga.cs3212.app.model.Level;
+import edu.westga.cs3212.app.model.Plane;
 
 /**
  * Handles all controls for a Level.
@@ -31,7 +32,11 @@ public class ControlListener extends KeyAdapter {
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.theLevel.getPlane().keyReleased(e);
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_SPACE) {
+			this.theLevel.getPlane().move(Plane.FALL_NORMAL);
+		}
 
 	}
 
@@ -40,9 +45,12 @@ public class ControlListener extends KeyAdapter {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		this.theLevel.getPlane().keyPressed(e);
 		this.theLevel.setStarted(true);
 		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_SPACE) {
+			this.theLevel.getPlane().move(Plane.RISE_NORMAL);
+		}
 
 		if (key == KeyEvent.VK_R) {
 			this.theLevel.setStarted(false);
