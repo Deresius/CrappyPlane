@@ -167,35 +167,35 @@ public class Level extends JPanel implements Runnable {
 	 */
 	private void drawObjects(Graphics g) {
 		if(!easyDraw) {
-			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
+			g.drawImage(this.plane.getImage(), (int) this.plane.getX(), (int) this.plane.getY(), this);
 		}else {
 			g.setColor(Color.red);
-			g.fillOval(plane.getX(), plane.getY(), 200, 50);
+			g.fillOval((int) plane.getX(), (int) plane.getY(), 200, 50);
 		}
 				
 		for (Obstacle obstacle : this.obstacles) {
 			if(!easyDraw) {
-				g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
+				g.drawImage(obstacle.getImage(), (int) obstacle.getX(), (int) obstacle.getY(), 80, 100, this);
 			}else {
 				g.setColor(Color.orange);
-				g.fillOval(obstacle.getX(), obstacle.getY(), 80, 100);
+				g.fillOval((int) obstacle.getX(), (int) obstacle.getY(), 80, 100);
 			}
 			
 		}
 
 		for (Cloud cloud : this.clouds) {
 			if(!easyDraw) {
-				g.drawImage(cloudImage, cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
+				g.drawImage(cloudImage, (int) cloud.getX(), (int) cloud.getY(), (190 * cloud.getSpeed()) / 4,
 						(110 * cloud.getSpeed()) / 4, this);
 			}else {
 				g.setColor(Color.white);
-				g.fillOval(cloud.getX(), cloud.getY(), 190, 110);
+				g.fillOval((int) cloud.getX(), (int) cloud.getY(), 190, 110);
 			}			
 		}
 
 		for (Ground ground : this.ground) {
 			if(!easyDraw) {
-				g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), this.LEVEL_HEIGHT / 6, this);
+				g.drawImage(ground.getImage(), (int) ground.getX(), (int) ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), this.LEVEL_HEIGHT / 6, this);
 			}			
 		}
 		drawScore(g);

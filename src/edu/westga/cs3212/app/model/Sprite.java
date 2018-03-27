@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 public abstract class Sprite {
 
 	/* locations */
-	protected int x;
-	protected int y;
+	protected double x;
+	protected double y;
 
 	/* boundaries */
 	protected int width;
@@ -49,14 +49,14 @@ public abstract class Sprite {
 	/**
 	 * @return The horizontal location of the Sprite
 	 */
-	public int getX() {
+	public double getX() {
 		return this.x;
 	}
 
 	/**
 	 * @return The vertical location of the Sprite
 	 */
-	public int getY() {
+	public double getY() {
 		return this.y;
 	}
 
@@ -85,7 +85,7 @@ public abstract class Sprite {
 	 * @return The boundaries of the sprite (by location and size/dimensions)
 	 */
 	public Rectangle getBoundaries() {
-		return new Rectangle(this.x + (int) (.1 * this.width), this.y + (int) (.1 * this.height),
+		return new Rectangle((int) this.x + (int) (.1 * this.width), (int) this.y + (int) (.1 * this.height),
 				(int) (.8 * this.width), (int) (.8 * this.height));
 	}
 
