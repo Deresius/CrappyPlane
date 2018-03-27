@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Scoreboard {
 
-	private static final int MAX_SIZE = 10;
+	public static final int MAX_SIZE = 10;
 	private ArrayList<Score> highScores;
 
 	/**
@@ -18,6 +18,10 @@ public class Scoreboard {
 		while (this.highScores.size() < MAX_SIZE) {
 			this.highScores.add(new Score("", 0));
 		}
+	}
+	
+	public int getMaxSize() {
+		return MAX_SIZE;
 	}
 
 	/**
@@ -40,14 +44,14 @@ public class Scoreboard {
 	public boolean add(Score newScore) {
 		int index = this.highScores.size() - 1;
 		Score current = this.highScores.get(index);
-		if (current.getScore() > newScore.getScore()) {
-			while (current.getScore() < newScore.getScore()) {
+		if (current.getScore() < newScore.getScore()) {
+			while (current.getScore() < newScore.getScore() && index > 0) {
+				index--;
 				current = this.highScores.get(index);
 			}
 			this.highScores.add(index, newScore);
-			if (this.highScores.size() > MAX_SIZE) {
-				this.highScores.remove(this.highScores.size() - 1);
-			}
+			this.highScores.remove(this.highScores.size() - 1);
+
 			return true;
 		} else {
 			return false;

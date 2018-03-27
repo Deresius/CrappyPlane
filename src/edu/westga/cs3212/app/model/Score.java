@@ -23,9 +23,6 @@ public class Score {
 		if (playersName == null) {
 			throw new IllegalArgumentException("Must enter a name.");
 		}
-		if (score < 0) {
-			throw new IllegalArgumentException("Must have a positive score.");
-		}
 
 		this.playersName = playersName;
 		this.score = score;
