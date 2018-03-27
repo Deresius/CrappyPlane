@@ -283,10 +283,6 @@ public class Level extends JPanel implements Runnable {
 		return started;
 	}
 
-	public boolean isEasyDraw() {
-		return easyDraw;
-	}
-
 	public int getFinalScore() {
 		return finalScore;
 	}
