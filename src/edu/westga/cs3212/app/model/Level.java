@@ -200,7 +200,7 @@ public class Level extends JPanel implements Runnable {
 	}
 
 	private void updateScore() {
-		if (started) {
+		if (this.started) {
 			this.distance++;
 		}
 	}
@@ -263,6 +263,13 @@ public class Level extends JPanel implements Runnable {
 			scored = true;
 		}
 	}
+	
+	private void cycle() {
+		this.updateScore();
+		this.updateLevel();
+		this.checkCollisions();
+		this.repaint();
+	}
 
 	public void setEasyDraw(boolean val) {
 		this.easyDraw = val;
@@ -280,27 +287,12 @@ public class Level extends JPanel implements Runnable {
 		return easyDraw;
 	}
 
-	private void cycle() {
-		this.updateScore();
-		this.updateLevel();
-		this.checkCollisions();
-		this.repaint();
-	}
-
 	public int getFinalScore() {
 		return finalScore;
 	}
 
-	public int getLevelWidth() {
-		return LEVEL_WIDTH;
-	}
-
 	public int getDistance() {
 		return distance;
-	}
-
-	public int getLevelHeight() {
-		return LEVEL_HEIGHT;
 	}
 
 	public Image getCloudImage() {
@@ -349,22 +341,6 @@ public class Level extends JPanel implements Runnable {
 
 	public ArrayList<Cloud> getClouds() {
 		return clouds;
-	}
-
-	public void setGround(ArrayList<Ground> ground) {
-		this.ground = ground;
-	}
-
-	public void setClouds(ArrayList<Cloud> clouds) {
-		this.clouds = clouds;
-	}
-
-	public void setObstacles(ArrayList<Obstacle> obstacles) {
-		this.obstacles = obstacles;
-	}
-
-	public void setEasyDraw(Boolean val) {
-		this.easyDraw = val;
 	}
 
 	public void setStarted(boolean val) {

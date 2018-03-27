@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -55,7 +54,7 @@ public class Painter extends JPanel {
 		for (Ground ground : this.theLevel.getGround()) {
 			if (!this.theLevel.getEasyDraw()) {
 				g.drawImage(ground.getImage(), (int) ground.getX(), (int) ground.getY(),
-						(int) (this.theLevel.getLevelWidth() * 1.1), this.theLevel.getLevelHeight() / 6, this);
+						(int) (this.theLevel.getWidth() * 1.1), this.theLevel.getHeight() / 6, this);
 			}
 		}
 		drawScore(g);
@@ -66,7 +65,7 @@ public class Painter extends JPanel {
 	public void drawScore(Graphics g) {
 		g.setFont(new Font("Helvetica", Font.PLAIN, 25));
 		g.setColor(Color.WHITE);
-		g.drawString("Distance: " + this.theLevel.getDistance(), this.theLevel.getLevelWidth() - 250, 20);
+		g.drawString("Distance: " + this.theLevel.getDistance(), this.theLevel.getWidth() - 250, 20);
 	}
 
 	public void drawControls(Graphics g) {
@@ -74,8 +73,8 @@ public class Painter extends JPanel {
 			String msg = "Don't Panic: Press Spacebar";
 			Font small = new Font("Helvetica", Font.BOLD, 50);
 			FontMetrics fm = getFontMetrics(small);
-			g.drawString(msg, (this.theLevel.getLevelWidth() - (fm.stringWidth(msg) / 2)) / 2,
-					this.theLevel.getLevelHeight() / 2);
+			g.drawString(msg, (this.theLevel.getWidth() - (fm.stringWidth(msg) / 2)) / 2,
+					this.theLevel.getHeight() / 2);
 		}
 	}
 
@@ -93,10 +92,9 @@ public class Painter extends JPanel {
 
 		g.setColor(Color.white);
 		g.setFont(small);
-		g.drawString(msg, (this.theLevel.getLevelWidth() - fm.stringWidth(msg)) / 2,
-				this.theLevel.getLevelHeight() / 2);
-		g.drawString("Score: " + this.theLevel.getFinalScore(),
-				(this.theLevel.getLevelWidth() - fm.stringWidth(msg)) / 2, (this.theLevel.getLevelHeight() / 2) + 60);
+		g.drawString(msg, (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2, this.theLevel.getHeight() / 2);
+		g.drawString("Score: " + this.theLevel.getFinalScore(), (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2,
+				(this.theLevel.getHeight() / 2) + 60);
 	}
 
 }
