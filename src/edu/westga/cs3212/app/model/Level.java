@@ -15,6 +15,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import edu.westga.cs3212.app.controller.ControlListener;
+
 /**
  * Sets up the level to be played
  *
@@ -96,13 +98,28 @@ public class Level extends JPanel implements Runnable {
 	public int getWidth() {
 		return this.LEVEL_WIDTH;
 	}
+	
+	/**
+	 * Gets the plane in the level
+	 */
+	public Plane getPlane() {
+		return this.plane;
+	}
+	
+	public void setStarted(boolean val) {
+		this.started = val;
+	}
+	
+	public void setInGame(boolean val) {
+		this.ingame = val;
+	}
 
 	/**
 	 * Initializes the level.
 	 */
-	private void initLevel() {
-		
-		this.addKeyListener(new TAdapter());
+	public void initLevel() {
+		ControlListener listener = new ControlListener(this);
+		this.addKeyListener(listener);
 		this.setFocusable(true);
 		this.easyDraw = false;
 		
@@ -366,6 +383,22 @@ public class Level extends JPanel implements Runnable {
 
 			}
 		}
+	}
+	
+	public void setEasyDraw(boolean val) {
+		this.easyDraw = val;
+	}
+
+	public boolean isIngame() {
+		return ingame;
+	}
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	public boolean isEasyDraw() {
+		return easyDraw;
 	}
 
 	private void cycle() {

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import edu.westga.cs3212.app.controller.ControlListener;
 import edu.westga.cs3212.app.model.Level;
 
 /**
@@ -24,6 +25,7 @@ public class CrappyPlane extends JFrame {
 	public CrappyPlane() {
 		initUI();
 	}
+	
 
 	private void initUI() {
 		Level level = new Level();

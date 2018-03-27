@@ -11,23 +11,37 @@ public class ControlListener extends KeyAdapter {
 	
 	public ControlListener(Level myLevel) {
 		this.theLevel = myLevel;
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
+		this.theLevel.getPlane().keyReleased(e);
 		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		this.theLevel.getPlane().keyPressed(e);
+		this.theLevel.setStarted(true);
 		int key = e.getKeyCode();
+		
 		if (key == KeyEvent.VK_R) {
-			
+			this.theLevel.setStarted(false);
+			this.theLevel.setInGame(true);
+			this.theLevel.initLevel();
+			System.out.println("Pressed R");
 		}
+		
 		if (key == KeyEvent.VK_E) {
-
+			this.theLevel.setEasyDraw(true);
+			System.out.println("Pressed E");
 		}
 
+	}
+	
+	
+	public Level getLevel() {
+		return this.theLevel;
 	}
 }
