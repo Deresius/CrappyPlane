@@ -1,6 +1,10 @@
 # CrappyPlane
 Running example for SE2 Spring 2018
 
+## Controls
+* Use the space bar to make the CrappyPlane ascend. Release the space bar to decend.
+* Press 'R' at the Game Over screen to restart the game.
+
 ## Installation Instructions
 ### CrappyPlane Game App
 1. Install Java 9 (http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html).
