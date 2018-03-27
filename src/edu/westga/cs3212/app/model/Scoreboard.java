@@ -42,7 +42,6 @@ public class Scoreboard {
 	 * @return true, if successful
 	 */
 	public void add(Score newScore) {
-		
 			this.highScores.add(newScore);
 			this.highScores.sort(null);
 			this.highScores.remove(this.highScores.size() - 1);

@@ -24,8 +24,10 @@ class TestScoreboardAdd {
 		board.add(new Score("Name1", 1));
 		board.add(new Score("Name2", 1));
 		board.add(new Score("Name3", 2));
-		int expect = 2;		
+		int expect = 2;	
+		
 		assertEquals(expect, board.getHighScores().get(0).getScore());
+		assertEquals("Name1", board.getHighScores().get(1).getPlayersName());
 	}
 	
 	@Test
