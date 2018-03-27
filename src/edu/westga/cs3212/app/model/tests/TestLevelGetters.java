@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3212.app.model.Level;
-import edu.westga.cs3212.app.model.Plane;
 
 class TestLevelGetters {
 
