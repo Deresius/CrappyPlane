@@ -14,6 +14,7 @@ import edu.westga.cs3212.app.model.Level;
 
 /**
  * Tests the Level constructor
+ * 
  */
 class TestLevelConstructor {
 	private Dimension screenSize;

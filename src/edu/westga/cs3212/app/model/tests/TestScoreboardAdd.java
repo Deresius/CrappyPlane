@@ -7,6 +7,12 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.app.model.Score;
 import edu.westga.cs3212.app.model.Scoreboard;
 
+/**
+ * Tests the addition of a score to the Scoreboard.
+ * 
+ * @author Team 4
+ *
+ */
 class TestScoreboardAdd {
 
 	@Test
@@ -38,6 +44,7 @@ class TestScoreboardAdd {
 		}
 
 		int expect = 10;
+		
 		assertEquals(expect, board.getHighScores().get(0).getScore());
 	}
 
@@ -49,6 +56,7 @@ class TestScoreboardAdd {
 		}
 
 		int expect = 10;
+		
 		assertEquals(expect, board.getHighScores().size());
 	}
 }
