@@ -37,7 +37,7 @@ class TestGroundMovement {
 	@Test
 	final void testResetToMaxXWhenMoveIsCalledAtNegativeMaxX() {
 		Ground myGround = new Ground(5, 10, 5);
-		int expect = myGround.getX();
+		double expect = myGround.getX();
 
 		myGround.move();
 		myGround.move();
