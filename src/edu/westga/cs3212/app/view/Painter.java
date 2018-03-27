@@ -87,11 +87,14 @@ public class Painter extends JPanel {
 			Font small = new Font("Helvetica", Font.BOLD, 50);
 			FontMetrics fm = getFontMetrics(small);
 			String console = "Console Activated - Press 'H' to hide this menu";
-			String controls = "Press 'E' to activate simple graphics mode.";
+			String controlE = "Press 'E' to activate simple graphics mode.";
+			String controlT = "Press 'T' to activate texture graphics mode.";
 			g.drawString(console, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
 					(int) (this.theLevel.getHeight() * .55));
-			g.drawString(controls, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
+			g.drawString(controlE, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
 					(int) (this.theLevel.getHeight() * .6));
+			g.drawString(controlT, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
+					(int) (this.theLevel.getHeight() * .65));
 		}
 	}
 

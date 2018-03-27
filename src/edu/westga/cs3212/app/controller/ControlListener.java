@@ -45,8 +45,7 @@ public class ControlListener extends KeyAdapter {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		this.theLevel.setStarted(true);
-
+		
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_SPACE) {
 			this.theLevel.setStarted(true);
@@ -72,6 +71,9 @@ public class ControlListener extends KeyAdapter {
 
 		if (key == KeyEvent.VK_H) {
 			this.theLevel.hideConsole();
+		}
+		if (key == KeyEvent.VK_T) {
+			this.theLevel.setEasyDraw(false);
 		}
 
 	}
