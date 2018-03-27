@@ -102,7 +102,7 @@ public class Painter extends JPanel {
 	 *            the graphics
 	 */
 	public void drawGameOver(Graphics g) {
-		this.setBackground(Color.black);
+		theLevel.setBackground(Color.BLACK);
 		String msg = "Game Over";
 		Font small = new Font("Helvetica", Font.BOLD, 50);
 		FontMetrics fm = getFontMetrics(small);
