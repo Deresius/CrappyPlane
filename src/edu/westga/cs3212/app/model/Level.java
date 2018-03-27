@@ -274,12 +274,12 @@ public class Level extends JPanel implements Runnable {
 		this.repaint();
 	}
 	
-	public void showConsole() {
-		this.showConsole = true;
+	public boolean showConsole() {
+		return this.showConsole = true;
 	}
 	
-	public void hideConsole() {
-		this.showConsole = false;
+	public boolean hideConsole() {
+		return this.showConsole = false;
 	}
 	
 	public boolean consoleVisible() {
