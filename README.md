@@ -4,6 +4,10 @@ Running example for SE2 Spring 2018
 ## Controls
 * Use the space bar to make the CrappyPlane ascend. Release the space bar to decend.
 * Press 'R' at the Game Over screen to restart the game.
+* Press '`' (Tilde) to show the console.
+* Press 'H' to hide the console.
+* Press 'E' to run easy graphics.
+* Press 'T' to run texture graphics. 
 
 ## Installation Instructions
 ### CrappyPlane Game App
