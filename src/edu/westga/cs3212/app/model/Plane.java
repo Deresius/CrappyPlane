@@ -1,7 +1,5 @@
 package edu.westga.cs3212.app.model;
 
-import java.awt.event.KeyEvent;
-
 /**
  * Defines the Plane class which is operated by the user
  *
