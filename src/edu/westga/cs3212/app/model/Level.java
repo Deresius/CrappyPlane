@@ -22,11 +22,14 @@ import javax.swing.JPanel;
  */
 public class Level extends JPanel implements Runnable {
 
+	
 	/**
 	 * Generated serial for warning suppression.
 	 */
 	private static final long serialVersionUID = 4780054145331265009L;
-	// private Timer timer;
+	
+	private static final int CLOUD_SPAWN_FREQUENCY = 500;
+	private static final int OBSTACLE_SPAWN_FREQUENCY = 1000;
 	
 	private Random rand = new Random();
 	
@@ -48,9 +51,10 @@ public class Level extends JPanel implements Runnable {
 	private int LEVEL_HEIGHT;
 	
 	private final int DELAY = 10;
+		
+	private Image cloudImage;
 	
-	
-	private Image image;
+	private boolean easyDraw;
 	
 	private Thread animator;
 	
@@ -67,16 +71,10 @@ public class Level extends JPanel implements Runnable {
 		this.initLevel();
 
 		ImageIcon ii = new ImageIcon("src/images/cloud.png");
-		this.image = ii.getImage();
+		this.cloudImage = ii.getImage();
 
 	}
 
-	/**
-	 * Gets the image of the cloud
-	 */
-	public Image getImage() {
-		return this.image;
-	}
 
 	/**
 	 * Gets the height of the level
@@ -96,14 +94,14 @@ public class Level extends JPanel implements Runnable {
 	 * Initializes the level.
 	 */
 	private void initLevel() {
-
-		this.scored = false;
+		
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(true);
-		this.setBackground(Color.BLACK);
+		this.easyDraw = false;
+		
 		this.ingame = true;
 		this.distance = 0;
-		
+		this.scored = false;		
 
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
 		
@@ -121,7 +119,11 @@ public class Level extends JPanel implements Runnable {
 	}
 
 	private void setupSky() {
+		Color lgtBlue = new Color(41, 151, 255);
+		this.setBackground(lgtBlue);
+		
 		this.clouds = new ArrayList<Cloud>();
+		
 		for(int i = 0; i < 3; i++) {
 			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 					rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
@@ -157,36 +159,58 @@ public class Level extends JPanel implements Runnable {
 	 *            the graphics
 	 */
 	private void drawObjects(Graphics g) {
-
-		Color lgtBlue = new Color(41, 151, 255);
-		g.setColor(lgtBlue);
-		g.fillRect(0, 0, LEVEL_WIDTH, LEVEL_HEIGHT);
-		if (this.plane.isVisible()) {
+		if(!easyDraw) {
 			g.drawImage(this.plane.getImage(), this.plane.getX(), this.plane.getY(), this);
+		}else {
+			g.setColor(Color.red);
+			g.fillOval(plane.getX(), plane.getY(), 200, 50);
 		}
-
+				
 		for (Obstacle obstacle : this.obstacles) {
-			g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
+			if(!easyDraw) {
+				g.drawImage(obstacle.getImage(), obstacle.getX(), obstacle.getY(), 80, 100, this);
+			}else {
+				g.setColor(Color.orange);
+				g.fillOval(obstacle.getX(), obstacle.getY(), 80, 100);
+			}
+			
 		}
 
 		for (Cloud cloud : this.clouds) {
-
-			g.drawImage(cloud.getImage(), cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
-					(110 * cloud.getSpeed()) / 4, this);
+			if(!easyDraw) {
+				g.drawImage(cloudImage, cloud.getX(), cloud.getY(), (190 * cloud.getSpeed()) / 4,
+						(110 * cloud.getSpeed()) / 4, this);
+			}else {
+				g.setColor(Color.white);
+				g.fillOval(cloud.getX(), cloud.getY(), 190, 110);
+			}			
 		}
 
 		for (Ground ground : this.ground) {
-			g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), 150, this);
+			if(!easyDraw) {
+				g.drawImage(ground.getImage(), ground.getX(), ground.getY(), (int) (this.LEVEL_WIDTH * 1.1), this.LEVEL_HEIGHT / 6, this);
+			}			
 		}
+		drawScore(g);
+		drawControls(g);
+
+	}
+
+
+	private void drawScore(Graphics g) {
 		g.setFont(new Font("Helvetica", Font.PLAIN, 25));
-
 		g.setColor(Color.WHITE);
-
 		g.drawString("Distance: " + distance, LEVEL_WIDTH - 250, 20);
-		if (!started) {
-			g.drawString("Don't Panic: Press Spacebar", 500, 200);
-		}
+	}
 
+
+	private void drawControls(Graphics g) {
+		if (!started) {
+			String msg = "Don't Panic: Press Spacebar";
+			Font small = new Font("Helvetica", Font.BOLD, 50);
+			FontMetrics fm = getFontMetrics(small);
+			g.drawString(msg,(this.LEVEL_WIDTH - (fm.stringWidth(msg) / 2)) / 2, this.LEVEL_HEIGHT / 2);
+		}
 	}
 
 	/**
@@ -196,7 +220,7 @@ public class Level extends JPanel implements Runnable {
 	 *            the graphics
 	 */
 	private void drawGameOver(Graphics g) {
-
+		this.setBackground(Color.black);
 		String msg = "Game Over";
 		Font small = new Font("Helvetica", Font.BOLD, 50);
 		FontMetrics fm = getFontMetrics(small);
@@ -212,25 +236,35 @@ public class Level extends JPanel implements Runnable {
 	 * Called to update the level for moving objects, and spawning clouds and .
 	 */
 	private void updateLevel() {
-		if (started) {
-			this.distance++;
-		}
-
+		updateScore();
 		updateClouds();
 		updateGround();
 		updateObstacles();
 		updatePlane();
 
-		if (this.distance % 1000 == 0 && started) {
-			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+		spawnObstacles();
+		spawnClouds();
+	}
+
+	private void spawnClouds() {
+		if (this.distance % CLOUD_SPAWN_FREQUENCY == 0 && started) {
+			this.clouds.add(new Cloud(this.LEVEL_WIDTH    ,
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
 		}
+	}
 
-		if (this.distance % 500 == 0 && started) {
-			this.clouds.add(new Cloud(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
+	private void spawnObstacles() {
+		if (this.distance % OBSTACLE_SPAWN_FREQUENCY == 0 && started) {
+			this.obstacles.add(new Obstacle(this.LEVEL_WIDTH,
 					(int) (rand.nextInt(this.LEVEL_HEIGHT) * .8), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 
+		}
+	}
+
+	private void updateScore() {
+		if (started) {
+			this.distance++;
 		}
 	}
 
@@ -272,12 +306,7 @@ public class Level extends JPanel implements Runnable {
 		Rectangle player = this.plane.getBoundaries();
 
 		if (this.plane.getY() + this.plane.getHeight() > this.LEVEL_HEIGHT) {
-			this.plane.setVisible(false);
-			this.ingame = false;
-			if (!scored) {
-				scoreGame();
-				scored = true;
-			}
+			endGame();
 		}
 
 		for (Obstacle individualObstacle : this.obstacles) {
@@ -285,13 +314,16 @@ public class Level extends JPanel implements Runnable {
 			Rectangle obstacleBounds = individualObstacle.getBoundaries();
 
 			if (player.intersects(obstacleBounds)) {
-				this.plane.setVisible(false);
-				this.ingame = false;
-				if (!scored) {
-					scoreGame();
-					scored = true;
-				}
+				endGame();
 			}
+		}
+	}
+
+	private void endGame() {
+		this.ingame = false;
+		if (!scored) {
+			scoreGame();
+			scored = true;
 		}
 	}
 
@@ -322,13 +354,15 @@ public class Level extends JPanel implements Runnable {
 				initLevel();
 
 			}
+			if (key == KeyEvent.VK_E) {
+				easyDraw = true;
+
+			}
 		}
 	}
 
 	private void cycle() {
-		if (started) {
-			this.distance++;
-		}
+		updateScore();
 		this.updateLevel();
 		this.checkCollisions();
 		this.repaint();
@@ -343,7 +377,6 @@ public class Level extends JPanel implements Runnable {
 		while (true) {
 
 			cycle();
-			repaint();
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = DELAY - timeDiff;

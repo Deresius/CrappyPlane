@@ -39,8 +39,6 @@ public class Cloud extends Sprite {
 		this.lowestAltitudeToDraw = maxY;
 		this.rightSideOfScreen = maxX;
 
-		this.initializeCloud();
-
 	}
 
 	/**
@@ -50,11 +48,6 @@ public class Cloud extends Sprite {
 		return this.speed;
 	}
 
-	private void initializeCloud() {
-
-		this.loadImage("src/images/cloud.png");
-		this.getImageDimensions();
-	}
 
 	@Override
 	public void move() {
@@ -65,7 +58,7 @@ public class Cloud extends Sprite {
 
 			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen / 4);
 
-			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .6);
+			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .7);
 
 		}
 

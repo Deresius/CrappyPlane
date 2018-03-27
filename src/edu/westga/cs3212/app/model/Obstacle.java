@@ -64,10 +64,9 @@ public class Obstacle extends Sprite {
 
 			this.x = this.rightSideOfScreen + rand.nextInt(this.rightSideOfScreen / 3);
 
-			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .7);
+			this.y = (int) (rand.nextInt(this.lowestAltitudeToDraw) * .9);
 
-			Random rando = new Random();
-			int theRandom = rando.nextInt(3) + 1;
+			//int theRandom = rand.nextInt(3) + 1;
 
 			// Needs optimization. Commented out randomization of image in this manner.
 			// finding a new method of randomization(pointing)
