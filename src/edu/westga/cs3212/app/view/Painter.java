@@ -1,4 +1,4 @@
-package edu.westga.cs3212.app.model;
+package edu.westga.cs3212.app.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,6 +6,12 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+
+import edu.westga.cs3212.app.model.Cloud;
+import edu.westga.cs3212.app.model.Ground;
+import edu.westga.cs3212.app.model.Level;
+import edu.westga.cs3212.app.model.Obstacle;
+import edu.westga.cs3212.app.model.Plane;
 
 public class Painter extends JPanel {
 

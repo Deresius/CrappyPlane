@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import edu.westga.cs3212.app.controller.ControlListener;
+import edu.westga.cs3212.app.view.Painter;
 
 /**
  * Sets up the level to be played
