@@ -74,6 +74,13 @@ public class Level extends JPanel implements Runnable {
 		this.cloudImage = ii.getImage();
 
 	}
+	
+	/**
+	 * Gets the cloud image
+	 */
+	public Image getImage() {
+		return this.cloudImage;
+	}
 
 
 	/**
