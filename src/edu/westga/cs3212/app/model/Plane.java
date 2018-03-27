@@ -45,6 +45,18 @@ public class Plane extends Sprite {
 			this.y = 1;
 		}
 	}
+	
+	/**
+	 * Moves the plane in the given direction
+	 * 
+	 * @param speed
+	 *            Controls both speed and direction. Up if positive and down if
+	 *            negative. Larger the number the faster it goes
+	 * 
+	 */
+	public void move(int speed) {
+		this.directionY = speed;
+	}
 
 	/**
 	 * Registers when a key is pressed and responds
@@ -75,17 +87,5 @@ public class Plane extends Sprite {
 		if (key == KeyEvent.VK_SPACE) {
 			this.move(Plane.FALL_NORMAL);
 		}
-	}
-
-	/**
-	 * Moves the plane in the given direction
-	 * 
-	 * @param speed
-	 *            Controls both speed and direction. Up if positive and down if
-	 *            negative. Larger the number the faster it goes
-	 * 
-	 */
-	public void move(int speed) {
-		this.directionY = speed;
 	}
 }
