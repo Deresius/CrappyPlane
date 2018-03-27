@@ -51,5 +51,4 @@ class TestScoreboardAdd {
 		int expect = 10;
 		assertEquals(expect, board.getHighScores().size());
 	}
-
 }
