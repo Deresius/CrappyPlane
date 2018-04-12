@@ -12,10 +12,10 @@ def runServer():
         #  Wait for next request from client
         print("waiting for message...")
         message = socket.recv()
-        if(message != b'exit'):
-           print("Received High Score: %s" % message)
-           scores.append(message)
-        elif(message == b"exit"):
+        if not message is b'exit':
+            print("Received High Score: %s" % message)
+            scores.append(message)
+        elif message is b"exit":
             return
         print(message)
         #  Do some 'work'
