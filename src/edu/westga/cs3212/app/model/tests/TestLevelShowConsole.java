@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import edu.westga.cs3212.app.model.Level;
 
 /**
- * Test Level's show console method.
+ * Tests Level's show console method.
  * 
  * @author Team 4
  *

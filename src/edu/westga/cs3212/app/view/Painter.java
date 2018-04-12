@@ -13,6 +13,12 @@ import edu.westga.cs3212.app.model.Level;
 import edu.westga.cs3212.app.model.Obstacle;
 import edu.westga.cs3212.app.model.Plane;
 
+/**
+ * Draws objects to the screen.
+ * 
+ * @author Team 4
+ *
+ */
 public class Painter extends JPanel {
 
 	private static final long serialVersionUID = 4019176462855353817L;
@@ -23,13 +29,14 @@ public class Painter extends JPanel {
 	}
 
 	/**
-	 * Called to Draw the objects on the screen
+	 * Called to Draw the objects on the screen.
 	 *
 	 * @param g
-	 *            the graphics
+	 *            The graphic to draw to.
 	 */
 	public void drawObjects(Graphics g) {
 		Plane plane = this.theLevel.getPlane();
+
 		if (!this.theLevel.getEasyDraw()) {
 			g.drawImage(plane.getImage(), (int) plane.getX(), (int) plane.getY(), this);
 		} else {
@@ -63,17 +70,30 @@ public class Painter extends JPanel {
 						(int) (this.theLevel.getWidth() * 1.1), this.theLevel.getHeight() / 6, this);
 			}
 		}
+
 		drawScore(g);
 		drawControls(g);
 
 	}
 
+	/**
+	 * Draws the score to the screen.
+	 * 
+	 * @param g
+	 *            The graphic to draw to.
+	 */
 	public void drawScore(Graphics g) {
 		g.setFont(new Font("Helvetica", Font.PLAIN, 25));
 		g.setColor(Color.WHITE);
 		g.drawString("Distance: " + this.theLevel.getDistance(), this.theLevel.getWidth() - 250, 20);
 	}
 
+	/**
+	 * Draws the controls to the screen.
+	 * 
+	 * @param g
+	 *            The graphic to draw to.
+	 */
 	public void drawControls(Graphics g) {
 		if (!this.theLevel.isStarted()) {
 			String msg = "Don't Panic: Press Spacebar";
@@ -82,13 +102,15 @@ public class Painter extends JPanel {
 			g.drawString(msg, (this.theLevel.getWidth() - (fm.stringWidth(msg) / 2)) / 2,
 					this.theLevel.getHeight() / 2);
 		}
-		
-		if(this.theLevel.consoleVisible()) {
+
+		if (this.theLevel.consoleVisible()) {
 			Font small = new Font("Helvetica", Font.BOLD, 50);
 			FontMetrics fm = getFontMetrics(small);
+
 			String console = "Console Activated - Press 'H' to hide this menu";
 			String controlE = "Press 'E' to activate simple graphics mode.";
 			String controlT = "Press 'T' to activate texture graphics mode.";
+
 			g.drawString(console, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
 					(int) (this.theLevel.getHeight() * .55));
 			g.drawString(controlE, (this.theLevel.getWidth() - (fm.stringWidth(console) / 2)) / 2,
@@ -102,10 +124,11 @@ public class Painter extends JPanel {
 	 * Called to draw game over.
 	 *
 	 * @param g
-	 *            the graphics
+	 *            The graphic to draw to.
 	 */
 	public void drawGameOver(Graphics g) {
 		theLevel.setBackground(Color.BLACK);
+
 		String msg = "Game Over";
 		Font small = new Font("Helvetica", Font.BOLD, 50);
 		FontMetrics fm = getFontMetrics(small);
@@ -113,7 +136,8 @@ public class Painter extends JPanel {
 		g.setColor(Color.white);
 		g.setFont(small);
 		g.drawString(msg, (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2, this.theLevel.getHeight() / 2);
-		g.drawString("Score: " + this.theLevel.getFinalScore(), (this.theLevel.getWidth() - fm.stringWidth("Score:" + this.theLevel.getFinalScore())) / 2,
+		g.drawString("Score: " + this.theLevel.getFinalScore(),
+				(this.theLevel.getWidth() - fm.stringWidth("Score:" + this.theLevel.getFinalScore())) / 2,
 				(this.theLevel.getHeight() / 2) + 60);
 		g.drawString("Press 'R' to Restart", (this.theLevel.getWidth() - fm.stringWidth("Press 'R' to Restart")) / 2,
 				(this.theLevel.getHeight() / 2) + 150);
