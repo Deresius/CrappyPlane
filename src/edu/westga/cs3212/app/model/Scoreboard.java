@@ -16,17 +16,13 @@ public class Scoreboard {
 	public Scoreboard() {
 		this.highScores = new ArrayList<Score>();
 		
-		int score = 10000;
+		int score = 1000;
 		
 		for(int i = 0; i < MAX_SIZE ; i++ )
 		{
-			this.highScores.add(new Score("AAA", score));
-			score -= 1000;
+			this.add(new Score("AAA", score));
+			score += 1000;
 		}
-		
-		//while (this.highScores.size() < MAX_SIZE) {
-			//this.highScores.add(new Score("", 0));
-		//}
 	}
 
 	public int getMaxSize() {
@@ -53,6 +49,8 @@ public class Scoreboard {
 	public void add(Score newScore) {
 			this.highScores.add(newScore);
 			this.highScores.sort(null);
-			this.highScores.remove(this.highScores.size() - 1);
+			if(this.highScores.size() > MAX_SIZE) {
+				this.highScores.remove(this.highScores.size() - 1);
+			}
 	}
 }
