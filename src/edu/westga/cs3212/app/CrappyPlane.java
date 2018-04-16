@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import edu.westga.cs3212.app.controller.SceneController;
 import edu.westga.cs3212.app.model.Level;
 
 /**
@@ -27,10 +28,10 @@ public class CrappyPlane extends JFrame {
 	
 
 	private void initUI() {
-		Level level = new Level();
-		add(level);
+		SceneController controller = new SceneController(new Level());
+		add(controller);
 
-		setSize(level.getWidth(), level.getHeight());
+		setSize(controller.getWidth(), controller.getHeight());
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBackground(Color.WHITE);
 		// setUndecorated(true);

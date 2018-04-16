@@ -6,10 +6,10 @@ import edu.westga.cs3212.app.model.Level;
 
 class TestLevelCheckCollision {
 
-	@Test
-	void testCheckCollision() {
-		Level level = new Level();
-		level.checkCollisions();
-	}
+//	@Test
+//	void testCheckCollision() {
+//		Level level = new Level();
+//		level.checkCollisions();
+//	}
 
 }
