@@ -13,7 +13,8 @@ import edu.westga.cs3212.app.model.Plane;
  *
  */
 public class ControlListener extends KeyAdapter {
-
+	
+	private SceneController controller;
 	private Level theLevel;
 
 	/**
@@ -22,8 +23,9 @@ public class ControlListener extends KeyAdapter {
 	 * @param myLevel
 	 *            The Level the ControlListener will handle keys for.
 	 */
-	public ControlListener(Level myLevel) {
-		this.theLevel = myLevel;
+	public ControlListener(SceneController controller) {
+		this.controller = controller;
+		this.theLevel = controller.getLevel();
 
 	}
 
@@ -56,9 +58,7 @@ public class ControlListener extends KeyAdapter {
 		}
 
 		if (key == KeyEvent.VK_R) {
-			this.theLevel.setStarted(false);
-			this.theLevel.setInGame(true);
-			this.theLevel.initLevel();
+			this.controller.restartGame();
 		}
 
 		if (key == KeyEvent.VK_E) {

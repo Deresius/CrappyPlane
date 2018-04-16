@@ -27,9 +27,11 @@ public class SceneController extends JPanel implements Runnable{
 	
 	public SceneController(Level level) {
 		this.level = level;
-		ControlListener listener = new ControlListener(this.level);
+		ControlListener listener = new ControlListener(this);
 		this.addKeyListener(listener);
 		this.setFocusable(true);
+		Color lgtBlue = new Color(41, 151, 255);
+		this.setBackground(lgtBlue);
 	}
 
 	@Override
@@ -66,8 +68,7 @@ public class SceneController extends JPanel implements Runnable{
 		Painter painter = new Painter(this.level);
 
 		if (this.level.isIngame()) {
-			Color lgtBlue = new Color(41, 151, 255);
-			this.setBackground(lgtBlue);
+			
 			painter.drawObjects(g);
 
 		} else {
@@ -84,6 +85,15 @@ public class SceneController extends JPanel implements Runnable{
 
 		animator = new Thread(this);
 		animator.start();
+	}
+	
+	public void restartGame() {
+		Color lgtBlue = new Color(41, 151, 255);
+		this.setBackground(lgtBlue);
+		this.level.endGame();
+		this.level.setStarted(false);
+		this.level.setInGame(true);
+		this.level.initLevel();
 	}
 	
 	/**
@@ -115,6 +125,10 @@ public class SceneController extends JPanel implements Runnable{
 		this.level.updateLevel();
 		this.checkCollisions();
 		this.repaint();
+	}
+	
+	public Level getLevel() {
+		return this.level;
 	}
 
 }
