@@ -12,6 +12,8 @@ import edu.westga.cs3212.app.model.Ground;
 import edu.westga.cs3212.app.model.Level;
 import edu.westga.cs3212.app.model.Obstacle;
 import edu.westga.cs3212.app.model.Plane;
+import edu.westga.cs3212.app.model.Score;
+import edu.westga.cs3212.app.model.Scoreboard;
 
 /**
  * Draws objects to the screen.
@@ -23,6 +25,7 @@ public class Painter extends JPanel {
 
 	private static final long serialVersionUID = 4019176462855353817L;
 	private Level theLevel;
+	private Scoreboard scoreboard = new Scoreboard();
 
 	public Painter(Level myLevel) {
 		this.theLevel = myLevel;
@@ -127,18 +130,58 @@ public class Painter extends JPanel {
 	 *            The graphic to draw to.
 	 */
 	public void drawGameOver(Graphics g) {
+		
+		setBackground(Color.BLACK);
+
 		String msg = "Game Over";
 		Font small = new Font("Helvetica", Font.BOLD, 50);
 		FontMetrics fm = getFontMetrics(small);
 
 		g.setColor(Color.white);
 		g.setFont(small);
-		g.drawString(msg, (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2, this.theLevel.getHeight() / 2);
+		g.drawString(msg, (this.theLevel.getWidth() - fm.stringWidth(msg)) / 2, this.theLevel.getHeight() / 5 );
 		g.drawString("Score: " + this.theLevel.getFinalScore(),
 				(this.theLevel.getWidth() - fm.stringWidth("Score:" + this.theLevel.getFinalScore())) / 2,
-				(this.theLevel.getHeight() / 2) + 60);
+				(this.theLevel.getHeight() / 5 + 60));
 		g.drawString("Press 'R' to Restart", (this.theLevel.getWidth() - fm.stringWidth("Press 'R' to Restart")) / 2,
-				(this.theLevel.getHeight() / 2) + 150);
+				(this.theLevel.getHeight() / 5 + 120));
+		
+		
+		drawScoreboard(g);
 	}
 
+	
+	private void drawScoreboard(Graphics g) {
+		g.setColor(Color.white);
+		
+		
+		
+		int oneTwentyFifth = this.theLevel.getHeight() / 25;
+		int heightToDraw = this.theLevel.getHeight() / 2;
+		heightToDraw += oneTwentyFifth;
+		
+		Font medium = new Font("Helvetica", Font.BOLD, 50);
+		FontMetrics fm = getFontMetrics(medium);
+		g.setFont(medium);
+		
+		String highscores = "Top Ten Highscores : ";
+		g.drawString( highscores , (this.theLevel.getWidth() - fm.stringWidth(highscores)) / 2, heightToDraw);		
+		
+		heightToDraw += oneTwentyFifth * 2;
+		
+		Font small = new Font("Helvetica", Font.BOLD, 40);
+		FontMetrics fs = getFontMetrics(small);
+		g.setFont(small);
+		
+		for(Score score : scoreboard.getHighScores())
+		{
+			
+			String scoreString = score.getScore() + "     " + score.getPlayersName();
+			g.drawString( scoreString , (this.theLevel.getWidth() - fs.stringWidth(scoreString)) / 2, heightToDraw);
+			heightToDraw += oneTwentyFifth;
+		}
+		
+		
+		
+	}
 }
