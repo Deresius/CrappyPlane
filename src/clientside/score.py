@@ -9,7 +9,6 @@ class Score(object):
     classdocs
     '''
 
-
     def __init__(self, name, thescore):
         '''
         Constructor
@@ -23,3 +22,12 @@ class Score(object):
     
     def getName(self):
         return self.name
+    
+    def __lt__(self, other):
+        return self.getScore() < other.getScore()
+    
+    
+    
+    
+    
+    
