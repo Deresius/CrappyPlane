@@ -20,4 +20,4 @@ def runClient():
     socket.send(b"exit")
         
 if(__name__ == "__main__"):
-   runClient()  
+    runClient()  
