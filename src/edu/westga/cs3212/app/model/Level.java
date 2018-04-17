@@ -257,11 +257,11 @@ public class Level extends JPanel {
 	}
 
 	public int getCloudSpawnFrequency() {
-		return this.CLOUD_SPAWN_FREQUENCY;
+		return CLOUD_SPAWN_FREQUENCY;
 	}
 
 	public int getObstacleSpawnFrequency() {
-		return this.OBSTACLE_SPAWN_FREQUENCY;
+		return OBSTACLE_SPAWN_FREQUENCY;
 	}
 
 	public void setStarted(boolean val) {
