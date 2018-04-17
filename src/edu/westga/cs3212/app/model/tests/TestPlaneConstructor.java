@@ -21,7 +21,7 @@ class TestPlaneConstructor {
 	final void testPassValidPlane() {
 		Plane testPlane = new Plane(4, 4);
 
-		assertEquals(true, testPlane.isVisible());
+		assertNotEquals(null, testPlane);
 	}
 
 }

@@ -1,6 +1,5 @@
 package edu.westga.cs3212.app.model;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -41,14 +40,10 @@ public class Level extends JPanel {
 	private int LEVEL_WIDTH;
 	private int LEVEL_HEIGHT;
 
-
 	private Image cloudImage;
 
 	private boolean easyDraw;
 	private boolean showConsole;
-	
-
-
 
 	/**
 	 * Instantiates a new level, based on the given viewport.
@@ -81,21 +76,22 @@ public class Level extends JPanel {
 		this.setupSky();
 		this.setupObstacles();
 	}
-	
+
 	public void scoreGame() {
-		this.finalScore = distance;
+		this.finalScore = this.distance;
 	}
-	
+
 	public void updateScore() {
 		if (this.started) {
 			this.distance++;
 		}
 	}
-	
+
 	/**
 	 * Called to update the level for moving objects, and spawning clouds and .
 	 */
 	public void updateLevel() {
+
 		updateScore();
 		updateClouds();
 		updateGround();
@@ -104,6 +100,7 @@ public class Level extends JPanel {
 
 		spawnObstacles();
 		spawnClouds();
+
 	}
 
 	private void spawnClouds() {
@@ -141,10 +138,8 @@ public class Level extends JPanel {
 	}
 
 	private void updatePlane() {
-
-		if (this.plane.isVisible()) {
-			this.plane.move();
-		}
+		this.plane.move();
+		
 	}
 
 	public void endGame() {
@@ -154,9 +149,9 @@ public class Level extends JPanel {
 			scored = true;
 		}
 	}
-	
+
 	private void setupSky() {
-		
+
 		this.clouds = new ArrayList<Cloud>();
 
 		for (int i = 0; i < 3; i++) {
@@ -164,27 +159,27 @@ public class Level extends JPanel {
 					rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 		}
 	}
-	
+
 	private void setupObstacles() {
 		this.obstacles = new ArrayList<Obstacle>();
 		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
 				rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 	}
-	
+
 	private void setupGround() {
 		this.ground = new ArrayList<Ground>();
 		this.ground.add(new Ground(0, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 	}
-	
+
 	public boolean showConsole() {
 		return this.showConsole = true;
 	}
-	
+
 	public boolean hideConsole() {
 		return this.showConsole = false;
 	}
-	
+
 	public boolean consoleVisible() {
 		return this.showConsole;
 	}
@@ -239,6 +234,10 @@ public class Level extends JPanel {
 		return this.LEVEL_HEIGHT;
 	}
 
+	public boolean getScored() {
+		return this.scored;
+	}
+
 	/**
 	 * Gets the width of the level
 	 */
@@ -257,12 +256,24 @@ public class Level extends JPanel {
 		return this.clouds;
 	}
 
+	public int getCloudSpawnFrequency() {
+		return this.CLOUD_SPAWN_FREQUENCY;
+	}
+
+	public int getObstacleSpawnFrequency() {
+		return this.OBSTACLE_SPAWN_FREQUENCY;
+	}
+
 	public void setStarted(boolean val) {
 		this.started = val;
 	}
 
 	public void setInGame(boolean val) {
 		this.ingame = val;
+	}
+
+	public void setScored(boolean val) {
+		this.scored = val;
 	}
 
 }

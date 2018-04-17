@@ -103,15 +103,6 @@ class TestCloudConstructor {
 	}
 
 	@Test
-	final void testValidCloudVisibility() {
-		Cloud testCloud = new Cloud(0, 0, 0, 0);
-
-		testCloud.setVisible(false);
-
-		assertEquals(false, testCloud.isVisible());
-	}
-
-	@Test
 	final void testValidCloudLoadImage() {
 		Cloud testCloud = new Cloud(0, 0, 0, 0);
 

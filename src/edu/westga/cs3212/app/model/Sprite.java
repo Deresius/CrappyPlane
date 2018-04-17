@@ -22,8 +22,6 @@ public abstract class Sprite {
 
 	protected Image image;
 
-	protected boolean visibility;
-
 	/**
 	 * Creates a new Sprite, at location x, y, and sets visibility to true.
 	 * 
@@ -43,7 +41,6 @@ public abstract class Sprite {
 
 		this.x = x;
 		this.y = y;
-		this.visibility = true;
 	}
 
 	/**
@@ -87,23 +84,6 @@ public abstract class Sprite {
 	public Rectangle getBoundaries() {
 		return new Rectangle((int) this.x + (int) (.1 * this.width), (int) this.y + (int) (.1 * this.height),
 				(int) (.8 * this.width), (int) (.8 * this.height));
-	}
-
-	/**
-	 * @return true if the Sprite is visible
-	 */
-	public boolean isVisible() {
-		return this.visibility;
-	}
-
-	/**
-	 * Sets the visibility of the Sprite
-	 * 
-	 * @param visible
-	 *            true if the Sprite is to be set visible
-	 */
-	public void setVisible(Boolean visible) {
-		this.visibility = visible;
 	}
 
 	/**
