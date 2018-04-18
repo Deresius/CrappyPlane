@@ -102,8 +102,8 @@ public abstract class Sprite {
 	 *            The image to load.
 	 */
 	protected void loadImage(String imageName) {
-
 		ImageIcon ii = new ImageIcon(imageName);
+
 		this.image = ii.getImage();
 	}
 

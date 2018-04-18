@@ -3,7 +3,7 @@ package edu.westga.cs3212.app.model;
 /**
  * The Class HighScore.
  */
-public class Score implements Comparable<Score>{
+public class Score implements Comparable<Score> {
 
 	/** The players name. */
 	private String playersName;
@@ -46,19 +46,18 @@ public class Score implements Comparable<Score>{
 		return score;
 	}
 
+	/**
+	 * Allows the score to be compared.
+	 */
 	@Override
 	public int compareTo(Score score) {
 		if (this.score < score.getScore()) {
 			return 1;
-		}
-		else if (this.score == score.getScore()) {
+		} else if (this.score == score.getScore()) {
 			return 0;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}
-
-	
 
 }

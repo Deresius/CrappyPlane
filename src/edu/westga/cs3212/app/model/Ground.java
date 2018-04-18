@@ -44,6 +44,9 @@ public class Ground extends Sprite {
 		this.getImageDimensions();
 	}
 
+	/**
+	 * Moves the ground to give the appearance of the plane flying forward.
+	 */
 	@Override
 	public void move() {
 

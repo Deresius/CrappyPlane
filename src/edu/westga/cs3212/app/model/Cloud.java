@@ -48,7 +48,9 @@ public class Cloud extends Sprite {
 		return this.speed;
 	}
 
-
+	/**
+	 * Moves the cloud.
+	 */
 	@Override
 	public void move() {
 		this.x -= this.speed;

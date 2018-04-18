@@ -55,6 +55,9 @@ public class Obstacle extends Sprite {
 		this.getImageDimensions();
 	}
 
+	/**
+	 * Moves the obstacle.
+	 */
 	@Override
 	public void move() {
 		this.x -= this.speed;

@@ -12,13 +12,11 @@ import edu.westga.cs3212.app.model.Obstacle;
 import edu.westga.cs3212.app.model.Plane;
 import edu.westga.cs3212.app.view.Painter;
 
-
 /**
  * The controller class for the level/playable scene of the crappyplane game.
  */
 public class SceneController extends JPanel implements Runnable {
 
-	
 	private static final long serialVersionUID = 1L;
 	private final int DELAY = 10;
 	private Thread animator;
@@ -26,7 +24,6 @@ public class SceneController extends JPanel implements Runnable {
 	private ControlListener listener;
 	private Painter painter;
 
-	
 	/**
 	 * Constructs the scene controller, with the provided level bound to focus.
 	 */
@@ -39,7 +36,6 @@ public class SceneController extends JPanel implements Runnable {
 		this.setBackground(lgtBlue);
 	}
 
-	
 	/**
 	 * The Runnable method.
 	 */
@@ -71,7 +67,6 @@ public class SceneController extends JPanel implements Runnable {
 
 	}
 
-	
 	/**
 	 * The call to draw the scene.
 	 */
@@ -92,7 +87,6 @@ public class SceneController extends JPanel implements Runnable {
 		Toolkit.getDefaultToolkit().sync();
 	}
 
-	
 	/**
 	 * The animators thread control.
 	 */
@@ -104,23 +98,25 @@ public class SceneController extends JPanel implements Runnable {
 		animator.start();
 	}
 
-	
 	/**
 	 * Initializes a new level, setting the background color for the sky.
 	 */
 	public void startLevel() {
 		Color lgtBlue = new Color(41, 151, 255);
+		
 		this.setBackground(lgtBlue);
+		
 		this.level.initLevel();
 	}
 
-	
 	/**
 	 * Restarts the game.
 	 */
 	public void restartGame() {
 		Color lgtBlue = new Color(41, 151, 255);
+		
 		this.setBackground(lgtBlue);
+		
 		this.level.endGame();
 		this.level.initLevel();
 	}
@@ -149,7 +145,6 @@ public class SceneController extends JPanel implements Runnable {
 		}
 	}
 
-	
 	/**
 	 * Called by the run method to tick time/distance called for the game engine.
 	 */
@@ -163,7 +158,6 @@ public class SceneController extends JPanel implements Runnable {
 
 	}
 
-	
 	/**
 	 * Returns the level of this controller.
 	 */

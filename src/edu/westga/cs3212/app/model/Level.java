@@ -28,8 +28,7 @@ public class Level extends JPanel {
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
-	
-	
+
 	/**
 	 * The Score Board of this level.
 	 */
@@ -82,7 +81,6 @@ public class Level extends JPanel {
 		this.setupGround();
 	}
 
-	
 	/**
 	 * Starts the level, and sets up its objects.
 	 */
@@ -93,7 +91,6 @@ public class Level extends JPanel {
 		this.setupObstacles();
 	}
 
-	
 	/**
 	 * Sets the final score to the highest distance reached in game.
 	 */
@@ -101,7 +98,6 @@ public class Level extends JPanel {
 		this.finalScore = this.distance;
 	}
 
-	
 	/**
 	 * Advances the score while the game is started.
 	 */
@@ -168,33 +164,30 @@ public class Level extends JPanel {
 
 	}
 
-	
 	/**
 	 * Ends the current session of the game.
 	 */
 	public void endGame() {
-		
+
 		this.ingame = false;
-		
+
 		if (!scored) {
 			scoreGame();
 			scored = true;
 			HighscoreClient client = new HighscoreClient(finalScore);
 			String toParse = client.getScoreboardString();
-			
-			
+
 			Scoreboard fresh = new Scoreboard();
-			for(String line : toParse.split("\n"))
-			{
+			for (String line : toParse.split("\n")) {
 				String[] cells = line.split(",");
-				
-				fresh.add(new Score(cells[0] , Integer.parseInt(cells[1])));				
- 			}
-			
+
+				fresh.add(new Score(cells[0], Integer.parseInt(cells[1])));
+			}
+
 			this.scoreboard = fresh;
-			
+
 		}
-		
+
 	}
 
 	private void setupSky() {
@@ -206,7 +199,7 @@ public class Level extends JPanel {
 					rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 		}
 	}
-	
+
 	private void setupObstacles() {
 		this.obstacles = new ArrayList<Obstacle>();
 		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
@@ -219,7 +212,6 @@ public class Level extends JPanel {
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 	}
 
-	
 	/**
 	 * Shows the console.
 	 */
@@ -227,7 +219,6 @@ public class Level extends JPanel {
 		return this.showConsole = true;
 	}
 
-	
 	/**
 	 * Hides the console.
 	 */
@@ -237,12 +228,11 @@ public class Level extends JPanel {
 
 	/**
 	 * Gets the visibility of the command console.
-	 */	
+	 */
 	public boolean consoleVisible() {
 		return this.showConsole;
 	}
 
-	
 	/**
 	 * Sets the draw mode of the game.
 	 */
@@ -250,7 +240,6 @@ public class Level extends JPanel {
 		this.easyDraw = val;
 	}
 
-	
 	/**
 	 * Returns whether the game is currently running.
 	 */
@@ -258,7 +247,6 @@ public class Level extends JPanel {
 		return this.ingame;
 	}
 
-	
 	/**
 	 * Returns whether the game is started.
 	 */
@@ -266,7 +254,6 @@ public class Level extends JPanel {
 		return this.started;
 	}
 
-	
 	/**
 	 * Gets the final score/ distance flown through the level.
 	 */
@@ -274,7 +261,6 @@ public class Level extends JPanel {
 		return this.finalScore;
 	}
 
-	
 	/**
 	 * Gets the distance flown through the level.
 	 */
@@ -282,7 +268,6 @@ public class Level extends JPanel {
 		return this.distance;
 	}
 
-	
 	/**
 	 * Gets the image of the cloud to display in the level.
 	 */
@@ -290,7 +275,6 @@ public class Level extends JPanel {
 		return this.cloudImage;
 	}
 
-	
 	/**
 	 * Gets whether the game is in easy draw mode.
 	 */
@@ -298,7 +282,6 @@ public class Level extends JPanel {
 		return this.easyDraw;
 	}
 
-	
 	/**
 	 * Gets the obstacles in the game.
 	 */
@@ -306,7 +289,6 @@ public class Level extends JPanel {
 		return this.obstacles;
 	}
 
-	
 	/**
 	 * Gets the ground panels in the game
 	 */
@@ -328,6 +310,11 @@ public class Level extends JPanel {
 		return this.LEVEL_HEIGHT;
 	}
 
+	/**
+	 * Returns the scored distance.
+	 * 
+	 * @return The scored distance.
+	 */
 	public boolean getScored() {
 		return this.scored;
 	}
@@ -346,7 +333,6 @@ public class Level extends JPanel {
 		return this.plane;
 	}
 
-	
 	/**
 	 * Gets the clouds in the level
 	 */
@@ -361,7 +347,6 @@ public class Level extends JPanel {
 		return CLOUD_SPAWN_FREQUENCY;
 	}
 
-	
 	/**
 	 * Gets the obstacle spawn frequency.
 	 */
@@ -369,7 +354,6 @@ public class Level extends JPanel {
 		return OBSTACLE_SPAWN_FREQUENCY;
 	}
 
-	
 	/**
 	 * Sets whether the game is started
 	 */
@@ -384,6 +368,12 @@ public class Level extends JPanel {
 		this.ingame = val;
 	}
 
+	/**
+	 * Sets the score.
+	 * 
+	 * @param val
+	 *            The value to set.
+	 */
 	public void setScored(boolean val) {
 		this.scored = val;
 	}

@@ -25,7 +25,6 @@ public class CrappyPlane extends JFrame {
 	public CrappyPlane() {
 		initUI();
 	}
-	
 
 	private void initUI() {
 		SceneController controller = new SceneController(new Level());
@@ -44,6 +43,11 @@ public class CrappyPlane extends JFrame {
 
 	}
 
+	/**
+	 * Application main entry point.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {

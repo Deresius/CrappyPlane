@@ -15,16 +15,20 @@ public class Scoreboard {
 	 */
 	public Scoreboard() {
 		this.highScores = new ArrayList<Score>();
-		
+
 		int score = 1000;
-		
-		for(int i = 0; i < MAX_SIZE ; i++ )
-		{
+
+		for (int i = 0; i < MAX_SIZE; i++) {
 			this.add(new Score("AAA", score));
 			score += 1000;
 		}
 	}
 
+	/**
+	 * Returns the max size of the scoreboard.
+	 * 
+	 * @return The max size of the scoreboard.
+	 */
 	public int getMaxSize() {
 		return MAX_SIZE;
 	}
@@ -39,7 +43,7 @@ public class Scoreboard {
 	}
 
 	/**
-	 * Adds the new highscore if it is worthy
+	 * Adds the new high score if it is worthy.
 	 *
 	 * @param highScore
 	 *            the high score
@@ -47,10 +51,11 @@ public class Scoreboard {
 	 * @return true, if successful
 	 */
 	public void add(Score newScore) {
-			this.highScores.add(newScore);
-			this.highScores.sort(null);
-			if(this.highScores.size() > MAX_SIZE) {
-				this.highScores.remove(this.highScores.size() - 1);
-			}
+		this.highScores.add(newScore);
+		this.highScores.sort(null);
+		
+		if (this.highScores.size() > MAX_SIZE) {
+			this.highScores.remove(this.highScores.size() - 1);
+		}
 	}
 }

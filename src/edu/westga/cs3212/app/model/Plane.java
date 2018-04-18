@@ -27,8 +27,8 @@ public class Plane extends Sprite {
 	}
 
 	private void initializePlane() {
-
 		this.loadImage("src/images/plane.png");
+
 		this.getImageDimensions();
 	}
 
@@ -36,14 +36,13 @@ public class Plane extends Sprite {
 	 * Moves the Plane up
 	 */
 	public void move() {
-
 		this.y += this.directionY;
 
 		if (this.y < 1) {
 			this.y = 1;
 		}
 	}
-	
+
 	/**
 	 * Moves the plane in the given direction
 	 * 
