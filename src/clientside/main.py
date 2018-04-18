@@ -11,6 +11,16 @@ def main():
     
     while True:
         message = socket.recv()
+        myScores = scoreboard.HighScores('highscores')
+        """
+        Send data to the java code using this to get lowest score:
+        myScores.getLowestScore()
+        Then, once the game is over and if the player score is greater than the previously sent lowest score,
+        send it back to pyproject and call:
+        myScores.updateFile(newScore)
+        This will sort the list and do all needed logic. Return the updated list to the java code with:
+        socket.send(myScores.getEncodedList()) {THIS METHOD IS NOT TESTED}
+        """
         if (message == b'highscore'):
             print("Received High Score Request: %s" % message)
             socket.send(b'Send Highscore')
@@ -18,7 +28,6 @@ def main():
             message = socket.recv()
             print("Received: %s" % message)
             time.sleep(1)
-            myScores = scoreboard.HighScores('highscores')
             returnString = "\n"
             for item in myScores.getScores():
                 returnString += item.getName() + "," + str(item.getScore()) + "\n"

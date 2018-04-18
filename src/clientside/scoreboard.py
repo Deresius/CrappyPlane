@@ -5,7 +5,7 @@ Created on Apr 17, 2018
 '''
 
 import os
-from clientside import score
+from clientside.score import Score
 
 class HighScores(object):
 
@@ -21,7 +21,7 @@ class HighScores(object):
         self.myScores = []
         for line in self.myFile.readlines():
             splitLine = str(line).split(sep=',')
-            self.myScores.append(score.Score(splitLine[0], int(splitLine[1])))
+            self.myScores.append(Score(splitLine[0], int(splitLine[1])))
         self.myFile.close()
             
             
@@ -33,9 +33,20 @@ class HighScores(object):
         
     def getFileName(self):
         return self.filename
+    
+    def getLowestScore(self):
+        if len(self.getScores()) != 0:
+            self.getScores().sort()
+            return self.getScores()[len(self.getScores())-1]
+        return Score("EmptyScoreboard", 0)
         
         
+    
     def updateFile(self, newScore):
+        """
+        This is called for adding a new score to the scoreboard. It updates the file and maintains the high score
+        number of 10 total.
+        """
         self.getScores().append(newScore)
         self.getScores().sort()
         while (len(self.getScores()) > 10):
@@ -46,6 +57,16 @@ class HighScores(object):
             newFile.write(item.getName() + "," + str(item.getScore()) + "\n")
         newFile.close()
         
+    def getEncodedList(self):
+        returnString = ""
+        for item in self.getScores():
+            returnString += item.getName() + "," + str(item.getScore()) + "\n"
+        return returnString.encode(encoding='utf_8', errors='strict')
+    
     def toString(self):
         for item in self.getScores():
             print(item.getName() + ":" + str(item.getScore()))
+
+
+
+
