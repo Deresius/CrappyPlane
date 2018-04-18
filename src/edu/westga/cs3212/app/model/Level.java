@@ -8,6 +8,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import edu.westga.cs3212.app.server.HighscoreClient;
+
 /**
  * Sets up the level to be played
  *
@@ -153,6 +155,7 @@ public class Level extends JPanel {
 		if (!scored) {
 			scoreGame();
 			scored = true;
+			new HighscoreClient();
 		}
 	}
 
@@ -165,7 +168,7 @@ public class Level extends JPanel {
 					rand.nextInt((int) (.8 * this.LEVEL_HEIGHT)), this.LEVEL_WIDTH, this.LEVEL_HEIGHT));
 		}
 	}
-
+	
 	private void setupObstacles() {
 		this.obstacles = new ArrayList<Obstacle>();
 		this.obstacles.add(new Obstacle(this.LEVEL_WIDTH + rand.nextInt(this.LEVEL_WIDTH),
