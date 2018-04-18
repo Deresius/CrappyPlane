@@ -155,7 +155,7 @@ public class Level extends JPanel {
 		if (!scored) {
 			scoreGame();
 			scored = true;
-			new HighscoreClient();
+			new HighscoreClient(10000);
 		}
 	}
 
