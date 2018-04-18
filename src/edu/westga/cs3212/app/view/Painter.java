@@ -25,7 +25,7 @@ public class Painter extends JPanel {
 
 	private static final long serialVersionUID = 4019176462855353817L;
 	private Level theLevel;
-	private Scoreboard scoreboard = new Scoreboard();
+	
 
 	public Painter(Level myLevel) {
 		this.theLevel = myLevel;
@@ -150,6 +150,7 @@ public class Painter extends JPanel {
 	}
 
 	private void drawScoreboard(Graphics g) {
+		System.out.println("drew scoreboard");
 		g.setColor(Color.white);
 
 		int oneTwentyFifth = this.theLevel.getHeight() / 25;
@@ -169,7 +170,7 @@ public class Painter extends JPanel {
 		FontMetrics fs = getFontMetrics(small);
 		g.setFont(small);
 
-		for (Score score : scoreboard.getHighScores()) {
+		for (Score score : this.theLevel.scoreboard.getHighScores()) {
 
 			String scoreString = score.getScore() + "     " + score.getPlayersName();
 			g.drawString(scoreString, (this.theLevel.getWidth() - fs.stringWidth(scoreString)) / 2, heightToDraw);

@@ -12,11 +12,13 @@ import edu.westga.cs3212.app.model.Obstacle;
 import edu.westga.cs3212.app.model.Plane;
 import edu.westga.cs3212.app.view.Painter;
 
+
+/**
+ * The controller class for the level/playable scene of the crappyplane game.
+ */
 public class SceneController extends JPanel implements Runnable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final int DELAY = 10;
 	private Thread animator;
@@ -24,6 +26,10 @@ public class SceneController extends JPanel implements Runnable {
 	private ControlListener listener;
 	private Painter painter;
 
+	
+	/**
+	 * Constructs the scene controller, with the provided level bound to focus.
+	 */
 	public SceneController(Level level) {
 		this.level = level;
 		this.listener = new ControlListener(this);
@@ -33,6 +39,10 @@ public class SceneController extends JPanel implements Runnable {
 		this.setBackground(lgtBlue);
 	}
 
+	
+	/**
+	 * The Runnable method.
+	 */
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, sleep;
@@ -61,6 +71,10 @@ public class SceneController extends JPanel implements Runnable {
 
 	}
 
+	
+	/**
+	 * The call to draw the scene.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -78,6 +92,10 @@ public class SceneController extends JPanel implements Runnable {
 		Toolkit.getDefaultToolkit().sync();
 	}
 
+	
+	/**
+	 * The animators thread control.
+	 */
 	@Override
 	public void addNotify() {
 		super.addNotify();
@@ -86,12 +104,20 @@ public class SceneController extends JPanel implements Runnable {
 		animator.start();
 	}
 
+	
+	/**
+	 * Initializes a new level, setting the background color for the sky.
+	 */
 	public void startLevel() {
 		Color lgtBlue = new Color(41, 151, 255);
 		this.setBackground(lgtBlue);
 		this.level.initLevel();
 	}
 
+	
+	/**
+	 * Restarts the game.
+	 */
 	public void restartGame() {
 		Color lgtBlue = new Color(41, 151, 255);
 		this.setBackground(lgtBlue);
@@ -123,6 +149,10 @@ public class SceneController extends JPanel implements Runnable {
 		}
 	}
 
+	
+	/**
+	 * Called by the run method to tick time/distance called for the game engine.
+	 */
 	private void cycle() {
 		this.level.updateLevel();
 		this.repaint();
@@ -133,6 +163,10 @@ public class SceneController extends JPanel implements Runnable {
 
 	}
 
+	
+	/**
+	 * Returns the level of this controller.
+	 */
 	public Level getLevel() {
 		return this.level;
 	}
