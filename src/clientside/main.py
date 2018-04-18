@@ -9,22 +9,26 @@ def main():
     print("Connected")
     
     while True:
-        print("waiting for message...")
         message = socket.recv()
-        if not message is b'exit':
+        if (message == b'highscore'):
             print("Received High Score Request: %s" % message)
-            #socket.send(b'Send Highscore')
-            #highscore = socket.recv
-            #print("Received Highscore: %s" % highscore)
-            #return
-        elif message is b'exit':
+            socket.send(b'Send Highscore')
+            time.sleep(1)
+            message = socket.recv()
+            print("Received: %s" % message)
+            time.sleep(1)
+            socket.send(b'List of Highscores')
+            return            
+        elif (message == b'exit'):
+            print(message)
             return
-        print(message)
-        #  Do some 'work'
-        time.sleep(1)
+        else:
+            time.sleep(1)  
+            socket.send(b'Not Working')
+        
     
-        #  Send reply back to client
-        socket.send(b'HighscoreBoard')
+        
+        
    
     
     
