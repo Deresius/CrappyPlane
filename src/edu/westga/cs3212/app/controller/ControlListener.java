@@ -13,7 +13,7 @@ import edu.westga.cs3212.app.model.Plane;
  *
  */
 public class ControlListener extends KeyAdapter {
-	
+
 	private SceneController controller;
 	private Level theLevel;
 
@@ -47,10 +47,14 @@ public class ControlListener extends KeyAdapter {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		int key = e.getKeyCode();
+
 		if (key == KeyEvent.VK_SPACE) {
-			this.theLevel.setStarted(true);
+			if (!this.theLevel.isStarted()) {
+				this.theLevel.startLevel();
+			}
+
 		}
 
 		if (key == KeyEvent.VK_SPACE) {

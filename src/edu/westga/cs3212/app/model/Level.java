@@ -52,11 +52,10 @@ public class Level extends JPanel {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.LEVEL_HEIGHT = (int) screenSize.getHeight();
 		this.LEVEL_WIDTH = (int) screenSize.getWidth();
-
-		this.initLevel();
-
 		ImageIcon ii = new ImageIcon("src/images/cloud.png");
 		this.cloudImage = ii.getImage();
+		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
+		this.initLevel();
 
 	}
 
@@ -64,15 +63,20 @@ public class Level extends JPanel {
 	 * Initializes the level.
 	 */
 	public void initLevel() {
+		this.obstacles = new ArrayList<Obstacle>();
+		this.clouds = new ArrayList<Cloud>();
 		this.easyDraw = false;
-
+		this.started = false;
+		this.scored = false;
 		this.ingame = true;
 		this.distance = 0;
-		this.scored = false;
-
 		this.plane = new Plane(this.PLANE_START_LOCATION_X, this.PLANE_START_LOCATION_Y);
-
 		this.setupGround();
+	}
+
+	public void startLevel() {
+		this.started = true;
+
 		this.setupSky();
 		this.setupObstacles();
 	}
@@ -92,14 +96,16 @@ public class Level extends JPanel {
 	 */
 	public void updateLevel() {
 
-		updateScore();
-		updateClouds();
 		updateGround();
-		updateObstacles();
 		updatePlane();
 
-		spawnObstacles();
-		spawnClouds();
+		if (this.isStarted()) {
+			updateClouds();
+			updateObstacles();
+			updateScore();
+			spawnObstacles();
+			spawnClouds();
+		}
 
 	}
 
@@ -139,7 +145,7 @@ public class Level extends JPanel {
 
 	private void updatePlane() {
 		this.plane.move();
-		
+
 	}
 
 	public void endGame() {

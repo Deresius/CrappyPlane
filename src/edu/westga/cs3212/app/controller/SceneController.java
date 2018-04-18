@@ -5,17 +5,15 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-
 import javax.swing.JPanel;
-
 
 import edu.westga.cs3212.app.model.Level;
 import edu.westga.cs3212.app.model.Obstacle;
 import edu.westga.cs3212.app.model.Plane;
 import edu.westga.cs3212.app.view.Painter;
 
-public class SceneController extends JPanel implements Runnable{
-	
+public class SceneController extends JPanel implements Runnable {
+
 	/**
 	 * 
 	 */
@@ -23,11 +21,12 @@ public class SceneController extends JPanel implements Runnable{
 	private final int DELAY = 10;
 	private Thread animator;
 	private Level level;
-	
-	
+	private ControlListener listener;
+	private Painter painter;
+
 	public SceneController(Level level) {
 		this.level = level;
-		ControlListener listener = new ControlListener(this);
+		this.listener = new ControlListener(this);
 		this.addKeyListener(listener);
 		this.setFocusable(true);
 		Color lgtBlue = new Color(41, 151, 255);
@@ -61,14 +60,14 @@ public class SceneController extends JPanel implements Runnable{
 		}
 
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Painter painter = new Painter(this.level);
+		this.painter = new Painter(this.level);
 
 		if (this.level.isIngame()) {
-			
+
 			painter.drawObjects(g);
 
 		} else {
@@ -86,22 +85,26 @@ public class SceneController extends JPanel implements Runnable{
 		animator = new Thread(this);
 		animator.start();
 	}
-	
+
+	public void startLevel() {
+		Color lgtBlue = new Color(41, 151, 255);
+		this.setBackground(lgtBlue);
+		this.level.initLevel();
+	}
+
 	public void restartGame() {
 		Color lgtBlue = new Color(41, 151, 255);
 		this.setBackground(lgtBlue);
 		this.level.endGame();
-		this.level.setStarted(false);
-		this.level.setInGame(true);
 		this.level.initLevel();
 	}
-	
+
 	/**
 	 * Check collisions for collisions between the plane, the ground, and objects,
 	 * to end the game.
 	 */
 	public void checkCollisions() {
-		
+
 		Plane plane = this.level.getPlane();
 
 		Rectangle player = plane.getBoundaries();
@@ -119,14 +122,17 @@ public class SceneController extends JPanel implements Runnable{
 			}
 		}
 	}
-	
+
 	private void cycle() {
-		this.level.updateScore();
 		this.level.updateLevel();
-		this.checkCollisions();
 		this.repaint();
+		if (this.level.isStarted()) {
+			this.checkCollisions();
+
+		}
+
 	}
-	
+
 	public Level getLevel() {
 		return this.level;
 	}
