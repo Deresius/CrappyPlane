@@ -35,13 +35,18 @@ class HighScores(object):
         return self.filename
     
     def getLowestScore(self):
-        self.getScores().sort()
         if len(self.getScores()) != 0:
+            self.getScores().sort()
             return self.getScores()[len(self.getScores())-1]
         return Score("EmptyScoreboard", 0)
         
         
+    
     def updateFile(self, newScore):
+        """
+        This is called for adding a new score to the scoreboard. It updates the file and maintains the high score
+        number of 10 total.
+        """
         self.getScores().append(newScore)
         self.getScores().sort()
         while (len(self.getScores()) > 10):
@@ -52,6 +57,12 @@ class HighScores(object):
             newFile.write(item.getName() + "," + str(item.getScore()) + "\n")
         newFile.close()
         
+    def getEncodedList(self):
+        returnString = ""
+        for item in self.getScores():
+            returnString += item.getName() + "," + str(item.getScore()) + "\n"
+        return returnString.encode(encoding='utf_8', errors='strict')
+    
     def toString(self):
         for item in self.getScores():
             print(item.getName() + ":" + str(item.getScore()))
