@@ -1,7 +1,7 @@
 '''
 Created on Apr 17, 2018
 
-@author: timbe
+@author: Group 4
 '''
 
 import os

@@ -1,7 +1,7 @@
 '''
 Created on Apr 16, 2018
 
-@author: timbe
+@author: Group 4
 '''
 
 class Score(object):
