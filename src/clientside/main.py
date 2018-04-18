@@ -1,5 +1,6 @@
 import zmq
 import time
+from clientside import scoreboard
 
 
 def main():
@@ -17,8 +18,12 @@ def main():
             message = socket.recv()
             print("Received: %s" % message)
             time.sleep(1)
-            socket.send(b'List of Highscores')
-            return            
+            myScores = scoreboard.HighScores('highscores')
+            returnString = "\n"
+            for item in myScores.getScores():
+                returnString += item.getName() + "," + str(item.getScore()) + "\n"
+            socket.send(returnString.encode(encoding='utf_8', errors='strict'))
+            return
         elif (message == b'exit'):
             print(message)
             return
