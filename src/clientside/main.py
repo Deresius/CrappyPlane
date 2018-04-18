@@ -1,12 +1,11 @@
 import zmq
 import time
-from test.test_decimal import file
+
 
 def main():
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind("tcp://127.0.0.1:5555")
-    e = 'High Score'
     print("Connected")
     
     while True:
@@ -14,10 +13,10 @@ def main():
         message = socket.recv()
         if not message is b'exit':
             print("Received High Score Request: %s" % message)
-            #myFile = file("Server Received")
-            #myFile.write(message)
-            
-            socket.send(b'HighscoreBoard')
+            #socket.send(b'Send Highscore')
+            #highscore = socket.recv
+            #print("Received Highscore: %s" % highscore)
+            #return
         elif message is b'exit':
             return
         print(message)
@@ -25,7 +24,7 @@ def main():
         time.sleep(1)
     
         #  Send reply back to client
-        #socket.send(b'HighscoreBoard')
+        socket.send(b'HighscoreBoard')
    
     
     
