@@ -19,10 +19,20 @@ class TestLevelUpdateLevel {
 
 	@Test
 	final void testCloudsMoved() {
+		this.level.startLevel();
 		double startLocation = this.level.getClouds().get(0).getX();
 		this.level.updateLevel();
 		double nextLocation = this.level.getClouds().get(0).getX();
 		assertNotEquals(startLocation, nextLocation, "Cloud did not move");
+	}
+	
+	@Test
+	final void testObstaclesMoved() {
+		this.level.startLevel();
+		double startLocation = this.level.getObstacles().get(0).getX();
+		this.level.updateLevel();
+		double nextLocation = this.level.getObstacles().get(0).getX();
+		assertNotEquals(startLocation, nextLocation, "Obstacle did not move");
 	}
 
 	@Test
@@ -33,14 +43,6 @@ class TestLevelUpdateLevel {
 		assertNotEquals(startLocation, nextLocation, "Ground did not move");
 	}
 
-	@Test
-	final void testObstaclesMoved() {
-		double startLocation = this.level.getObstacles().get(0).getX();
-		this.level.updateLevel();
-		double nextLocation = this.level.getObstacles().get(0).getX();
-		assertNotEquals(startLocation, nextLocation, "Obstacle did not move");
-	}
-	
 	@Test
 	final void testPlaneMoved() {
 		double startLocation = this.level.getPlane().getY();
