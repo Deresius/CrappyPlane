@@ -28,6 +28,12 @@ public class Level extends JPanel {
 	private ArrayList<Ground> ground;
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Obstacle> obstacles;
+	
+	
+	/**
+	 * The Score Board of this level.
+	 */
+	public Scoreboard scoreboard = new Scoreboard();
 
 	private boolean ingame;
 	private boolean started = false;
@@ -76,6 +82,10 @@ public class Level extends JPanel {
 		this.setupGround();
 	}
 
+	
+	/**
+	 * Starts the level, and sets up its objects.
+	 */
 	public void startLevel() {
 		this.started = true;
 
@@ -83,10 +93,18 @@ public class Level extends JPanel {
 		this.setupObstacles();
 	}
 
+	
+	/**
+	 * Sets the final score to the highest distance reached in game.
+	 */
 	public void scoreGame() {
 		this.finalScore = this.distance;
 	}
 
+	
+	/**
+	 * Advances the score while the game is started.
+	 */
 	public void updateScore() {
 		if (this.started) {
 			this.distance++;
@@ -150,13 +168,33 @@ public class Level extends JPanel {
 
 	}
 
+	
+	/**
+	 * Ends the current session of the game.
+	 */
 	public void endGame() {
+		
 		this.ingame = false;
+		
 		if (!scored) {
 			scoreGame();
 			scored = true;
-			new HighscoreClient(10000);
+			HighscoreClient client = new HighscoreClient(finalScore);
+			String toParse = client.getScoreboardString();
+			
+			
+			Scoreboard fresh = new Scoreboard();
+			for(String line : toParse.split("\n"))
+			{
+				String[] cells = line.split(",");
+				
+				fresh.add(new Score(cells[0] , Integer.parseInt(cells[1])));				
+ 			}
+			
+			this.scoreboard = fresh;
+			
 		}
+		
 	}
 
 	private void setupSky() {
@@ -181,50 +219,97 @@ public class Level extends JPanel {
 		this.ground.add(new Ground(this.LEVEL_WIDTH, this.LEVEL_HEIGHT - 150, this.LEVEL_WIDTH));
 	}
 
+	
+	/**
+	 * Shows the console.
+	 */
 	public boolean showConsole() {
 		return this.showConsole = true;
 	}
 
+	
+	/**
+	 * Hides the console.
+	 */
 	public boolean hideConsole() {
 		return this.showConsole = false;
 	}
 
+	/**
+	 * Gets the visibility of the command console.
+	 */	
 	public boolean consoleVisible() {
 		return this.showConsole;
 	}
 
+	
+	/**
+	 * Sets the draw mode of the game.
+	 */
 	public void setEasyDraw(boolean val) {
 		this.easyDraw = val;
 	}
 
+	
+	/**
+	 * Returns whether the game is currently running.
+	 */
 	public boolean isIngame() {
 		return this.ingame;
 	}
 
+	
+	/**
+	 * Returns whether the game is started.
+	 */
 	public boolean isStarted() {
 		return this.started;
 	}
 
+	
+	/**
+	 * Gets the final score/ distance flown through the level.
+	 */
 	public int getFinalScore() {
 		return this.finalScore;
 	}
 
+	
+	/**
+	 * Gets the distance flown through the level.
+	 */
 	public int getDistance() {
 		return this.distance;
 	}
 
+	
+	/**
+	 * Gets the image of the cloud to display in the level.
+	 */
 	public Image getCloudImage() {
 		return this.cloudImage;
 	}
 
+	
+	/**
+	 * Gets whether the game is in easy draw mode.
+	 */
 	public boolean getEasyDraw() {
 		return this.easyDraw;
 	}
 
+	
+	/**
+	 * Gets the obstacles in the game.
+	 */
 	public ArrayList<Obstacle> getObstacles() {
 		return this.obstacles;
 	}
 
+	
+	/**
+	 * Gets the ground panels in the game
+	 */
 	public ArrayList<Ground> getGround() {
 		return this.ground;
 	}
@@ -261,22 +346,40 @@ public class Level extends JPanel {
 		return this.plane;
 	}
 
+	
+	/**
+	 * Gets the clouds in the level
+	 */
 	public ArrayList<Cloud> getClouds() {
 		return this.clouds;
 	}
 
+	/**
+	 * Gets the clouds spawn freqency
+	 */
 	public int getCloudSpawnFrequency() {
 		return CLOUD_SPAWN_FREQUENCY;
 	}
 
+	
+	/**
+	 * Gets the obstacle spawn frequency.
+	 */
 	public int getObstacleSpawnFrequency() {
 		return OBSTACLE_SPAWN_FREQUENCY;
 	}
 
+	
+	/**
+	 * Sets whether the game is started
+	 */
 	public void setStarted(boolean val) {
 		this.started = val;
 	}
 
+	/**
+	 * Sets whether the game is currently running.
+	 */
 	public void setInGame(boolean val) {
 		this.ingame = val;
 	}

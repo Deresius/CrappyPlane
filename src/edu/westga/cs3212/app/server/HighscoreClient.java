@@ -6,6 +6,7 @@ import org.zeromq.ZMQ.Socket;
 
 public class HighscoreClient {
 	private String score;
+	private String codedScoreboard;
 
 	public HighscoreClient(int Score) {
 		Context context = ZMQ.context(1);
@@ -31,6 +32,7 @@ public class HighscoreClient {
 		
 		reply = socket.recv(0);
 		response = new String(reply, ZMQ.CHARSET);
+		codedScoreboard = response;
 		System.out.println("Client - Received " + response);
 
 		request = "exit";
@@ -39,5 +41,10 @@ public class HighscoreClient {
 
 		socket.close();
 		context.term();
+	}
+	
+	public String getScoreboardString()
+	{
+		return codedScoreboard;
 	}
 }
