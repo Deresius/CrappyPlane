@@ -24,7 +24,7 @@ class Score(object):
         return self.name
     
     def __lt__(self, other):
-        return self.getScore() < other.getScore()
+        return self.getScore() > other.getScore()
     
     
     
