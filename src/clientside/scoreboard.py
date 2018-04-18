@@ -5,7 +5,7 @@ Created on Apr 17, 2018
 '''
 
 import os
-from clientside import score
+from clientside.score import Score
 
 class HighScores(object):
 
@@ -21,7 +21,7 @@ class HighScores(object):
         self.myScores = []
         for line in self.myFile.readlines():
             splitLine = str(line).split(sep=',')
-            self.myScores.append(score.Score(splitLine[0], int(splitLine[1])))
+            self.myScores.append(Score(splitLine[0], int(splitLine[1])))
         self.myFile.close()
             
             
@@ -33,6 +33,12 @@ class HighScores(object):
         
     def getFileName(self):
         return self.filename
+    
+    def getLowestScore(self):
+        self.getScores().sort()
+        if len(self.getScores()) != 0:
+            return self.getScores()[len(self.getScores())-1]
+        return Score("EmptyScoreboard", 0)
         
         
     def updateFile(self, newScore):
@@ -49,3 +55,7 @@ class HighScores(object):
     def toString(self):
         for item in self.getScores():
             print(item.getName() + ":" + str(item.getScore()))
+
+
+
+
